@@ -1,11 +1,11 @@
-import { Login } from "./pages/Login";
-import { GlobalStyle } from "./styles/global";
+import { Login } from './pages/Login';
+import { GlobalStyle } from './styles/global';
 
 function App() {
   return (
     <>
-    <Login />
-    <GlobalStyle/>
+      <Login />
+      <GlobalStyle />
     </>
   );
 }
