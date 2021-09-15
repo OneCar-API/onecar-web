@@ -10,7 +10,7 @@ import ButtonBack from "../../components/ButtonBack";
 
 import {Container, Content,Header} from './style';
 
-const AlterPassword: React.FC = () =>(
+const NewPassword: React.FC = () =>(
   <Container>
     <Header>
     <ButtonBack type = "submit">Voltar</ButtonBack>
@@ -20,13 +20,15 @@ const AlterPassword: React.FC = () =>(
       <Logo/>
 
       <form>        
-        <Input name="email" placeholder="E-mail"/>
+        <Input name="newpassword" type= "password" placeholder = "Insira a nova senha"/>
 
-        <Button type="submit">Próximo</Button>
+        <Input name="confirmpassword" type= "password" placeholder = "Confirme a nova senha"/>
+
+        <Button type="submit">Confirmar</Button>
 
       </form>  
       </Content>  
   </Container>
 );
 
-export default AlterPassword;
+export default NewPassword;

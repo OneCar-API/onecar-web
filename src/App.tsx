@@ -5,16 +5,17 @@ import GlobalStyle from "./styles/global";
 
 import SignIn from "./pages/SignIn";
 import AlterPassword from "./pages/AlterPassword";
+import NewPassword from "./pages/NewPassword";
 
 
 const App: React.FC=()=> {
   return (
     <>
-    <SignIn/>
-
-    {/* <AlterPassword/> */}
-    <GlobalStyle/>
-    <GlobalStyle />
+      <GlobalStyle/>
+      {/* <NewPassword/> */}
+      {/* <AlterPassword/> */}
+      <SignIn/>
+      <GlobalStyle />
     </>
   );
 }

@@ -5,8 +5,7 @@ import backgroundImg from '../../assets/images/backgroundImg.svg'
 
 export const Container = styled.div`
   background: url(${backgroundImg}) no-repeat;
-  /* background-size: cover; */
-
+  background-size: cover;
 
   height: 100vh;
 
@@ -15,7 +14,8 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  background: #F2F2F2;
+  background: rgb(242, 242, 242, 0.9);
+  background-size: cover;
   
   display: flex;
   flex-direction: column;
@@ -37,13 +37,19 @@ export const Content = styled.div`
     a{
       color: #5E9DBC;
       display: block;
-      margin-top: 16px;
+      margin-top: 5px;
       text-decoration: none;
       transition:color 0.2s;
+      margin-right: 175px;
 
       &:hover{
         color: ${shade(0.2, '#5E9DBC')}
       }
+   }
+   > button{
+     width: 177px;
+     height: 73px;
+
    }
   }
    > a {
