@@ -10,7 +10,7 @@ export default createGlobalStyle`
   box-sizing: border-box;
 }
 :root{
-  --background: #E5E5E5;
+  --background: #ffffff;
   --blue: #5E9DBC; // cor dos botões
   --gray: rgba(242, 242, 242, 0.9);
   --darkGray: #494949; 
@@ -41,7 +41,7 @@ button{
 }
 
 
-/* @media(max-width: 1980px) {
+@media(max-width: 1980px) {
     html {
       font-size: 81.25%;
     }
@@ -75,7 +75,7 @@ button{
     html {
       font-size: 50%;
     }
-  } */
+  }
 
 
 `
