@@ -1,20 +1,17 @@
 import React from "react";
-import { Login } from './pages/Login';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import GlobalStyle from "./styles/global";
 
-import SignIn from "./pages/SignIn";
-import AlterPassword from "./pages/AlterPassword";
-import NewPassword from "./pages/NewPassword";
+import Routes from "./routes";
 
 
 const App: React.FC=()=> {
   return (
     <>
-      <GlobalStyle/>
-      {/* <NewPassword/> */}
-      {/* <AlterPassword/> */}
-      <SignIn/>
+      <Router>
+        <Routes />
+      </Router>
       <GlobalStyle />
     </>
   );
