@@ -1,12 +1,9 @@
 import React from "react";
 
-
-
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import Logo from "../../components/Logo";
 import ButtonBack from "../../components/ButtonBack";
-
 
 import {Container, Content,Header} from './style';
 
