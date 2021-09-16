@@ -121,6 +121,8 @@ export const Main = styled.main`
     display: flex;
     transition: transform 0.2s;
 
+    box-shadow: 2.5px 3px 5px 1px #c4c4c4;
+
     &:hover {
       transform: translateX(10px);
     }
@@ -156,6 +158,8 @@ export const Main = styled.main`
         margin-top: 50px;
       }
     }
+
+    
 
     #info {
       margin: 20px 40px 0 auto;
@@ -193,11 +197,16 @@ export const Main = styled.main`
         }
       }
       
+      hr {
+        color: #c4c4c4;
+        margin-bottom: 3px;
+      }
 
       h4 {
         color: #808080;
       }
     }
+    
   }
 `;
 
