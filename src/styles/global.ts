@@ -82,6 +82,4 @@ button{
       font-size: 50%;
     }
   }
-
-
-`
+`;
