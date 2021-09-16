@@ -27,9 +27,15 @@ body{
 
 }
 
-body, input, button{
+body, input{
   font-family: 'Nunito', sans-serif;
   font-size: 16px;
+}
+
+button{
+  font-family: 'Nunito', sans-serif;
+}
+
 }
 
 h1,h2,h3,h4,h4,h6,strong{
