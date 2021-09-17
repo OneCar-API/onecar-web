@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 
 
 export const Container = styled.div`
@@ -16,12 +16,12 @@ align-items: center;
   margin-top: 8px;
 }
 
+
 input{
   flex: 1;
   background: transparent;
   border:0;
   margin-right: 16px;
-
       }     
     
 `;
