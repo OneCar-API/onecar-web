@@ -1,6 +1,6 @@
 import React from "react";
 
-
+import { Form } from '@unform/web';
 
 import Input from "../../components/Input";
 import Button from "../../components/Button";
@@ -8,27 +8,32 @@ import Logo from "../../components/Logo";
 import ButtonBack from "../../components/ButtonBack";
 
 
-import {Container, Content,Header} from './style';
+import { Container, Content, Header } from './style';
 
-const NewPassword: React.FC = () =>(
-  <Container>
-    <Header>
-    <ButtonBack type = "submit">Voltar</ButtonBack>
-    </Header>
-    <Content>
-             
-      <Logo/>
+const NewPassword: React.FC = () => {
+  function handleSubmit(data: object): void {
+    console.log(data);
+  }
+  return (
+    <Container>
+      <Header>
+        <ButtonBack type="submit">Voltar</ButtonBack>
+      </Header>
+      <Content>
 
-      <form>        
-        <Input name="newpassword" type= "password" placeholder = "Insira a nova senha"/>
+        <Logo />
 
-        <Input name="confirmpassword" type= "password" placeholder = "Confirme a nova senha"/>
+        <Form onSubmit={handleSubmit }>
+          <Input name="newpassword" type="password" placeholder="Insira a nova senha" />
 
-        <Button type="submit">Confirmar</Button>
+          <Input name="confirmpassword" type="password" placeholder="Confirme a nova senha" />
 
-      </form>  
-      </Content>  
-  </Container>
-);
+          <Button type="submit">Confirmar</Button>
+
+        </Form>
+      </Content>
+    </Container>
+  );
+}
 
 export default NewPassword;

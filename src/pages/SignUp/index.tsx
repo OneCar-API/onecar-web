@@ -1,6 +1,12 @@
-import React from "react";
+import React, {useCallback, useRef} from "react";
+
+import { Form } from '@unform/web';
+import { FormHandles } from "@unform/core";
 
 
+import * as Yup from 'yup';
+
+import getValidationErrors from "../../utils/getValidationErros";
 
 import Input from "../../components/Input";
 import Button from "../../components/Button";
@@ -8,39 +14,64 @@ import Logo from "../../components/Logo";
 import ButtonBack from "../../components/ButtonBack";
 
 
-import {Container, Content,Header} from './style';
+import { Container, Content, Header } from './style';
+import { isSchema } from "yup";
 
-const NewPassword: React.FC = () =>(
-  <Container>
-    <Header>
-    <ButtonBack type = "submit">Voltar</ButtonBack>
-    </Header>
-    <Content>
+const SignUp: React.FC = () => {
+  const formRef = useRef<FormHandles>(null);
 
-      <h1>É novo por aqui? Faça seu cadastro.</h1>
-             
-     
-      <form>        
-        <Input name="nome" placeholder = "Nome:"/>
 
-        <Input name="e-mail" placeholder = "E-mail: "/>
+  const handleSubmit = useCallback(async(data: object)=>{
+    try{
+      formRef.current?.setErrors({});
+      const schema = Yup.object().shape({
+        name: Yup.string().required('Nome obrigatório'),
+        email: Yup.string().required('E-mail obrigatório').email('Digite um e-mail válido'),
+        password: Yup.string().min(6, 'Mínimo de 6 dígitos'),
+      })
 
-        <Input name="senha" type= "password" placeholder = "Senha: "/> 
-        <a href="csv">
-         Você também pode importar um arquivo CSV
-        </a>
+    
+    await schema.validate(data,{
+      abortEarly: false,
+    });
+    }
+    catch(error){   
+      if(error instanceof Yup.ValidationError){
+        const errors = getValidationErrors(error); 
+          formRef.current?.setErrors(errors);
+      }
+  }
+}, []);
 
-        <Button type="submit">Cadastrar</Button>       
+  return (
+    <Container>
+      <Header>
+        <ButtonBack type="submit">Voltar</ButtonBack>
+      </Header>
+      <Content>
 
-      </form> 
-      {/* <a href="csv">
-         Você também pode importar um arquivo CSV
-        </a>
+        <h1>É novo por aqui? Faça seu cadastro.</h1>
 
-        <Button type="submit">Cadastrar</Button> */}
+
+        <Form ref = {formRef} onSubmit={handleSubmit}>
+          <Input name="name" placeholder="Nome:" />
+
+          <Input name="email" placeholder="E-mail: " />
+
+          <Input name="password" type="password" placeholder="Senha: " />
+          <a href="csv">
+            Você também pode importar um arquivo CSV
+          </a>
+
+          <Button type="submit">Cadastrar</Button>
+
+        </Form>
       </Content>
-      
-  </Container>
-);
+    </Container>
+  );
 
-export default NewPassword;
+}
+
+
+
+export default SignUp;
