@@ -12,11 +12,11 @@ import {
   Main,
 } from './styles';
 
-import logoImg from '../../assets/images/logo.svg';
-import avatar from '../../assets/images/botaoUser.svg';
-import exchange from '../../assets/images/shift.svg';
-import motor from '../../assets/images/motor.svg';
-import direction from '../../assets/images/direction.svg';
+import logoImg from '../../../assets/images/logo.svg';
+import avatar from '../../../assets/images/botaoUser.svg';
+import exchange from '../../../assets/images/shift.svg';
+import motor from '../../../assets/images/motor.svg';
+import direction from '../../../assets/images/direction.svg';
 
 const Announcement: React.FC = () => (
   <Container>
