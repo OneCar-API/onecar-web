@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FiSearch, FiHeart, FiGrid, FiList, FiArrowLeft } from 'react-icons/fi';
+import { FiSearch, FiArrowLeft } from 'react-icons/fi';
 
 import { 
   Container, 
@@ -10,13 +10,13 @@ import {
   Profile,
   Content, 
   Main,
-  Info, 
+  Info,
 } from './styles';
 
 import avatar from '../../../assets/images/botaoUser.svg';
 import calendar from '../../../assets/images/year.svg';
 import km from '../../../assets/images/km.svg';
-import color from '../../../assets/images/shift.svg';
+import color from '../../../assets/images/color.svg';
 import exchange from '../../../assets/images/shift.svg';
 import motor from '../../../assets/images/motor.svg';
 import direction from '../../../assets/images/direction.svg';
@@ -132,7 +132,6 @@ const ShowAnnouncement: React.FC = () => (
         </div>
       </Info>
     </Content>
-      
   </Container>
 );
 
