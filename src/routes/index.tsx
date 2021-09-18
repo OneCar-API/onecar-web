@@ -10,14 +10,26 @@ import NewPassword from '../pages/NewPassword';
 
 import ListAnnouncements from '../pages/Announcement/ListAnnouncements';
 import ShowAnnouncement from '../pages/Announcement/ShowAnnouncement';
+import ImportUsers from '../pages/ImportUser';
+import ImportAnnouncements from '../pages/Announcement/ImportAnnouncements';
 
 const Routes: React.FC = () => (
   <Switch>
-    <Route path="/" component={ListAnnouncements} />
-    <Route path="/announcement" component={ShowAnnouncement} />
-
-    <Route path="/signin" exact component={SignIn} />
+    <Route path="/" exact component={SignIn} />
     <Route path="/signup" component={SignUp} />
+    <Route
+      path="/announcements"
+      exact
+      component={ListAnnouncements}
+      isPrivate
+    />
+    <Route path="/announcement" component={ShowAnnouncement} isPrivate />
+    <Route path="/import-users" component={ImportUsers} />
+    <Route
+      path="/import-announcements"
+      component={ImportAnnouncements}
+      isPrivate
+    />
 
     <Route path="/forgot-password" component={AlterPassword} />
     <Route path="/reset-password" component={NewPassword} />

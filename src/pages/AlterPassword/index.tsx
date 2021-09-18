@@ -56,7 +56,7 @@ const AlterPassword: React.FC = () => {
             'Enviamos um e-mail para confirmar a recuperação de senha, cheque sua caixa de entrada.',
         });
 
-        history.push('/signin');
+        history.push('/');
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErrors(error);
@@ -80,7 +80,7 @@ const AlterPassword: React.FC = () => {
   return (
     <Container>
       <Header>
-        <Link to="/signin">
+        <Link to="/">
           <ButtonBack type="submit">Voltar</ButtonBack>
         </Link>
       </Header>

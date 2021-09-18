@@ -2,6 +2,7 @@ import React from 'react';
 
 import { FiSearch, FiArrowLeft } from 'react-icons/fi';
 
+import { Link } from 'react-router-dom';
 import {
   Container,
   Header,
@@ -27,7 +28,9 @@ const ShowAnnouncement: React.FC = () => (
   <Container>
     <Header>
       <HeaderContent>
-        <FiArrowLeft size={25} />
+        <Link to="/announcements">
+          <FiArrowLeft size={25} />
+        </Link>
 
         <Form>
           <input placeholder="Pesquisar" />
@@ -36,7 +39,9 @@ const ShowAnnouncement: React.FC = () => (
           </button>
         </Form>
 
-        <button type="button">Anunciar</button>
+        <Link to="/import-announcements">
+          <button type="button">Anunciar</button>
+        </Link>
 
         <Profile>
           <img src={avatar} alt="User" />

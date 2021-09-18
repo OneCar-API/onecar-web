@@ -18,13 +18,14 @@ export const HeaderContent = styled.div`
   display: flex;
   align-items: center;
 
-  > svg {
+  a {
     width: 60px;
     color: #787878;
+    text-decoration: none;
   }
 
   button {
-    margin-left: auto;
+    margin-left: 90px;
     background: #5e9dbc;
     color: #fff;
     font-size: 16px;
@@ -43,7 +44,7 @@ export const HeaderContent = styled.div`
 export const Form = styled.form`
   width: 600px;
   display: flex;
-  margin-left: 130px;
+  margin-left: 175px;
 
   input {
     flex: 1;
@@ -84,7 +85,7 @@ export const Profile = styled.div`
   align-items: center;
 
   img {
-    margin-left: 20px;
+    margin-left: 150px;
     width: 35px;
     height: 35px;
   }

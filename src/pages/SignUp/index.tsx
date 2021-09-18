@@ -47,7 +47,7 @@ const SignUp: React.FC = () => {
 
         await api.post('/users', data);
 
-        history.push('/signin');
+        history.push('/');
 
         addToast({
           type: 'success',
@@ -79,7 +79,7 @@ const SignUp: React.FC = () => {
         </Link>
       </Header>
       <Content>
-        <h1>É novo por aqui? Faça seu cadastro.</h1>
+        <h1>É novo por aqui? Faça seu cadastro!</h1>
 
         <Form ref={formRef} onSubmit={handleSubmit}>
           <Input name="name" placeholder="Nome:" />
@@ -87,7 +87,10 @@ const SignUp: React.FC = () => {
           <Input name="email" placeholder="E-mail: " />
 
           <Input name="password" type="password" placeholder="Senha: " />
-          <a href="csv">Você também pode importar um arquivo CSV</a>
+
+          <Link to="/import-users">
+            Você também pode fazer o upload de um arquivo!
+          </Link>
 
           <Button type="submit">Cadastrar</Button>
         </Form>
