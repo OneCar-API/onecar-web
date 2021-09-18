@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { shade } from 'polished';
 
 export const Container = styled.div`
-
   body {
     background: #fff;
   }
@@ -10,7 +9,7 @@ export const Container = styled.div`
 
 export const Header = styled.header`
   padding: 15px;
-  background: #E5E5E5;
+  background: #e5e5e5;
 `;
 
 export const HeaderContent = styled.div`
@@ -25,7 +24,7 @@ export const HeaderContent = styled.div`
 
   button {
     margin-left: auto;
-    background: #5E9DBC;
+    background: #5e9dbc;
     color: #fff;
     font-size: 16px;
     border: 0;
@@ -66,7 +65,7 @@ export const Form = styled.form`
     transition: background-color 0.2s;
     width: 50px;
     height: 30px;
-    
+
     &:hover {
       background: ${shade(0.2, '#ffffff')};
     }
@@ -90,7 +89,6 @@ export const Profile = styled.div`
   }
 `;
 
-
 export const Announcements = styled.div`
   margin: 15px auto;
   max-width: 1200px;
@@ -112,7 +110,7 @@ export const Visualization = styled.div`
 export const Main = styled.main`
   a {
     margin-top: 20px;
-    background: #E5E5E5;
+    background: #e5e5e5;
     border-radius: 5px;
     width: 100%;
     display: block;
@@ -159,8 +157,6 @@ export const Main = styled.main`
       }
     }
 
-    
-
     #info {
       margin: 20px 40px 0 auto;
       height: 25px;
@@ -168,7 +164,6 @@ export const Main = styled.main`
       p {
         font-size: 16px;
         color: #808080;
-
       }
 
       svg {
@@ -183,7 +178,6 @@ export const Main = styled.main`
         align-items: center;
         margin-bottom: 10px;
 
-
         img {
           width: 27px;
           height: 24px;
@@ -196,7 +190,7 @@ export const Main = styled.main`
           color: #808080;
         }
       }
-      
+
       hr {
         color: #c4c4c4;
         margin-bottom: 3px;
@@ -206,9 +200,5 @@ export const Main = styled.main`
         color: #808080;
       }
     }
-    
   }
 `;
-
-
-

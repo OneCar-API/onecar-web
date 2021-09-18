@@ -2,13 +2,14 @@ import React from 'react';
 
 import { FiSearch, FiHeart, FiGrid, FiList } from 'react-icons/fi';
 
-import { 
-  Container, 
-  Header, 
-  HeaderContent, 
-  Form, Profile, 
-  Announcements, 
-  Visualization, 
+import {
+  Container,
+  Header,
+  HeaderContent,
+  Form,
+  Profile,
+  Announcements,
+  Visualization,
   Main,
 } from './styles';
 
@@ -45,25 +46,27 @@ const Announcement: React.FC = () => (
           <FiGrid size={30} />
           <FiList size={30} />
         </Visualization>
-        
+
         <Main>
           <a href="teste">
-            <img src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx" alt="Jeep Renegade" />
-            
+            <img
+              src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
+              alt="Jeep Renegade"
+            />
+
             <div>
               <strong>Jeep Renegade</strong>
               <p>2020/2021</p>
 
               <h1>R$ 88.950,00</h1>
-
             </div>
-            
+
             <div id="info">
               <div>
                 <p>147.000km</p>
                 <FiHeart size={20} />
               </div>
-              
+
               <div>
                 <img src={exchange} alt="Câmbio" />
                 <p>Automático</p>
@@ -79,58 +82,22 @@ const Announcement: React.FC = () => (
                 <p>Direção Hidráulica</p>
               </div>
 
-              <hr/>
-              <h4>São José dos Campos - SP</h4>
-            </div>
-          </a>
-          
-
-          <a href="teste">
-            <img src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx" alt="Jeep Renegade" />
-            
-            <div>
-              <strong>Jeep Renegade</strong>
-              <p>2020/2021</p>
-
-              <h1>R$ 88.950,00</h1>
-
-            </div>
-
-            <div id="info">
-              <div>
-                <p>147.000km</p>
-                <FiHeart size={20} />
-              </div>
-              
-              <div>
-                <img src={exchange} alt="Câmbio" />
-                <p>Automático</p>
-              </div>
-
-              <div>
-                <img src={motor} alt="Potência do motor" />
-                <p>2.0</p>
-              </div>
-
-              <div>
-                <img src={direction} alt="Direção" />
-                <p>Direção Hidráulica</p>
-              </div>
-              
-              <hr/>
+              <hr />
               <h4>São José dos Campos - SP</h4>
             </div>
           </a>
 
           <a href="teste">
-            <img src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx" alt="Jeep Renegade" />
-            
+            <img
+              src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
+              alt="Jeep Renegade"
+            />
+
             <div>
               <strong>Jeep Renegade</strong>
               <p>2020/2021</p>
 
               <h1>R$ 88.950,00</h1>
-
             </div>
 
             <div id="info">
@@ -138,7 +105,7 @@ const Announcement: React.FC = () => (
                 <p>147.000km</p>
                 <FiHeart size={20} />
               </div>
-              
+
               <div>
                 <img src={exchange} alt="Câmbio" />
                 <p>Automático</p>
@@ -153,8 +120,47 @@ const Announcement: React.FC = () => (
                 <img src={direction} alt="Direção" />
                 <p>Direção Hidráulica</p>
               </div>
-              
-              <hr/>
+
+              <hr />
+              <h4>São José dos Campos - SP</h4>
+            </div>
+          </a>
+
+          <a href="teste">
+            <img
+              src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
+              alt="Jeep Renegade"
+            />
+
+            <div>
+              <strong>Jeep Renegade</strong>
+              <p>2020/2021</p>
+
+              <h1>R$ 88.950,00</h1>
+            </div>
+
+            <div id="info">
+              <div>
+                <p>147.000km</p>
+                <FiHeart size={20} />
+              </div>
+
+              <div>
+                <img src={exchange} alt="Câmbio" />
+                <p>Automático</p>
+              </div>
+
+              <div>
+                <img src={motor} alt="Potência do motor" />
+                <p>2.0</p>
+              </div>
+
+              <div>
+                <img src={direction} alt="Direção" />
+                <p>Direção Hidráulica</p>
+              </div>
+
+              <hr />
               <h4>São José dos Campos - SP</h4>
             </div>
           </a>

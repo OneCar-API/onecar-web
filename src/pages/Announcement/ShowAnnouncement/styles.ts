@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { shade } from 'polished';
 
 export const Container = styled.div`
-
   body {
     background: #ffffff;
   }
@@ -10,7 +9,7 @@ export const Container = styled.div`
 
 export const Header = styled.header`
   padding: 15px;
-  background: #E5E5E5;
+  background: #e5e5e5;
 `;
 
 export const HeaderContent = styled.div`
@@ -26,7 +25,7 @@ export const HeaderContent = styled.div`
 
   button {
     margin-left: auto;
-    background: #5E9DBC;
+    background: #5e9dbc;
     color: #fff;
     font-size: 16px;
     border: 0;
@@ -67,7 +66,7 @@ export const Form = styled.form`
     transition: background-color 0.2s;
     width: 50px;
     height: 30px;
-    
+
     &:hover {
       background: ${shade(0.2, '#ffffff')};
     }
@@ -119,7 +118,7 @@ export const Main = styled.div`
 
       & + button {
         margin-left: 10px;
-      } 
+      }
 
       img {
         width: 95px;
@@ -195,9 +194,3 @@ export const Info = styled.aside`
     }
   }
 `;
-
-
-
-
-
-

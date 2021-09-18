@@ -11,7 +11,7 @@ export default function getValidationErrors(err: ValidationError): Errors {
     if (error.path) {
       validationErrors[error.path] = error.message;
     }
-  })
+  });
 
   return validationErrors;
 }
