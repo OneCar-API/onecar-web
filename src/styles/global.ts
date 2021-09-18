@@ -1,5 +1,4 @@
-
-import { createGlobalStyle} from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
 
@@ -13,7 +12,7 @@ export default createGlobalStyle`
   --background: #ffffff;
   --blue: #5E9DBC; // cor dos botões
   --gray: rgba(242, 242, 242, 0.9);
-  --darkGray: #494949; 
+  --darkGray: #494949;
   --white: #f9f9f9; // cor do texto dos botões
   --text-field: #787878; //cor dos título dos campos da tela exibição de 1 anúncio
   --text-information: #808080; //cor das informações ano/cidade/km da tela exibição de anúncios

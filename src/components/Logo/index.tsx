@@ -1,15 +1,11 @@
+import React from 'react';
 
-import React from "react";
+import logoImg from '../../assets/images/logo.svg';
 
-import logoImg from "../../assets/images/logo.svg"
+import Image from './styles';
 
-import Image from "./styles";
-
-const Logo = ()=> {
-  return (
-    <Image src= {logoImg} />
-  )
-}
+const Logo = () => {
+  return <Image src={logoImg} />;
+};
 
 export default Logo;
-
