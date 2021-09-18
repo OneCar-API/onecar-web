@@ -101,8 +101,8 @@ export const Main = styled.div`
   margin-right: 70px;
 
   > img {
-    width: 780px;
-    height: 510px;
+    width: 680px;
+    height: 410px;
     border-radius: 12px;
     box-shadow: 2.5px 3px 5px 1px #c4c4c4;
   }
@@ -153,18 +153,18 @@ export const Info = styled.aside`
   width: 500px;
 
   > strong {
-    font-size: 48px;
+    font-size: 40px;
     color: #383838;
   }
 
   h1 {
     background: var(--blue);
-    padding: 12px;
-    width: 350px;
+    padding: 8px;
+    width: 320px;
     color: #fff;
     border-radius: 30px 12px 12px 30px;
     text-align: center;
-    font-size: 40px;
+    font-size: 35px;
     margin-top: 20px;
   }
 
@@ -174,20 +174,20 @@ export const Info = styled.aside`
     align-items: center;
 
     img {
-      height: 40px;
-      width: 40px;
+      height: 30px;
+      width: 30px;
     }
 
     div {
       margin-left: 20px;
 
       p {
-        font-size: 18px;
+        font-size: 16px;
         color: #787878;
       }
 
       strong {
-        font-size: 24px;
+        font-size: 20px;
         color: #383838;
         font-weight: 400;
       }

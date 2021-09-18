@@ -16,6 +16,7 @@ import {
 import avatar from '../../../assets/images/botaoUser.svg';
 import calendar from '../../../assets/images/year.svg';
 import km from '../../../assets/images/km.svg';
+import color from '../../../assets/images/color.svg';
 import exchange from '../../../assets/images/shift.svg';
 import motor from '../../../assets/images/motor.svg';
 import direction from '../../../assets/images/direction.svg';
@@ -105,7 +106,7 @@ const ShowAnnouncement: React.FC = () => (
         </div>
 
         <div>
-          <img src={exchange} alt="Cor" />
+          <img src={color} alt="Cor" />
           <div>
             <p>Cor:</p>
             <strong>Vermelho</strong>
