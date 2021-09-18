@@ -67,7 +67,7 @@ const NewPassword: React.FC = () => {
             'Sua senha foi recuperada, você já pode realizar seu login!',
         });
 
-        history.push('/signin');
+        history.push('/');
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErrors(error);
@@ -88,7 +88,7 @@ const NewPassword: React.FC = () => {
   return (
     <Container>
       <Header>
-        <Link to="/signin">
+        <Link to="/">
           <ButtonBack type="submit">Voltar</ButtonBack>
         </Link>
       </Header>

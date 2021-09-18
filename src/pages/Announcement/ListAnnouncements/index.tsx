@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { FiSearch, FiHeart, FiGrid, FiList } from 'react-icons/fi';
 
+import { Link } from 'react-router-dom';
 import {
   Container,
   Header,
@@ -18,156 +19,93 @@ import avatar from '../../../assets/images/botaoUser.svg';
 import exchange from '../../../assets/images/shift.svg';
 import motor from '../../../assets/images/motor.svg';
 import direction from '../../../assets/images/direction.svg';
+import api from '../../../services/api';
 
-const Announcement: React.FC = () => (
-  <Container>
-    <Header>
-      <HeaderContent>
-        <img src={logoImg} alt="OneCar" />
+const Announcement: React.FC = () => {
+  useCallback(async () => {
+    try {
+      await api.get('/ads');
+    } catch (error) {
+      if (error) {
+        throw new Error();
+      }
+    }
+  }, []);
 
-        <Form>
-          <input placeholder="Pesquisar" />
-          <button type="submit">
-            <FiSearch />
-          </button>
-        </Form>
+  return (
+    <Container>
+      <Header>
+        <HeaderContent>
+          <img src={logoImg} alt="OneCar" />
 
-        <button type="button">Anunciar</button>
+          <Form>
+            <input placeholder="Pesquisar" />
+            <button type="submit">
+              <FiSearch />
+            </button>
+          </Form>
 
-        <Profile>
-          <img src={avatar} alt="User" />
-        </Profile>
-      </HeaderContent>
-    </Header>
+          <Link to="/import-announcements">
+            <button type="button">Anunciar</button>
+          </Link>
 
-    <body>
-      <Announcements>
-        <Visualization>
-          <FiGrid size={30} />
-          <FiList size={30} />
-        </Visualization>
+          <Profile>
+            <img src={avatar} alt="User" />
+          </Profile>
+        </HeaderContent>
+      </Header>
 
-        <Main>
-          <a href="teste">
-            <img
-              src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
-              alt="Jeep Renegade"
-            />
+      <body>
+        <Announcements>
+          <Visualization>
+            <FiGrid size={30} />
+            <FiList size={30} />
+          </Visualization>
 
-            <div>
-              <strong>Jeep Renegade</strong>
-              <p>2020/2021</p>
-
-              <h1>R$ 88.950,00</h1>
-            </div>
-
-            <div id="info">
-              <div>
-                <p>147.000km</p>
-                <FiHeart size={20} />
-              </div>
-
-              <div>
-                <img src={exchange} alt="Câmbio" />
-                <p>Automático</p>
-              </div>
+          <Main>
+            <Link to="/announcement">
+              <img
+                src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
+                alt="Jeep Renegade"
+              />
 
               <div>
-                <img src={motor} alt="Potência do motor" />
-                <p>2.0</p>
+                <strong>Jeep Renegade</strong>
+                <p>2020/2021</p>
+
+                <h1>R$ 88.950,00</h1>
               </div>
 
-              <div>
-                <img src={direction} alt="Direção" />
-                <p>Direção Hidráulica</p>
+              <div id="info">
+                <div>
+                  <p>147.000km</p>
+                  <FiHeart size={20} />
+                </div>
+
+                <div>
+                  <img src={exchange} alt="Câmbio" />
+                  <p>Automático</p>
+                </div>
+
+                <div>
+                  <img src={motor} alt="Potência do motor" />
+                  <p>2.0</p>
+                </div>
+
+                <div>
+                  <img src={direction} alt="Direção" />
+                  <p>Direção Hidráulica</p>
+                </div>
+
+                <hr />
+                <h4>São José dos Campos - SP</h4>
               </div>
-
-              <hr />
-              <h4>São José dos Campos - SP</h4>
-            </div>
-          </a>
-
-          <a href="teste">
-            <img
-              src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
-              alt="Jeep Renegade"
-            />
-
-            <div>
-              <strong>Jeep Renegade</strong>
-              <p>2020/2021</p>
-
-              <h1>R$ 88.950,00</h1>
-            </div>
-
-            <div id="info">
-              <div>
-                <p>147.000km</p>
-                <FiHeart size={20} />
-              </div>
-
-              <div>
-                <img src={exchange} alt="Câmbio" />
-                <p>Automático</p>
-              </div>
-
-              <div>
-                <img src={motor} alt="Potência do motor" />
-                <p>2.0</p>
-              </div>
-
-              <div>
-                <img src={direction} alt="Direção" />
-                <p>Direção Hidráulica</p>
-              </div>
-
-              <hr />
-              <h4>São José dos Campos - SP</h4>
-            </div>
-          </a>
-
-          <a href="teste">
-            <img
-              src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
-              alt="Jeep Renegade"
-            />
-
-            <div>
-              <strong>Jeep Renegade</strong>
-              <p>2020/2021</p>
-
-              <h1>R$ 88.950,00</h1>
-            </div>
-
-            <div id="info">
-              <div>
-                <p>147.000km</p>
-                <FiHeart size={20} />
-              </div>
-
-              <div>
-                <img src={exchange} alt="Câmbio" />
-                <p>Automático</p>
-              </div>
-
-              <div>
-                <img src={motor} alt="Potência do motor" />
-                <p>2.0</p>
-              </div>
-
-              <div>
-                <img src={direction} alt="Direção" />
-                <p>Direção Hidráulica</p>
-              </div>
-
-              <hr />
-              <h4>São José dos Campos - SP</h4>
-            </div>
-          </a>
-        </Main>
-      </Announcements>
-    </body>
-  </Container>
-);
+            </Link>
+          </Main>
+        </Announcements>
+      </body>
+    </Container>
+  );
+};
 
 export default Announcement;

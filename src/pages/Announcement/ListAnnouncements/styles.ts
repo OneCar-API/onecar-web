@@ -23,7 +23,7 @@ export const HeaderContent = styled.div`
   }
 
   button {
-    margin-left: auto;
+    margin-left: 90px;
     background: #5e9dbc;
     color: #fff;
     font-size: 16px;
