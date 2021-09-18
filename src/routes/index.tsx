@@ -13,14 +13,14 @@ import ShowAnnouncement from '../pages/Announcement/ShowAnnouncement';
 
 const Routes: React.FC = () => (
   <Switch>
-    <Route path="/announcements" component={ListAnnouncements} />
+    <Route path="/" component={ListAnnouncements} />
     <Route path="/announcement" component={ShowAnnouncement} />
 
     <Route path="/signin" exact component={SignIn} />
     <Route path="/signup" component={SignUp} />
 
-    <Route path="/password" component={AlterPassword} />
-    <Route path="/new-password" component={NewPassword} />
+    <Route path="/forgot-password" component={AlterPassword} />
+    <Route path="/reset-password" component={NewPassword} />
   </Switch>
 );
 
