@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { FiSearch, FiArrowLeft } from 'react-icons/fi';
 
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import {
   Container,
   Header,
@@ -22,143 +22,196 @@ import motor from '../../../assets/images/motor.svg';
 import direction from '../../../assets/images/direction.svg';
 import fuel from '../../../assets/images/fuel.svg';
 import door from '../../../assets/images/door.svg';
+import api from '../../../services/api';
 
-const ShowAnnouncement: React.FC = () => (
-  <Container>
-    <Header>
-      <HeaderContent>
-        <Link to="/announcements">
-          <FiArrowLeft size={25} />
-        </Link>
+interface IAds {
+  id: string;
+  description: string;
+  price: string;
+  views: number;
+  interests: number;
+  cars: {
+    manufacturer: string;
+    brand: string;
+    model: string;
+    year_manufacturer: string;
+    fuel: string;
+    gearbox_type: string;
+    km: number;
+    vehicle_items: {
+      airbag: boolean;
+      alarm: boolean;
+      air_conditioning: boolean;
+      eletric_lock: boolean;
+      eletric_window: boolean;
+      stereo: boolean;
+      reverse_sense: boolean;
+      reverse_camera: boolean;
+      armored: boolean;
+      hydraulic_steering: boolean;
+    };
+  };
+}
 
-        <Form>
-          <input placeholder="Pesquisar" />
-          <button type="submit">
-            <FiSearch />
-          </button>
-        </Form>
+const ShowAnnouncement: React.FC = () => {
+  const [announcement, setAnnouncement] = useState<IAds>();
 
-        <Link to="/import-announcements">
-          <button type="button">Anunciar</button>
-        </Link>
+  const id = useParams();
 
-        <Profile>
-          <img src={avatar} alt="User" />
-        </Profile>
-      </HeaderContent>
-    </Header>
+  useEffect(() => {
+    showAnnouncements();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
-    <Content>
-      <Main>
-        <img
-          src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
-          alt="Jeep Renegade"
-        />
+  async function showAnnouncements() {
+    const response = await api.get(`ads/${id}`);
 
-        <div>
-          <button type="button">
-            <img
-              src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
-              alt="Jeep Renegade"
-            />
-          </button>
+    console.log(response);
 
-          <button type="button">
-            <img
-              src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
-              alt="Jeep Renegade"
-            />
-          </button>
+    setAnnouncement(response.data);
+  }
 
-          <button type="button">
-            <img
-              src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
-              alt="Jeep Renegade"
-            />
-          </button>
+  return (
+    <Container>
+      <Header>
+        <HeaderContent>
+          <Link to="/announcements">
+            <FiArrowLeft size={25} />
+          </Link>
 
-          <button type="button">
-            <img
-              src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
-              alt="Jeep Renegade"
-            />
-          </button>
-        </div>
+          <Form>
+            <input placeholder="Pesquisar" />
+            <button type="submit">
+              <FiSearch />
+            </button>
+          </Form>
 
-        <h1>Descrição</h1>
-        <input placeholder="Carro bem conservado, ..." />
-      </Main>
+          <Link to="/import-announcements">
+            <button type="button">Anunciar</button>
+          </Link>
 
-      <Info>
-        <strong>Jeep Renegade</strong>
-        <h1>R$ 88.950,00</h1>
+          <Profile>
+            <img src={avatar} alt="User" />
+          </Profile>
+        </HeaderContent>
+      </Header>
 
-        <div>
-          <img src={calendar} alt="Calendário" />
+      <Content>
+        <Main>
+          <img
+            src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
+            alt="Jeep Renegade"
+          />
+
           <div>
-            <p>Ano:</p>
-            <strong>2021</strong>
-          </div>
-        </div>
+            <button type="button">
+              <img
+                src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
+                alt="Jeep Renegade"
+              />
+            </button>
 
-        <div>
-          <img src={km} alt="Quilometragem" />
-          <div>
-            <p>Quilometragem:</p>
-            <strong>88.000km</strong>
-          </div>
-        </div>
+            <button type="button">
+              <img
+                src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
+                alt="Jeep Renegade"
+              />
+            </button>
 
-        <div>
-          <img src={exchange} alt="Cor" />
-          <div>
-            <p>Cor:</p>
-            <strong>Vermelho</strong>
-          </div>
-        </div>
+            <button type="button">
+              <img
+                src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
+                alt="Jeep Renegade"
+              />
+            </button>
 
-        <div>
-          <img src={exchange} alt="Câmbio" />
-          <div>
-            <p>Câmbio:</p>
-            <strong>Automático</strong>
+            <button type="button">
+              <img
+                src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
+                alt="Jeep Renegade"
+              />
+            </button>
           </div>
-        </div>
 
-        <div>
-          <img src={motor} alt="Motor" />
-          <div>
-            <p>Motor:</p>
-            <strong>2.0</strong>
-          </div>
-        </div>
+          <h1>Descrição</h1>
+          <input placeholder="Carro bem conservado, ..." />
+        </Main>
 
-        <div>
-          <img src={direction} alt="Direção" />
-          <div>
-            <p>Direção:</p>
-            <strong>Hidráulica</strong>
-          </div>
-        </div>
+        <Info>
+          <strong>Jeep Renegade</strong>
+          <h1>{announcement?.price}</h1>
 
-        <div>
-          <img src={fuel} alt="Combustível" />
           <div>
-            <p>Combustível:</p>
-            <strong>Flex</strong>
+            <img src={calendar} alt="Calendário" />
+            <div>
+              <p>Ano:</p>
+              <strong>{announcement?.cars.year_manufacturer}</strong>
+            </div>
           </div>
-        </div>
 
-        <div>
-          <img src={door} alt="Portas" />
           <div>
-            <p>Portas:</p>
-            <strong>4</strong>
+            <img src={km} alt="Quilometragem" />
+            <div>
+              <p>Quilometragem:</p>
+              <strong>{announcement?.cars.km}</strong>
+            </div>
           </div>
-        </div>
-      </Info>
-    </Content>
-  </Container>
-);
+
+          <div>
+            <img src={exchange} alt="Cor" />
+            <div>
+              <p>Cor:</p>
+              <strong>Vermelho</strong>
+            </div>
+          </div>
+
+          <div>
+            <img src={exchange} alt="Câmbio" />
+            <div>
+              <p>Câmbio:</p>
+              <strong>{announcement?.cars.gearbox_type}</strong>
+            </div>
+          </div>
+
+          <div>
+            <img src={motor} alt="Motor" />
+            <div>
+              <p>Motor:</p>
+              <strong>{announcement?.cars.model}</strong>
+            </div>
+          </div>
+
+          <div>
+            <img src={direction} alt="Direção" />
+            <div>
+              <p>Direção:</p>
+              <strong>
+                {announcement?.cars.vehicle_items.hydraulic_steering
+                  ? 'Hidráulica'
+                  : 'Mecânica'}
+              </strong>
+            </div>
+          </div>
+
+          <div>
+            <img src={fuel} alt="Combustível" />
+            <div>
+              <p>Combustível:</p>
+              <strong>{announcement?.cars.fuel}</strong>
+            </div>
+          </div>
+
+          <div>
+            <img src={door} alt="Portas" />
+            <div>
+              <p>Portas:</p>
+              <strong>4</strong>
+            </div>
+          </div>
+        </Info>
+      </Content>
+    </Container>
+  );
+};
 
 export default ShowAnnouncement;

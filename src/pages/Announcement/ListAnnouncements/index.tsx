@@ -1,8 +1,8 @@
-import React, { useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { FiSearch, FiHeart, FiGrid, FiList } from 'react-icons/fi';
 
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import {
   Container,
   Header,
@@ -21,16 +21,55 @@ import motor from '../../../assets/images/motor.svg';
 import direction from '../../../assets/images/direction.svg';
 import api from '../../../services/api';
 
-const Announcement: React.FC = () => {
-  useCallback(async () => {
-    try {
-      await api.get('/ads');
-    } catch (error) {
-      if (error) {
-        throw new Error();
-      }
-    }
-  }, []);
+interface IAds {
+  id: string;
+  description: string;
+  price: string;
+  views: number;
+  interests: number;
+  cars: {
+    manufacturer: string;
+    brand: string;
+    model: string;
+    year_manufacturer: string;
+    fuel: string;
+    gearbox_type: string;
+    km: number;
+    vehicle_items: {
+      airbag: boolean;
+      alarm: boolean;
+      air_conditioning: boolean;
+      eletric_lock: boolean;
+      eletric_window: boolean;
+      stereo: boolean;
+      reverse_sense: boolean;
+      reverse_camera: boolean;
+      armored: boolean;
+      hydraulic_steering: boolean;
+    };
+  };
+}
+
+const ListAnnouncements: React.FC = () => {
+  const [announcements, setAnnouncements] = useState<IAds[]>([]);
+
+  const history = useHistory();
+
+  useEffect(() => {
+    loadCars();
+  });
+
+  async function loadCars() {
+    const response = await api.get('/ads');
+
+    console.log(response);
+
+    setAnnouncements(response.data);
+  }
+
+  function viewAnnouncement(id: string) {
+    history.push(`/ads/${id}`);
+  }
 
   return (
     <Container>
@@ -62,50 +101,59 @@ const Announcement: React.FC = () => {
             <FiList size={30} />
           </Visualization>
 
-          <Main>
-            <Link to="/announcement">
-              <img
-                src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
-                alt="Jeep Renegade"
-              />
-
-              <div>
-                <strong>Jeep Renegade</strong>
-                <p>2020/2021</p>
-
-                <h1>R$ 88.950,00</h1>
-              </div>
-
-              <div id="info">
-                <div>
-                  <p>147.000km</p>
-                  <FiHeart size={20} />
-                </div>
+          {announcements.map(announcement => (
+            <Main>
+              <Link
+                to="/announcement"
+                onClick={() => viewAnnouncement(announcement.id)}
+              >
+                <img
+                  src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
+                  alt="Jeep Renegade"
+                />
 
                 <div>
-                  <img src={exchange} alt="Câmbio" />
-                  <p>Automático</p>
+                  <strong>Jeep Renegade</strong>
+                  <p>{announcement.cars.year_manufacturer}</p>
+
+                  <h1>{announcement.price}</h1>
                 </div>
 
-                <div>
-                  <img src={motor} alt="Potência do motor" />
-                  <p>2.0</p>
-                </div>
+                <div id="info">
+                  <div>
+                    <p>{announcement.cars.km}</p>
+                    <FiHeart size={20} />
+                  </div>
 
-                <div>
-                  <img src={direction} alt="Direção" />
-                  <p>Direção Hidráulica</p>
-                </div>
+                  <div>
+                    <img src={exchange} alt="Câmbio" />
+                    <p>{announcement.cars.gearbox_type}</p>
+                  </div>
 
-                <hr />
-                <h4>São José dos Campos - SP</h4>
-              </div>
-            </Link>
-          </Main>
+                  <div>
+                    <img src={motor} alt="Potência do motor" />
+                    <p>{announcement.cars.model}</p>
+                  </div>
+
+                  <div>
+                    <img src={direction} alt="Direção" />
+                    <p>
+                      {announcement.cars.vehicle_items.hydraulic_steering
+                        ? 'Hidráulica'
+                        : 'Mecânica'}
+                    </p>
+                  </div>
+
+                  <hr />
+                  <h4>São José dos Campos - SP</h4>
+                </div>
+              </Link>
+            </Main>
+          ))}
         </Announcements>
       </body>
     </Container>
   );
 };
 
-export default Announcement;
+export default ListAnnouncements;

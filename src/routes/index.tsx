@@ -23,7 +23,7 @@ const Routes: React.FC = () => (
       component={ListAnnouncements}
       isPrivate
     />
-    <Route path="/announcement" component={ShowAnnouncement} isPrivate />
+    <Route path="/announcement/:id" component={ShowAnnouncement} isPrivate />
     <Route path="/import-users" component={ImportUsers} />
     <Route
       path="/import-announcements"
