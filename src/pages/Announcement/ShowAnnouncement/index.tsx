@@ -65,7 +65,7 @@ const ShowAnnouncement: React.FC = () => {
   }, [id]);
 
   async function showAnnouncements() {
-    const response = await api.get(`ads/${id}`);
+    const response = await api.get(`advert/${id}`);
 
     console.log(response);
 
@@ -158,11 +158,8 @@ const ShowAnnouncement: React.FC = () => {
             </div>
           </div>
 
-        <div>
-          <img src={color} alt="Cor" />
-
           <div>
-            <img src={exchange} alt="Cor" />
+            <img src={color} alt="Cor" />
             <div>
               <p>Cor:</p>
               <strong>Vermelho</strong>

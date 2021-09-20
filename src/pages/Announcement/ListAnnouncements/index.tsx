@@ -27,7 +27,7 @@ interface IAds {
   price: string;
   views: number;
   interests: number;
-  cars: {
+  car: {
     manufacturer: string;
     brand: string;
     model: string;
@@ -60,7 +60,7 @@ const ListAnnouncements: React.FC = () => {
   });
 
   async function loadCars() {
-    const response = await api.get('/ads');
+    const response = await api.get('/adverts');
 
     console.log(response);
 
@@ -68,7 +68,7 @@ const ListAnnouncements: React.FC = () => {
   }
 
   function viewAnnouncement(id: string) {
-    history.push(`/ads/${id}`);
+    history.push(`/advert/${id}`);
   }
 
   return (
@@ -114,31 +114,31 @@ const ListAnnouncements: React.FC = () => {
 
                 <div>
                   <strong>Jeep Renegade</strong>
-                  <p>{announcement.cars.year_manufacturer}</p>
+                  <p>{announcement.car.year_manufacturer}</p>
 
                   <h1>{announcement.price}</h1>
                 </div>
 
                 <div id="info">
                   <div>
-                    <p>{announcement.cars.km}</p>
+                    <p>{announcement.car.km}</p>
                     <FiHeart size={20} />
                   </div>
 
                   <div>
                     <img src={exchange} alt="Câmbio" />
-                    <p>{announcement.cars.gearbox_type}</p>
+                    <p>{announcement.car.gearbox_type}</p>
                   </div>
 
                   <div>
                     <img src={motor} alt="Potência do motor" />
-                    <p>{announcement.cars.model}</p>
+                    <p>{announcement.car.model}</p>
                   </div>
 
                   <div>
                     <img src={direction} alt="Direção" />
                     <p>
-                      {announcement.cars.vehicle_items.hydraulic_steering
+                      {announcement.car.vehicle_items.hydraulic_steering
                         ? 'Hidráulica'
                         : 'Mecânica'}
                     </p>
