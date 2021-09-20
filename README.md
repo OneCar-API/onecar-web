@@ -1,6 +1,6 @@
 # OneCar Web
 
-![Sem título-1_Prancheta 1](https://user-images.githubusercontent.com/56441318/133938021-8c9157ec-7f4a-487b-ba53-658014b0b88f.png)
+![Sem título-1_Prancheta 1](https://user-images.githubusercontent.com/56441318/133950991-44ac40d3-c041-4c7a-b35b-bbf84abc9c37.png)
 
 
 Este repositório é destinado ao front-end web do produto OneCar, seu site de vendas de carros.
