@@ -18,44 +18,40 @@ import avatar from '../../../assets/images/botaoUser.svg';
 import calendar from '../../../assets/images/year.svg';
 import km from '../../../assets/images/km.svg';
 import color from '../../../assets/images/color.svg';
-import exchange from '../../../assets/images/shift.svg';
+import gearbox_type from '../../../assets/images/shift.svg';
 import motor from '../../../assets/images/motor.svg';
 import direction from '../../../assets/images/direction.svg';
 import fuel from '../../../assets/images/fuel.svg';
 import door from '../../../assets/images/door.svg';
 import api from '../../../services/api';
+import { useAuth } from '../../../hooks/auth';
 
 interface IAds {
   id: string;
+  ad_code: number;
+  title: string;
   description: string;
   price: string;
   views: number;
   interests: number;
-  cars: {
+  car_id: {
+    id: string;
     manufacturer: string;
     brand: string;
     model: string;
     year_manufacturer: string;
+    year_model: string;
     fuel: string;
     gearbox_type: string;
     km: number;
-    vehicle_items: {
-      airbag: boolean;
-      alarm: boolean;
-      air_conditioning: boolean;
-      eletric_lock: boolean;
-      eletric_window: boolean;
-      stereo: boolean;
-      reverse_sense: boolean;
-      reverse_camera: boolean;
-      armored: boolean;
-      hydraulic_steering: boolean;
-    };
+    color: number;
   };
 }
 
 const ShowAnnouncement: React.FC = () => {
   const [announcement, setAnnouncement] = useState<IAds>();
+
+  const { token } = useAuth();
 
   const id = useParams();
 
@@ -65,7 +61,11 @@ const ShowAnnouncement: React.FC = () => {
   }, [id]);
 
   async function showAnnouncements() {
-    const response = await api.get(`advert/${id}`);
+    const response = await api.get(`ads/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     console.log(response);
 
@@ -76,7 +76,7 @@ const ShowAnnouncement: React.FC = () => {
     <Container>
       <Header>
         <HeaderContent>
-          <Link to="/announcements">
+          <Link to="/adverts">
             <FiArrowLeft size={25} />
           </Link>
 
@@ -87,7 +87,7 @@ const ShowAnnouncement: React.FC = () => {
             </button>
           </Form>
 
-          <Link to="/import-announcements">
+          <Link to="/import-ads">
             <button type="button">Anunciar</button>
           </Link>
 
@@ -100,36 +100,36 @@ const ShowAnnouncement: React.FC = () => {
       <Content>
         <Main>
           <img
-            src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
-            alt="Jeep Renegade"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZMlO2PxSWuyDUKRnzbi-qpoBDzdK4MRZ3Kw&usqp=CAU"
+            alt="Carro"
           />
 
           <div>
             <button type="button">
               <img
-                src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
-                alt="Jeep Renegade"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZMlO2PxSWuyDUKRnzbi-qpoBDzdK4MRZ3Kw&usqp=CAU"
+                alt="Carro"
               />
             </button>
 
             <button type="button">
               <img
-                src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
-                alt="Jeep Renegade"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZMlO2PxSWuyDUKRnzbi-qpoBDzdK4MRZ3Kw&usqp=CAU"
+                alt="Carro"
               />
             </button>
 
             <button type="button">
               <img
-                src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
-                alt="Jeep Renegade"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZMlO2PxSWuyDUKRnzbi-qpoBDzdK4MRZ3Kw&usqp=CAU"
+                alt="Carro"
               />
             </button>
 
             <button type="button">
               <img
-                src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
-                alt="Jeep Renegade"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZMlO2PxSWuyDUKRnzbi-qpoBDzdK4MRZ3Kw&usqp=CAU"
+                alt="Carro"
               />
             </button>
           </div>
@@ -139,14 +139,14 @@ const ShowAnnouncement: React.FC = () => {
         </Main>
 
         <Info>
-          <strong>Jeep Renegade</strong>
-          <h1>{announcement?.price}</h1>
+          <strong>Honda Civic</strong>
+          <h1>R$25000,00</h1>
 
           <div>
             <img src={calendar} alt="Calendário" />
             <div>
               <p>Ano:</p>
-              <strong>{announcement?.cars.year_manufacturer}</strong>
+              <strong>2010</strong>
             </div>
           </div>
 
@@ -154,7 +154,7 @@ const ShowAnnouncement: React.FC = () => {
             <img src={km} alt="Quilometragem" />
             <div>
               <p>Quilometragem:</p>
-              <strong>{announcement?.cars.km}</strong>
+              <strong>80000km</strong>
             </div>
           </div>
 
@@ -162,15 +162,15 @@ const ShowAnnouncement: React.FC = () => {
             <img src={color} alt="Cor" />
             <div>
               <p>Cor:</p>
-              <strong>Vermelho</strong>
+              <strong>Preto</strong>
             </div>
           </div>
 
           <div>
-            <img src={exchange} alt="Câmbio" />
+            <img src={gearbox_type} alt="Câmbio" />
             <div>
               <p>Câmbio:</p>
-              <strong>{announcement?.cars.gearbox_type}</strong>
+              <strong>Manual</strong>
             </div>
           </div>
 
@@ -178,7 +178,7 @@ const ShowAnnouncement: React.FC = () => {
             <img src={motor} alt="Motor" />
             <div>
               <p>Motor:</p>
-              <strong>{announcement?.cars.model}</strong>
+              <strong>1.8</strong>
             </div>
           </div>
 
@@ -186,11 +186,7 @@ const ShowAnnouncement: React.FC = () => {
             <img src={direction} alt="Direção" />
             <div>
               <p>Direção:</p>
-              <strong>
-                {announcement?.cars.vehicle_items.hydraulic_steering
-                  ? 'Hidráulica'
-                  : 'Mecânica'}
-              </strong>
+              <strong>Hidráulica</strong>
             </div>
           </div>
 
@@ -198,7 +194,7 @@ const ShowAnnouncement: React.FC = () => {
             <img src={fuel} alt="Combustível" />
             <div>
               <p>Combustível:</p>
-              <strong>{announcement?.cars.fuel}</strong>
+              <strong>Flex</strong>
             </div>
           </div>
 

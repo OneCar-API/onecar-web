@@ -11,9 +11,12 @@ import ButtonBack from '../../../components/ButtonBack';
 
 import { Container, Content, Header } from './styles';
 import Dropzone from '../../../components/Dropzone';
+import { useAuth } from '../../../hooks/auth';
 
 const ImportAnnouncements: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<any>();
+
+  const { token } = useAuth();
 
   const { addToast } = useToast();
   const history = useHistory();
@@ -23,7 +26,10 @@ const ImportAnnouncements: React.FC = () => {
       const formData = new FormData();
       formData.append('file-ads', selectedFile);
       await api.post('/ads/import', formData, {
-        headers: { 'content-type': 'multipart/form-data' },
+        headers: {
+          'content-type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       addToast({
@@ -45,12 +51,12 @@ const ImportAnnouncements: React.FC = () => {
           'Ocorreu um erro ao fazer a importação dos anúncios, tente novamente.',
       });
     }
-  }, [addToast, selectedFile, history]);
+  }, [addToast, selectedFile, history, token]);
 
   return (
     <Container>
       <Header>
-        <Link to="/announcements">
+        <Link to="/adverts">
           <ButtonBack type="submit">Voltar</ButtonBack>
         </Link>
       </Header>
