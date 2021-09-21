@@ -1,13 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
-export default createGlobalStyle`
-
-*{
-  margin: 0;
-  padding: 0;
-  outline: 0;
-  box-sizing: border-box;
-}
+export const GlobalStyle = createGlobalStyle`
 :root{
   --background: #ffffff;
   --blue: #5E9DBC; // cor dos botões
@@ -19,30 +12,16 @@ export default createGlobalStyle`
   --text: #383838; // cor padrão dos textos
 }
 
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body{
-  background: var(--background);
-  -webkit-font-smoothing: antialiased;
+  background: var(---background);
   color: var(---text);
-
-}
-
-body, input{
-  font-family: 'Nunito', sans-serif;
-  font-size: 16px;
-}
-
-button{
-  font-family: 'Nunito', sans-serif;
-}
-
-}
-
-h1,h2,h3,h4,h4,h6,strong{
-  font-weight: 600;
-}
-
-button{
-  cursor: pointer;
+  font: 400 16px "Nunito", sans-serif;
 }
 
 
