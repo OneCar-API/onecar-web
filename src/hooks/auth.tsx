@@ -44,8 +44,6 @@ const AuthProvider: React.FC = ({ children }) => {
     localStorage.setItem('@OneCar:user', JSON.stringify(user));
 
     setData({ token, user });
-
-    return response.data;
   }, []);
 
   const signOut = useCallback(() => {

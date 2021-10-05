@@ -69,9 +69,6 @@ const ShowAnnouncement: React.FC = () => {
 
   useEffect(() => {
     showAnnouncements();
-    console.log(id)
-    console.log(token)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   async function showAnnouncements() {
