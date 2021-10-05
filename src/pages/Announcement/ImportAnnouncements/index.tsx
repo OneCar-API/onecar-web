@@ -1,15 +1,14 @@
 import React, { useCallback, useState } from 'react';
 
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import api from '../../../services/api';
 
 import { useToast } from '../../../hooks/toast';
 
 import Button from '../../../components/Button';
-import ButtonBack from '../../../components/ButtonBack';
 
-import { Container, Content, Header } from './styles';
+import { Container, Content } from './styles';
 import Dropzone from '../../../components/Dropzone';
 import { useAuth } from '../../../hooks/auth';
 
@@ -54,14 +53,8 @@ const ImportAnnouncements: React.FC = () => {
   }, [addToast, selectedFile, history, token]);
 
   return (
-    <Container>
-      <Header>
-        <Link to="/adverts">
-          <ButtonBack type="submit">Voltar</ButtonBack>
-        </Link>
-      </Header>
       <Content>
-        <h1>Deseja otimizar seu tempo? Importe um csv!</h1>
+        <h2>Deseja otimizar seu tempo? Importe um csv!</h2>
 
         <Dropzone onFileUploaded={setSelectedFile} />
 
@@ -69,7 +62,6 @@ const ImportAnnouncements: React.FC = () => {
           Confirmar
         </Button>
       </Content>
-    </Container>
   );
 };
 

@@ -29,6 +29,8 @@ const SignIn: React.FC = () => {
 
   const { addToast } = useToast();
 
+  const a = true;
+
   const history = useHistory();
 
   const handleSubmit = useCallback(
@@ -46,12 +48,17 @@ const SignIn: React.FC = () => {
           abortEarly: false,
         });
 
-        await signIn({
+        const response = await signIn({
           email: data.email,
           password: data.password,
         });
 
-        history.push('/adverts');
+        if(a){
+          history.push('/reset-password');
+        }
+
+        // history.push('/adverts');
+        console.log(response)
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErrors(error);

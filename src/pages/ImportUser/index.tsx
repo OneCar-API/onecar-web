@@ -48,14 +48,8 @@ const ImportUsers: React.FC = () => {
   }, [addToast, selectedFile, history]);
 
   return (
-    <Container>
-      <Header>
-        <Link to="/">
-          <ButtonBack type="submit">Voltar</ButtonBack>
-        </Link>
-      </Header>
       <Content>
-        <h1>Deseja otimizar seu tempo? Importe um csv!</h1>
+        <h2>Deseja otimizar seu tempo? Importe um csv!</h2>
 
         <Dropzone onFileUploaded={setSelectedFile} />
 
@@ -63,7 +57,6 @@ const ImportUsers: React.FC = () => {
           Cadastrar
         </Button>
       </Content>
-    </Container>
   );
 };
 

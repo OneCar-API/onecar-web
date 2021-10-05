@@ -108,7 +108,8 @@ export const Visualization = styled.div`
 `;
 
 export const Main = styled.main`
-  a {
+
+    cursor:pointer;
     margin-top: 20px;
     background: #e5e5e5;
     border-radius: 5px;
@@ -200,5 +201,4 @@ export const Main = styled.main`
         color: #808080;
       }
     }
-  }
 `;

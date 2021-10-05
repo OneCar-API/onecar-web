@@ -88,7 +88,7 @@ const NewPassword: React.FC = () => {
   return (
     <Container>
       <Header>
-        <Link to="/">
+        <Link to="/signin">
           <ButtonBack type="submit">Voltar</ButtonBack>
         </Link>
       </Header>

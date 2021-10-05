@@ -3,6 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { FiSearch, FiHeart, FiGrid, FiList } from 'react-icons/fi';
 
 import { Link, useHistory } from 'react-router-dom';
+
+import Modal from '../../../components/Modal';
+import ImportAnnouncement from '../ImportAnnouncements'
+
 import {
   Container,
   Header,
@@ -47,11 +51,14 @@ interface IAds {
 const ListAnnouncements: React.FC = () => {
   const [announcements, setAnnouncements] = useState<IAds[]>([]);
 
-  const { token } = useAuth();
+  const [modalActive, setModalActive] = useState(false)
+
+  const { token, user } = useAuth();
 
   const history = useHistory();
 
   useEffect(() => {
+    console.log(token)
     loadCars();
   }, []);
 
@@ -68,7 +75,11 @@ const ListAnnouncements: React.FC = () => {
   }
 
   function viewAnnouncement(id: string) {
-    history.push(`/advert/${id}`);
+    if(user){
+      history.push(`/advert-p/${id}`);
+    } else{
+      history.push(`/advert/${id}`);
+    }
   }
 
   return (
@@ -84,10 +95,12 @@ const ListAnnouncements: React.FC = () => {
             </button>
           </Form>
 
-          <Link to="/import-ads">
-            <button type="button">Anunciar</button>
-          </Link>
-
+          {
+            user ?
+              <button type="button" onClick={() => setModalActive(true)}>Anunciar</button>
+              :
+              <button type="button" onClick={() => history.push('/signin')}>Entrar</button>
+          }
           <Profile>
             <img src={avatar} alt="User" />
           </Profile>
@@ -102,67 +115,75 @@ const ListAnnouncements: React.FC = () => {
           </Visualization>
 
           {announcements.map(announcement => (
-            <Main>
-              <Link
-                to="/advert"
-                onClick={() => viewAnnouncement(announcement.id)}
-              >
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZMlO2PxSWuyDUKRnzbi-qpoBDzdK4MRZ3Kw&usqp=CAU"
-                  alt="Carro"
-                />
+            <Main
+              onClick={() => viewAnnouncement(announcement.id)}
+            >
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZMlO2PxSWuyDUKRnzbi-qpoBDzdK4MRZ3Kw&usqp=CAU"
+                alt="Carro"
+              />
+
+              <div>
+                <strong>
+                  {announcement.car_id.brand}
+                  {announcement.car_id.model}
+                </strong>
+                <p>
+                  {announcement.car_id.year_manufacturer}
+                  {announcement.car_id.year_model}
+                </p>
+
+                <h1>
+                  R$
+                  {announcement.price}
+                  ,00
+                </h1>
+              </div>
+
+              <div id="info">
+                <div>
+                  <p>
+                    {announcement.car_id.km}
+                  </p>
+                  <FiHeart size={20} />
+                </div>
 
                 <div>
-                  <strong>
-                    {announcement.car_id.brand}
-                    {announcement.car_id.model}
-                  </strong>
-                  <p>
-                    {announcement.car_id.year_manufacturer}
-                    {announcement.car_id.year_model}
-                  </p>
-
-                  <h1>
-                    R$
-                    {announcement.price}
-                    ,00
-                  </h1>
+                  <img src={gearbox_type} alt="Câmbio" />
+                  <p>{announcement.car_id.gearbox_type}</p>
                 </div>
 
-                <div id="info">
-                  <div>
-                    <p>
-                      {announcement.car_id.km}
-                      80000km
-                    </p>
-                    <FiHeart size={20} />
-                  </div>
-
-                  <div>
-                    <img src={gearbox_type} alt="Câmbio" />
-                    <p>{announcement.car_id.gearbox_type}</p>
-                  </div>
-
-                  <div>
-                    <img src={motor} alt="Potência do motor" />
-                    <p>2.0</p>
-                  </div>
-
-                  <div>
-                    <img src={direction} alt="Direção" />
-                    <p>Hidráulica</p>
-                  </div>
-
-                  <hr />
-                  <h4>São José dos Campos - SP</h4>
+                <div>
+                  <img src={motor} alt="Potência do motor" />
+                  <p>2.0</p>
                 </div>
-              </Link>
+
+                <div>
+                  <img src={direction} alt="Direção" />
+                  <p>Hidráulica</p>
+                </div>
+
+                <hr />
+                <h4>São José dos Campos - SP</h4>
+              </div>
             </Main>
           ))}
         </Announcements>
+        <Modal
+          hideModal={() => setModalActive(false)}
+          active={modalActive}
+          width='800px'
+          title='Importar Anúncio'
+          contentDisplay='block'
+          fadeInDisplay='block'
+          maxWidth='800px'
+        >
+          <ImportAnnouncement />
+        </Modal>
       </body>
     </Container>
   );
-};
+  ;
+}
 
 export default ListAnnouncements;

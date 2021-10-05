@@ -22,6 +22,7 @@ export const HeaderContent = styled.div`
     width: 60px;
     color: #787878;
     text-decoration: none;
+    cursor: pointer;
   }
 
   button {
@@ -85,7 +86,7 @@ export const Profile = styled.div`
   align-items: center;
 
   img {
-    margin-left: 150px;
+    margin-left: 20px;
     width: 35px;
     height: 35px;
   }
