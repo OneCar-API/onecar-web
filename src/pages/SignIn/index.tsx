@@ -1,11 +1,11 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useEffect } from 'react';
 import { FiLogIn } from 'react-icons/fi';
 
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 
 import * as Yup from 'yup';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
@@ -17,6 +17,7 @@ import Logo from '../../components/Logo';
 
 import { Container, Content, Background } from './styles';
 
+
 interface SignInFormData {
   email: string;
   password: string;
@@ -25,13 +26,29 @@ interface SignInFormData {
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const { signIn } = useAuth();
+  const { allowUser, signIn, user } = useAuth();
 
   const { addToast } = useToast();
 
-  const a = true;
-
   const history = useHistory();
+
+  const location = useLocation();
+
+  useEffect(() => {
+    console.log(location)
+    switch (location.pathname) {
+      case '/confirm-user':
+        console.log('b')
+        confirmUser()
+        break;
+      default:
+        console.log('a')
+    }
+  }, [])
+
+  const confirmUser = async () => {
+    await allowUser({ token: location.search.replace("?token=",'') });
+  }
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
@@ -48,17 +65,13 @@ const SignIn: React.FC = () => {
           abortEarly: false,
         });
 
-        const response = await signIn({
+        await signIn({
           email: data.email,
           password: data.password,
+          location: location.pathname.replace('/invite-user/', '?token='),
         });
 
-        if(a){
-          history.push('/reset-password');
-        }
 
-        // history.push('/adverts');
-        console.log(response)
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErrors(error);

@@ -15,7 +15,7 @@ import ImportAnnouncements from '../pages/Announcement/ImportAnnouncements';
 
 const Routes: React.FC = () => (
   <Switch>
-    <Route path="/signin" component={SignIn} />
+    <Route path={["/signin","/invite-user","/confirm-user"]} component={SignIn} />
     <Route path="/signup" component={SignUp} />
     <Route path="/" exact component={ListAnnouncements} />
     <Route path="/advert/:id" component={ShowAnnouncement} />
