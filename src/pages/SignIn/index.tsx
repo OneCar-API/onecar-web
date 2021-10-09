@@ -1,11 +1,11 @@
-import React, { useRef, useCallback, useEffect } from 'react';
+import React, { useRef, useCallback } from 'react';
 import { FiLogIn } from 'react-icons/fi';
 
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 
 import * as Yup from 'yup';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
@@ -17,7 +17,6 @@ import Logo from '../../components/Logo';
 
 import { Container, Content, Background } from './styles';
 
-
 interface SignInFormData {
   email: string;
   password: string;
@@ -26,29 +25,11 @@ interface SignInFormData {
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const { allowUser, signIn, user } = useAuth();
+  const { signIn } = useAuth();
 
   const { addToast } = useToast();
 
   const history = useHistory();
-
-  const location = useLocation();
-
-  useEffect(() => {
-    console.log(location)
-    switch (location.pathname) {
-      case '/confirm-user':
-       
-        confirmUser()
-        break;
-      default:
-        console.log('a')
-    }
-  }, [])
-
-  const confirmUser = async () => {
-    await allowUser({ token: location.search.replace("?token=",'') });
-  }
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
@@ -68,10 +49,9 @@ const SignIn: React.FC = () => {
         await signIn({
           email: data.email,
           password: data.password,
-          location: location.pathname.replace('/invite-user/', '?token='),
         });
 
-
+        history.push('/adverts');
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErrors(error);

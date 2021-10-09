@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef } from 'react';
 
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
@@ -15,10 +15,8 @@ import getValidationErrors from '../../utils/getValidationErrors';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import ButtonBack from '../../components/ButtonBack';
-import Modal from '../../components/Modal';
 
 import { Container, Content, Header } from './style';
-import ImportUsers from '../ImportUser';
 
 interface SignUpFormData {
   name: string;
@@ -30,8 +28,6 @@ const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
-
-  const [modalActive, setModalActive] = useState(false);
 
   const handleSubmit = useCallback(
     async (data: SignUpFormData) => {
@@ -50,9 +46,10 @@ const SignUp: React.FC = () => {
         await schema.validate(data, {
           abortEarly: false,
         });
-        console.log(data)
+
         await api.post('/user', data);
-        history.push('/signin');
+
+        history.push('/');
 
         addToast({
           type: 'success',
@@ -79,7 +76,7 @@ const SignUp: React.FC = () => {
   return (
     <Container>
       <Header>
-        <Link to="/signin">
+        <Link to="/">
           <ButtonBack type="submit">Voltar</ButtonBack>
         </Link>
       </Header>
@@ -97,24 +94,13 @@ const SignUp: React.FC = () => {
 
           <Input name="password" type="password" placeholder="Senha: " />
 
-          <Link to="/signup" onClick={() => setModalActive(true)}>
-            <h2>Você também pode fazer o upload de um arquivo!</h2>
+          <Link to="/import-users">
+            Você também pode fazer o upload de um arquivo!
           </Link>
 
           <Button type="submit">Cadastrar</Button>
         </Form>
       </Content>
-      <Modal
-        hideModal={() => setModalActive(false)}
-        active={modalActive}
-        width='800px'
-        title='Importar Usuário'
-        contentDisplay='block'
-        fadeInDisplay='block'
-        maxWidth='800px'
-      >
-        <ImportUsers />
-      </Modal>
     </Container>
   );
 };

@@ -25,20 +25,21 @@ export const Header = styled.div`
 `;
 
 export const Content = styled.div`
+  background: rgb(242, 242, 242, 0.9);
   background-size: cover;
 
- 
+  display: flex;
   flex-direction: column;
 
   align-items: center;
   /* margin-top: 146px; */
 
   width: 100vw;
-  height: 75vh;
+  height: 100vh;
 
   form {
     align-items: center;
-    margin: 150px 0;
+    margin: 30px 0;
     width: 500px;
     text-align: center;
   }
@@ -63,7 +64,7 @@ export const Content = styled.div`
   }
 
   button {
-    margin-top: 30px;
+    margin-top: 80px;
   }
 `;
 

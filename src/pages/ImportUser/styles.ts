@@ -25,6 +25,7 @@ export const Header = styled.div`
 `;
 
 export const Content = styled.div`
+  background: rgb(242, 242, 242, 0.9);
   background-size: cover;
 
   display: flex;
@@ -34,7 +35,7 @@ export const Content = styled.div`
   /* margin-top: 146px; */
 
   width: 100vw;
-  height: 75vh;
+  height: 100vh;
 
   form {
     align-items: center;
@@ -63,7 +64,7 @@ export const Content = styled.div`
   }
 
   button {
-    margin-top: 30px;
+    margin-top: 80px;
   }
 `;
 

@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import { FiSearch, FiHeart } from 'react-icons/fi';
+import { FiSearch, FiHeart, FiGrid, FiList } from 'react-icons/fi';
 
 import { Link, useHistory } from 'react-router-dom';
-
-import Modal from '../../../components/Modal';
-import Menu from '../../../components/Menu';
-import ImportAnnouncement from '../ImportAnnouncements'
-
 import {
   Container,
   Header,
@@ -17,8 +12,6 @@ import {
   Announcements,
   Visualization,
   Main,
-  GridIcon,
-  ListIcon
 } from './styles';
 
 import logoImg from '../../../assets/images/logo.svg';
@@ -48,33 +41,17 @@ interface IAds {
     gearbox_type: string;
     km: number;
     color: number;
-    vehicle_item_id: {
-      airbag: boolean;
-      alarm: boolean;
-      air_conditioning: boolean;
-      eletric_lock: boolean;
-      eletric_window: boolean;
-      stereo: boolean;
-      reverse_sensor: boolean;
-      reverse_camera: boolean;
-      armoured: boolean;
-      hydraulic_steering: boolean;
-    }
   };
 }
 
 const ListAnnouncements: React.FC = () => {
   const [announcements, setAnnouncements] = useState<IAds[]>([]);
 
-  const [modalActive, setModalActive] = useState(false)
-  const [selected, setSelected] = useState('list')
-
-  const { token, user } = useAuth();
+  const { token } = useAuth();
 
   const history = useHistory();
 
   useEffect(() => {
-    console.log(token)
     loadCars();
   }, []);
 
@@ -91,14 +68,8 @@ const ListAnnouncements: React.FC = () => {
   }
 
   function viewAnnouncement(id: string) {
-    if (user) {
-      history.push(`/advert-p/${id}`);
-    } else {
-      history.push(`/advert/${id}`);
-    }
+    history.push(`/advert/${id}`);
   }
-
-  const [visualization, setVisualization] = useState('block');
 
   return (
     <Container>
@@ -113,12 +84,10 @@ const ListAnnouncements: React.FC = () => {
             </button>
           </Form>
 
-          {
-            user ?
-              <button type="button" onClick={() => setModalActive(true)}>Anunciar</button>
-              :
-              <button type="button" onClick={() => history.push('/signin')}>Entrar</button>
-          }
+          <Link to="/import-ads">
+            <button type="button">Anunciar</button>
+          </Link>
+
           <Profile>
             <img src={avatar} alt="User" />
           </Profile>
@@ -128,30 +97,16 @@ const ListAnnouncements: React.FC = () => {
       <body>
         <Announcements>
           <Visualization>
-            <GridIcon
-              selected={selected}
-              size={30}
-              onClick={() => {
-                setVisualization('flex')
-                setSelected('grid')
-              }}
-            />
-            <ListIcon
-              selected={selected}
-              size={30}
-              onClick={() => {
-                setVisualization('block')
-                setSelected('list')
-              }}
-            />
+            <FiGrid size={30} />
+            <FiList size={30} />
           </Visualization>
-          <Menu display={visualization}>
-            {announcements.map(announcement => (
-              <Main
-                display={visualization}
+
+          {announcements.map(announcement => (
+            <Main>
+              <Link
+                to="/advert"
                 onClick={() => viewAnnouncement(announcement.id)}
               >
-
                 <img
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZMlO2PxSWuyDUKRnzbi-qpoBDzdK4MRZ3Kw&usqp=CAU"
                   alt="Carro"
@@ -178,6 +133,7 @@ const ListAnnouncements: React.FC = () => {
                   <div>
                     <p>
                       {announcement.car_id.km}
+                      80000km
                     </p>
                     <FiHeart size={20} />
                   </div>
@@ -188,32 +144,25 @@ const ListAnnouncements: React.FC = () => {
                   </div>
 
                   <div>
+                    <img src={motor} alt="Potência do motor" />
+                    <p>2.0</p>
+                  </div>
+
+                  <div>
                     <img src={direction} alt="Direção" />
-                    <p>{announcement?.car_id.vehicle_item_id?.hydraulic_steering ? 'Hidráulica' : 'Comum'}</p>
+                    <p>Hidráulica</p>
                   </div>
 
                   <hr />
                   <h4>São José dos Campos - SP</h4>
                 </div>
-              </Main>
-            ))}
-          </Menu>
+              </Link>
+            </Main>
+          ))}
         </Announcements>
-        <Modal
-          hideModal={() => setModalActive(false)}
-          active={modalActive}
-          width='800px'
-          title='Importar Anúncio'
-          contentDisplay='block'
-          fadeInDisplay='block'
-          maxWidth='800px'
-        >
-          <ImportAnnouncement />
-        </Modal>
       </body>
     </Container>
   );
-  ;
-}
+};
 
 export default ListAnnouncements;
