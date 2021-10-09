@@ -162,7 +162,9 @@ const ShowAnnouncement: React.FC = () => {
           </div>
 
           <h1>Descrição</h1>
+
           <input placeholder={announcement?.description} />
+
         </Main>
 
         <Info>

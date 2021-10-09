@@ -19,6 +19,7 @@
     "ecmaFeatures": {
       "jsx": false
     },
+
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
@@ -52,6 +53,7 @@
       {
         "extensions": [
           ".tsx"
+
         ]
       }
     ],
