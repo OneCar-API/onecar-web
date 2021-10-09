@@ -16,51 +16,51 @@ import {
 
 import logoImg from '../../../assets/images/logo.svg';
 import avatar from '../../../assets/images/botaoUser.svg';
-import exchange from '../../../assets/images/shift.svg';
+import gearbox_type from '../../../assets/images/shift.svg';
 import motor from '../../../assets/images/motor.svg';
 import direction from '../../../assets/images/direction.svg';
 import api from '../../../services/api';
+import { useAuth } from '../../../hooks/auth';
 
 interface IAds {
   id: string;
+  ad_code: number;
+  title: string;
   description: string;
   price: string;
   views: number;
   interests: number;
-  cars: {
+  car_id: {
+    id: string;
     manufacturer: string;
     brand: string;
     model: string;
     year_manufacturer: string;
+    year_model: string;
     fuel: string;
     gearbox_type: string;
     km: number;
-    vehicle_items: {
-      airbag: boolean;
-      alarm: boolean;
-      air_conditioning: boolean;
-      eletric_lock: boolean;
-      eletric_window: boolean;
-      stereo: boolean;
-      reverse_sense: boolean;
-      reverse_camera: boolean;
-      armored: boolean;
-      hydraulic_steering: boolean;
-    };
+    color: number;
   };
 }
 
 const ListAnnouncements: React.FC = () => {
   const [announcements, setAnnouncements] = useState<IAds[]>([]);
 
+  const { token } = useAuth();
+
   const history = useHistory();
 
   useEffect(() => {
     loadCars();
-  });
+  }, []);
 
   async function loadCars() {
-    const response = await api.get('/ads');
+    const response = await api.get('/ads', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     console.log(response);
 
@@ -68,7 +68,8 @@ const ListAnnouncements: React.FC = () => {
   }
 
   function viewAnnouncement(id: string) {
-    history.push(`/ads/${id}`);
+    console.log(id);
+    history.push(`/advert/${id}`);
   }
 
   return (
@@ -84,7 +85,7 @@ const ListAnnouncements: React.FC = () => {
             </button>
           </Form>
 
-          <Link to="/import-announcements">
+          <Link to="/import-ads">
             <button type="button">Anunciar</button>
           </Link>
 
@@ -104,44 +105,53 @@ const ListAnnouncements: React.FC = () => {
           {announcements.map(announcement => (
             <Main>
               <Link
-                to="/announcement"
+                to="/advert"
                 onClick={() => viewAnnouncement(announcement.id)}
               >
                 <img
-                  src="https://cdn.buttercms.com/Aq0QB1qQQEuSfH03HzOx"
-                  alt="Jeep Renegade"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZMlO2PxSWuyDUKRnzbi-qpoBDzdK4MRZ3Kw&usqp=CAU"
+                  alt="Carro"
                 />
 
                 <div>
-                  <strong>Jeep Renegade</strong>
-                  <p>{announcement.cars.year_manufacturer}</p>
+                  <strong>
+                    {announcement.car_id.brand}
+                    {announcement.car_id.model}
+                  </strong>
+                  <p>
+                    {announcement.car_id.year_manufacturer}
+                    {announcement.car_id.year_model}
+                  </p>
 
-                  <h1>{announcement.price}</h1>
+                  <h1>
+                    R$
+                    {announcement.price}
+                    ,00
+                  </h1>
                 </div>
 
                 <div id="info">
                   <div>
-                    <p>{announcement.cars.km}</p>
+                    <p>
+                      {announcement.car_id.km}
+                      80000km
+                    </p>
                     <FiHeart size={20} />
                   </div>
 
                   <div>
-                    <img src={exchange} alt="Câmbio" />
-                    <p>{announcement.cars.gearbox_type}</p>
+                    <img src={gearbox_type} alt="Câmbio" />
+                    <p>{announcement.car_id.gearbox_type}</p>
                   </div>
 
                   <div>
                     <img src={motor} alt="Potência do motor" />
-                    <p>{announcement.cars.model}</p>
+                    <p>2.0</p>
                   </div>
 
                   <div>
                     <img src={direction} alt="Direção" />
-                    <p>
-                      {announcement.cars.vehicle_items.hydraulic_steering
-                        ? 'Hidráulica'
-                        : 'Mecânica'}
-                    </p>
+                    <p>Hidráulica</p>
                   </div>
 
                   <hr />

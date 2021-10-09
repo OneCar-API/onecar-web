@@ -1,71 +1,62 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
-import { FormHandles } from '@unform/core';
-
-import * as Yup from 'yup';
 import { Link, useHistory } from 'react-router-dom';
 
 import api from '../../../services/api';
 
 import { useToast } from '../../../hooks/toast';
 
-import getValidationErrors from '../../../utils/getValidationErrors';
-
 import Button from '../../../components/Button';
 import ButtonBack from '../../../components/ButtonBack';
 
 import { Container, Content, Header } from './styles';
 import Dropzone from '../../../components/Dropzone';
-
-interface ImportAnnouncementsFormData {
-  name: string;
-  email: string;
-  password: string;
-}
+import { useAuth } from '../../../hooks/auth';
 
 const ImportAnnouncements: React.FC = () => {
-  const [selectedFile, setSelectedFile] = useState<File>();
+  const [selectedFile, setSelectedFile] = useState<any>();
 
-  const formRef = useRef<FormHandles>(null);
+  const { token } = useAuth();
+
   const { addToast } = useToast();
   const history = useHistory();
 
-  useCallback(
-    async (data: ImportAnnouncementsFormData) => {
-      try {
-        formRef.current?.setErrors({});
+  const handleUploadFile = useCallback(async () => {
+    try {
+      const formData = new FormData();
+      formData.append('file-ads', selectedFile);
+      await api.post('/ads/import', formData, {
+        headers: {
+          'content-type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-        await api.post('/ads/import', data);
+      addToast({
+        type: 'success',
+        title: 'Cadastro de anúncios realizado!',
+        description: 'Seus anúncios foram importados com sucesso!',
+      });
 
-        history.push('/announcements');
-
-        addToast({
-          type: 'success',
-          title: 'Anúncios cadastrados!',
-          description: 'Seus anúncios foram cadastrados com sucesso!',
-        });
-      } catch (error) {
-        if (error instanceof Yup.ValidationError) {
-          const errors = getValidationErrors(error);
-
-          formRef.current?.setErrors(errors);
-        }
-
-        addToast({
-          type: 'error',
-          title: 'Erro no upload do arquivo',
-          description:
-            'Ocorreu um erro ao fazer upload do arquivo, tente novamente.',
-        });
+      history.push('/');
+    } catch (error) {
+      if (error) {
+        console.log(error);
       }
-    },
-    [addToast, history],
-  );
+
+      addToast({
+        type: 'error',
+        title: 'Erro no cadastro de anúncios',
+        description:
+          'Ocorreu um erro ao fazer a importação dos anúncios, tente novamente.',
+      });
+    }
+  }, [addToast, selectedFile, history, token]);
 
   return (
     <Container>
       <Header>
-        <Link to="/announcements">
+        <Link to="/adverts">
           <ButtonBack type="submit">Voltar</ButtonBack>
         </Link>
       </Header>
@@ -74,7 +65,9 @@ const ImportAnnouncements: React.FC = () => {
 
         <Dropzone onFileUploaded={setSelectedFile} />
 
-        <Button type="submit">Confirmar</Button>
+        <Button type="submit" onClick={handleUploadFile}>
+          Confirmar
+        </Button>
       </Content>
     </Container>
   );

@@ -35,6 +35,8 @@ const SignUp: React.FC = () => {
         formRef.current?.setErrors({});
         const schema = Yup.object().shape({
           name: Yup.string().required('Nome obrigatório'),
+          nickname: Yup.string().required('Apelido obrigatório'),
+          document: Yup.string().required('Documento obrigatório'),
           email: Yup.string()
             .required('E-mail obrigatório')
             .email('Digite um e-mail válido'),
@@ -45,7 +47,7 @@ const SignUp: React.FC = () => {
           abortEarly: false,
         });
 
-        await api.post('/users', data);
+        await api.post('/user', data);
 
         history.push('/');
 
@@ -83,6 +85,10 @@ const SignUp: React.FC = () => {
 
         <Form ref={formRef} onSubmit={handleSubmit}>
           <Input name="name" placeholder="Nome:" />
+
+          <Input name="nickname" placeholder="Apelido:" />
+
+          <Input name="document" placeholder="CPF:" />
 
           <Input name="email" placeholder="E-mail: " />
 

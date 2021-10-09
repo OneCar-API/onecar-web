@@ -1,15 +1,10 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
-import { FormHandles } from '@unform/core';
-
-import * as Yup from 'yup';
 import { Link, useHistory } from 'react-router-dom';
 
 import api from '../../services/api';
 
 import { useToast } from '../../hooks/toast';
-
-import getValidationErrors from '../../utils/getValidationErrors';
 
 import Button from '../../components/Button';
 import ButtonBack from '../../components/ButtonBack';
@@ -17,50 +12,40 @@ import ButtonBack from '../../components/ButtonBack';
 import { Container, Content, Header } from './styles';
 import Dropzone from '../../components/Dropzone';
 
-interface ImportUsersFormData {
-  name: string;
-  email: string;
-  password: string;
-}
-
 const ImportUsers: React.FC = () => {
-  const [selectedFile, setSelectedFile] = useState<File>();
+  const [selectedFile, setSelectedFile] = useState<any>();
 
-  const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
 
-  useCallback(
-    async (data: ImportUsersFormData) => {
-      try {
-        formRef.current?.setErrors({});
+  const handleUploadFile = useCallback(async () => {
+    try {
+      const formData = new FormData();
+      formData.append('file-users', selectedFile);
+      await api.post('/users/import', formData, {
+        headers: { 'content-type': 'multipart/form-data' },
+      });
 
-        await api.post('/users/import', data);
+      addToast({
+        type: 'success',
+        title: 'Cadastro realizado!',
+        description:
+          'Foi enviado um e-mail contendo uma senha para cada um dos usuários.',
+      });
 
-        history.push('/');
-
-        addToast({
-          type: 'success',
-          title: 'Cadastros realizados!',
-          description:
-            'Foi enviado um e-mail contendo uma senha para cada usuário!',
-        });
-      } catch (error) {
-        if (error instanceof Yup.ValidationError) {
-          const errors = getValidationErrors(error);
-
-          formRef.current?.setErrors(errors);
-        }
-
-        addToast({
-          type: 'error',
-          title: 'Erro no cadastro',
-          description: 'Ocorreu um erro ao fazer cadastro, tente novamente.',
-        });
+      history.push('/');
+    } catch (error) {
+      if (error) {
+        console.log(error);
       }
-    },
-    [addToast, history],
-  );
+
+      addToast({
+        type: 'error',
+        title: 'Erro no cadastro',
+        description: 'Ocorreu um erro ao fazer cadastro, tente novamente.',
+      });
+    }
+  }, [addToast, selectedFile, history]);
 
   return (
     <Container>
@@ -74,7 +59,9 @@ const ImportUsers: React.FC = () => {
 
         <Dropzone onFileUploaded={setSelectedFile} />
 
-        <Button type="submit">Cadastrar</Button>
+        <Button type="submit" onClick={handleUploadFile}>
+          Cadastrar
+        </Button>
       </Content>
     </Container>
   );

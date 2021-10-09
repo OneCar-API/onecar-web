@@ -100,6 +100,7 @@ export const Visualization = styled.div`
   svg {
     color: #808080;
     margin-top: 40px;
+    margin-left: 85rem;
 
     & + svg {
       margin-left: 10px;
