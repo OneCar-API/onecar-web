@@ -26,7 +26,7 @@ export default createGlobalStyle`
 
   }
 
-  body, input{
+  body, input,textarea{
     font-family: 'Nunito', sans-serif;
     font-size: 16px;
   }

@@ -95,6 +95,16 @@ export const Content = styled.main`
   max-width: 1200px;
   margin: 64px auto;
   display: flex;
+
+  > textarea {
+    border-radius: 1rem;
+    border-color: #787878;
+    resize: none;
+    max-width: 200px;
+    max-height: 100px;
+    min-height: 100px;
+    min-width: 200px;
+  }
 `;
 
 export const Main = styled.div`

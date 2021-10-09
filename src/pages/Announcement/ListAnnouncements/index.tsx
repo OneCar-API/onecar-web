@@ -68,6 +68,7 @@ const ListAnnouncements: React.FC = () => {
   }
 
   function viewAnnouncement(id: string) {
+    console.log(id);
     history.push(`/advert/${id}`);
   }
 

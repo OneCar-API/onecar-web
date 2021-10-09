@@ -135,7 +135,8 @@ const ShowAnnouncement: React.FC = () => {
           </div>
 
           <h1>Descrição</h1>
-          <input placeholder="Carro bem conservado, ..." />
+          <textarea>Carro bem conservado. Único dono.</textarea>
+          {/* <input placeholder= /> */}
         </Main>
 
         <Info>
