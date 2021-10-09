@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { shade } from 'polished';
+import { FiGrid, FiList } from 'react-icons/fi';
 
 export const Container = styled.div`
   body {
@@ -105,6 +106,24 @@ export const Visualization = styled.div`
       margin-left: 10px;
     }
   }
+`;
+
+interface IconProps {
+  selected: string;
+}
+
+export const GridIcon = styled(FiGrid) <IconProps>`
+    cursor:pointer;
+    background: ${(props => props.selected === 'list' ? '#fff' : '#e5e5e5')};
+    border-radius: 3px;
+ 
+`;
+
+export const ListIcon = styled(FiList) <IconProps>`
+    cursor:pointer;
+    background: ${(props => props.selected === 'grid' ? '#fff' : '#e5e5e5')};
+    border-radius: 3px;
+
 `;
 
 interface MainProps {

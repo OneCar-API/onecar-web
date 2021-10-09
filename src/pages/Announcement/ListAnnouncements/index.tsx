@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { FiSearch, FiHeart, FiGrid, FiList } from 'react-icons/fi';
+import { FiSearch, FiHeart } from 'react-icons/fi';
 
 import { Link, useHistory } from 'react-router-dom';
 
@@ -17,6 +17,8 @@ import {
   Announcements,
   Visualization,
   Main,
+  GridIcon,
+  ListIcon
 } from './styles';
 
 import logoImg from '../../../assets/images/logo.svg';
@@ -46,6 +48,18 @@ interface IAds {
     gearbox_type: string;
     km: number;
     color: number;
+    vehicle_item_id: {
+      airbag: boolean;
+      alarm: boolean;
+      air_conditioning: boolean;
+      eletric_lock: boolean;
+      eletric_window: boolean;
+      stereo: boolean;
+      reverse_sensor: boolean;
+      reverse_camera: boolean;
+      armoured: boolean;
+      hydraulic_steering: boolean;
+    }
   };
 }
 
@@ -53,6 +67,7 @@ const ListAnnouncements: React.FC = () => {
   const [announcements, setAnnouncements] = useState<IAds[]>([]);
 
   const [modalActive, setModalActive] = useState(false)
+  const [selected, setSelected] = useState('list')
 
   const { token, user } = useAuth();
 
@@ -113,8 +128,22 @@ const ListAnnouncements: React.FC = () => {
       <body>
         <Announcements>
           <Visualization>
-            <FiGrid size={30} onClick={() => setVisualization('flex')} />
-            <FiList size={30} onClick={() => setVisualization('block')} />
+            <GridIcon
+              selected={selected}
+              size={30}
+              onClick={() => {
+                setVisualization('flex')
+                setSelected('grid')
+              }}
+            />
+            <ListIcon
+              selected={selected}
+              size={30}
+              onClick={() => {
+                setVisualization('block')
+                setSelected('list')
+              }}
+            />
           </Visualization>
           <Menu display={visualization}>
             {announcements.map(announcement => (
@@ -159,13 +188,8 @@ const ListAnnouncements: React.FC = () => {
                   </div>
 
                   <div>
-                    <img src={motor} alt="Potência do motor" />
-                    <p>2.0</p>
-                  </div>
-
-                  <div>
                     <img src={direction} alt="Direção" />
-                    <p>Hidráulica</p>
+                    <p>{announcement?.car_id.vehicle_item_id?.hydraulic_steering ? 'Hidráulica' : 'Comum'}</p>
                   </div>
 
                   <hr />

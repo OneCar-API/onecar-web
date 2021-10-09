@@ -49,6 +49,18 @@ interface IAds {
     gearbox_type: string;
     km: number;
     color: number;
+    vehicle_item_id:{
+      airbag: boolean;
+      alarm: boolean;
+      air_conditioning: boolean;
+      eletric_lock: boolean;
+      eletric_window: boolean;
+      stereo: boolean;
+      reverse_sensor: boolean;
+      reverse_camera: boolean;
+      armoured: boolean;
+      hydraulic_steering: boolean;
+    }
   };
 }
 
@@ -168,7 +180,7 @@ const ShowAnnouncement: React.FC = () => {
             <img src={calendar} alt="Calendário" />
             <div>
               <p>Ano:</p>
-              <strong>2010</strong>
+              <strong>{announcement?.car_id.year_model}</strong>
             </div>
           </div>
 
@@ -195,15 +207,7 @@ const ShowAnnouncement: React.FC = () => {
             <img src={gearbox_type} alt="Câmbio" />
             <div>
               <p>Câmbio:</p>
-              <strong>Manual</strong>
-            </div>
-          </div>
-
-          <div>
-            <img src={motor} alt="Motor" />
-            <div>
-              <p>Motor:</p>
-              <strong>1.8</strong>
+              <strong>{announcement?.car_id.gearbox_type}</strong>
             </div>
           </div>
 
@@ -211,7 +215,7 @@ const ShowAnnouncement: React.FC = () => {
             <img src={direction} alt="Direção" />
             <div>
               <p>Direção:</p>
-              <strong>Hidráulica</strong>
+              <strong>{announcement?.car_id.vehicle_item_id.hydraulic_steering?'Hidráulica':'Comum'}</strong>
             </div>
           </div>
 
@@ -222,14 +226,7 @@ const ShowAnnouncement: React.FC = () => {
               <strong>{announcement?.car_id.fuel}</strong>
             </div>
           </div>
-
-          <div>
-            <img src={door} alt="Portas" />
-            <div>
-              <p>Portas:</p>
-              <strong>4</strong>
-            </div>
-          </div>
+          
         </Info>
       </Content>
       <Modal

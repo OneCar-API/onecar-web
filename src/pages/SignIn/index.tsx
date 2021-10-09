@@ -38,7 +38,7 @@ const SignIn: React.FC = () => {
     console.log(location)
     switch (location.pathname) {
       case '/confirm-user':
-        console.log('b')
+       
         confirmUser()
         break;
       default:
