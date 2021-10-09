@@ -47,25 +47,23 @@ const ImportUsers: React.FC = () => {
     }
   }, [addToast, selectedFile, history]);
 
-  const [fetchedCSVData, setFetchedCSVData] = useState<string>('');
-
-  if (!fetchedCSVData) {
-    fetch(`${process.env.PUBLIC_URL}/csv/file-users.csv`)
-      .then(res => setFetchedCSVData(res.url))
-      
-  }
-
   return (
-    <Content>
-      <h2>Deseja otimizar seu tempo? Importe um csv!</h2>
+    <Container>
+      <Header>
+        <Link to="/">
+          <ButtonBack type="submit">Voltar</ButtonBack>
+        </Link>
+      </Header>
+      <Content>
+        <h1>Deseja otimizar seu tempo? Importe um csv!</h1>
 
-      <Dropzone onFileUploaded={setSelectedFile} />
+        <Dropzone onFileUploaded={setSelectedFile} />
 
-      <Button type="submit" onClick={handleUploadFile}>
-        Cadastrar
-      </Button>
-      <a href={fetchedCSVData}>Faça download do modelo CSV</a>
-    </Content>
+        <Button type="submit" onClick={handleUploadFile}>
+          Cadastrar
+        </Button>
+      </Content>
+    </Container>
   );
 };
 

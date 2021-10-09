@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useEffect } from 'react';
+import React, { useRef, useCallback } from 'react';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
@@ -15,13 +15,11 @@ import ButtonBack from '../../components/ButtonBack';
 import { Container, Content, Header } from './style';
 
 import api from '../../services/api';
-import { useAuth } from '../../hooks/auth';
 
 interface NewPasswordFormData {
   password: string;
   password_confirmation: string;
 }
-
 
 const NewPassword: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
@@ -31,22 +29,6 @@ const NewPassword: React.FC = () => {
   const history = useHistory();
 
   const location = useLocation();
-
-  const { user, signOut } = useAuth();
-
-  let user_id: string;
-
-  useEffect(() => {
-
-    for (const [key, value] of Object.entries(user)) {
-      if (value === true && key === 'is_active') {
-        history.push('/adverts');
-      }
-      if(key === 'id'){
-        user_id = value
-      }
-    }
-  }, [])
 
   const handleSubmit = useCallback(
     async (data: NewPasswordFormData) => {
@@ -61,22 +43,16 @@ const NewPassword: React.FC = () => {
           ),
         });
 
-
         await schema.validate(data, {
           abortEarly: false,
         });
 
         const { password, password_confirmation } = data;
-        const token = user_id;
-        console.log(token)
+        const token = location.search.replace('?token=', '');
 
         if (!token) {
           throw new Error();
         }
-
-        // await api.patch('/user/confirm', {
-        //   token
-        // })
 
         await api.post('/password/reset', {
           password,
@@ -91,8 +67,7 @@ const NewPassword: React.FC = () => {
             'Sua senha foi recuperada, você já pode realizar seu login!',
         });
 
-        signOut
-        history.push('/signin');
+        history.push('/');
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErrors(error);
@@ -110,22 +85,12 @@ const NewPassword: React.FC = () => {
     [addToast, history, location.search],
   );
 
-  console.log(location)
-
   return (
     <Container>
       <Header>
-
-        <ButtonBack
-          onClick={() => {
-            signOut()
-            history.push('/signin')
-          }}
-          type="submit"
-        >
-          Voltar
-        </ButtonBack>
-
+        <Link to="/">
+          <ButtonBack type="submit">Voltar</ButtonBack>
+        </Link>
       </Header>
       <Content>
         <Logo />

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { shade } from 'polished';
-import { FiGrid, FiList } from 'react-icons/fi';
 
 export const Container = styled.div`
   body {
@@ -108,41 +107,16 @@ export const Visualization = styled.div`
   }
 `;
 
-interface IconProps {
-  selected: string;
-}
-
-export const GridIcon = styled(FiGrid) <IconProps>`
-    cursor:pointer;
-    background: ${(props => props.selected === 'list' ? '#fff' : '#e5e5e5')};
-    border-radius: 3px;
- 
-`;
-
-export const ListIcon = styled(FiList) <IconProps>`
-    cursor:pointer;
-    background: ${(props => props.selected === 'grid' ? '#fff' : '#e5e5e5')};
-    border-radius: 3px;
-
-`;
-
-interface MainProps {
-  display: string
-}
-
-export const Main = styled.main<MainProps>`
-
-    cursor:pointer;
+export const Main = styled.main`
+  a {
     margin-top: 20px;
     background: #e5e5e5;
     border-radius: 5px;
-    width: ${(props) => props.display === 'flex' ? 'auto' : '100%'};
+    width: 100%;
+    display: block;
     text-decoration: none;
 
-    margin-left:${(props) => props.display === 'flex' ? '20px' : '0px'};
-    margin-right:${(props) => props.display === 'flex' ? '20px' : '0px'};
-
-    display: ${(props) => props.display === 'flex' ? 'block' : 'flex'};
+    display: flex;
     transition: transform 0.2s;
 
     box-shadow: 2.5px 3px 5px 1px #c4c4c4;
@@ -179,11 +153,7 @@ export const Main = styled.main<MainProps>`
       h1 {
         font-size: 36px;
         color: #383838;
-        margin-top: ${(props) => props.display === 'flex' ? '20px' : '50px'};
-      }
-
-      img {
-        display: ${(props) => props.display === 'flex' ? 'none' : 'block'};
+        margin-top: 50px;
       }
     }
 
@@ -204,7 +174,7 @@ export const Main = styled.main<MainProps>`
       }
 
       div {
-        display: ${(props) => props.display === 'flex' ? 'none' : 'flex'};
+        display: flex;
         align-items: center;
         margin-bottom: 10px;
 
@@ -230,4 +200,5 @@ export const Main = styled.main<MainProps>`
         color: #808080;
       }
     }
+  }
 `;
