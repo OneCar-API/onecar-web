@@ -7,11 +7,15 @@ import api from '../../../services/api';
 import { useToast } from '../../../hooks/toast';
 
 import Button from '../../../components/Button';
-import ButtonBack from '../../../components/ButtonBack';
 
-import { Container, Content, Header } from './styles';
+import { Container, Content } from './styles';
 import Dropzone from '../../../components/Dropzone';
 import { useAuth } from '../../../hooks/auth';
+
+// import fileAds from '../../../assets/csv/file-ads.csv';
+
+
+type CSVData = string | null;
 
 const ImportAnnouncements: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<any>();
@@ -31,6 +35,8 @@ const ImportAnnouncements: React.FC = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+
+
 
       addToast({
         type: 'success',
@@ -53,23 +59,26 @@ const ImportAnnouncements: React.FC = () => {
     }
   }, [addToast, selectedFile, history, token]);
 
+
+  const [fetchedCSVData, setFetchedCSVData] = useState<string>('');
+
+  if (!fetchedCSVData) {
+    fetch(`${process.env.PUBLIC_URL}/csv/file-ads.csv`)
+      .then(res => setFetchedCSVData(res.url))
+
+  }
+
   return (
-    <Container>
-      <Header>
-        <Link to="/adverts">
-          <ButtonBack type="submit">Voltar</ButtonBack>
-        </Link>
-      </Header>
-      <Content>
-        <h1>Deseja otimizar seu tempo? Importe um csv!</h1>
+    <Content>
+      <h2>Deseja otimizar seu tempo? Importe um csv!</h2>
 
-        <Dropzone onFileUploaded={setSelectedFile} />
+      <Dropzone onFileUploaded={setSelectedFile} />
 
-        <Button type="submit" onClick={handleUploadFile}>
-          Confirmar
-        </Button>
-      </Content>
-    </Container>
+      <Button type="submit" onClick={handleUploadFile}>
+        Confirmar
+      </Button>
+      <a href={fetchedCSVData}>Faça download do modelo CSV</a>
+    </Content>
   );
 };
 

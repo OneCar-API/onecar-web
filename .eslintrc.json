@@ -1,8 +1,25 @@
 {
-    "env": {
-        "browser": true,
-        "es6": true
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "airbnb",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": false
     },
+<<<<<<< HEAD
     "extends": [
         "plugin:@typescript-eslint/recommended",
         "plugin:react/recommended",
@@ -61,15 +78,62 @@
             "ts": "never",
             "tsx": "never"
           }
+=======
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react-hooks",
+    "react",
+    "@typescript-eslint",
+    "prettier"
+  ],
+  "rules": {
+    "no-restricted-syntax": "off",
+    "react/jsx-indent-props": "off",
+    "react/jsx-indent": "off",
+    "prettier/prettier": "off",
+    "react-hooks/rules-of-hooks": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "off",
+    "@typescript-eslint/ban-types": "off",
+    "react-hooks/exhaustive-deps": "warn",
+    "no-unused-expressions": "off",
+    "no-console": "off",
+    "no-unused-vars": "off",
+    "camelcase": "off",
+    "react/jsx-wrap-multilines": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "react/require-default-props": "off",
+    "react/jsx-no-bind": "off",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".tsx"
+>>>>>>> 3a0505d2d314aab2b8d6beb5ce9fc0fddab88147
         ]
-      },
-      "settings": {
-        "import/resolver": {
-          "typescript": {},
-          "babel-plugin-root-import": {
-            "rootPathPrefix": "~",
-            "rootPathSuffix": "src"
-          }
-        }
+      }
+    ],
+    "import/prefer-default-export": "off",
+    "no-use-before-define": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {},
+      "babel-plugin-root-import": {
+        "rootPathPrefix": "~",
+        "rootPathSuffix": "src"
+      }
     }
+  }
 }

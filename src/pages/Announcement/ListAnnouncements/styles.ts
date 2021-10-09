@@ -108,16 +108,23 @@ export const Visualization = styled.div`
   }
 `;
 
-export const Main = styled.main`
-  a {
+interface MainProps {
+  display: string
+}
+
+export const Main = styled.main<MainProps>`
+
+    cursor:pointer;
     margin-top: 20px;
     background: #e5e5e5;
     border-radius: 5px;
-    width: 100%;
-    display: block;
+    width: ${(props) => props.display === 'flex' ? 'auto' : '100%'};
     text-decoration: none;
 
-    display: flex;
+    margin-left:${(props) => props.display === 'flex' ? '20px' : '0px'};
+    margin-right:${(props) => props.display === 'flex' ? '20px' : '0px'};
+
+    display: ${(props) => props.display === 'flex' ? 'block' : 'flex'};
     transition: transform 0.2s;
 
     box-shadow: 2.5px 3px 5px 1px #c4c4c4;
@@ -154,7 +161,11 @@ export const Main = styled.main`
       h1 {
         font-size: 36px;
         color: #383838;
-        margin-top: 50px;
+        margin-top: ${(props) => props.display === 'flex' ? '20px' : '50px'};
+      }
+
+      img {
+        display: ${(props) => props.display === 'flex' ? 'none' : 'block'};
       }
     }
 
@@ -175,7 +186,7 @@ export const Main = styled.main`
       }
 
       div {
-        display: flex;
+        display: ${(props) => props.display === 'flex' ? 'none' : 'flex'};
         align-items: center;
         margin-bottom: 10px;
 
@@ -201,5 +212,4 @@ export const Main = styled.main`
         color: #808080;
       }
     }
-  }
 `;
