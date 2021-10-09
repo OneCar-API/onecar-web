@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 import { FiSearch, FiArrowLeft } from 'react-icons/fi';
 
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
+
+import Modal from '../../../components/Modal';
+import ImportAnnouncement from '../ImportAnnouncements'
+
 import {
   Container,
   Header,
@@ -45,23 +49,42 @@ interface IAds {
     gearbox_type: string;
     km: number;
     color: number;
+    vehicle_item_id:{
+      airbag: boolean;
+      alarm: boolean;
+      air_conditioning: boolean;
+      eletric_lock: boolean;
+      eletric_window: boolean;
+      stereo: boolean;
+      reverse_sensor: boolean;
+      reverse_camera: boolean;
+      armoured: boolean;
+      hydraulic_steering: boolean;
+    }
   };
+}
+
+interface RouterParams {
+  id: string
 }
 
 const ShowAnnouncement: React.FC = () => {
   const [announcement, setAnnouncement] = useState<IAds>();
 
-  const { token } = useAuth();
+  const [modalActive, setModalActive] = useState(false)
 
-  const id = useParams();
+  const { token, user } = useAuth();
+
+  const history = useHistory();
+
+  const { id } = useParams<RouterParams>();
 
   useEffect(() => {
     showAnnouncements();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   async function showAnnouncements() {
-    const response = await api.get(`ads/${id}`, {
+    const response = await api.get(`/ads/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -76,7 +99,7 @@ const ShowAnnouncement: React.FC = () => {
     <Container>
       <Header>
         <HeaderContent>
-          <Link to="/adverts">
+          <Link to="/">
             <FiArrowLeft size={25} />
           </Link>
 
@@ -87,9 +110,13 @@ const ShowAnnouncement: React.FC = () => {
             </button>
           </Form>
 
-          <Link to="/import-ads">
-            <button type="button">Anunciar</button>
-          </Link>
+
+          {
+            user ?
+              <button type="button" onClick={() => setModalActive(true)}>Anunciar</button>
+              :
+              <button type="button" onClick={() => history.push('/signin')}>Entrar</button>
+          }
 
           <Profile>
             <img src={avatar} alt="User" />
@@ -135,19 +162,27 @@ const ShowAnnouncement: React.FC = () => {
           </div>
 
           <h1>Descrição</h1>
-          <textarea>Carro bem conservado. Único dono.</textarea>
-          {/* <input placeholder= /> */}
+
+          <input placeholder={announcement?.description} />
+
         </Main>
 
         <Info>
-          <strong>Honda Civic</strong>
-          <h1>R$25000,00</h1>
+          <strong>
+            {announcement?.car_id.brand}
+            {announcement?.car_id.model}
+          </strong>
+          <h1>
+            R$
+            {announcement?.price}
+            ,00
+          </h1>
 
           <div>
             <img src={calendar} alt="Calendário" />
             <div>
               <p>Ano:</p>
-              <strong>2010</strong>
+              <strong>{announcement?.car_id.year_model}</strong>
             </div>
           </div>
 
@@ -155,7 +190,10 @@ const ShowAnnouncement: React.FC = () => {
             <img src={km} alt="Quilometragem" />
             <div>
               <p>Quilometragem:</p>
-              <strong>80000km</strong>
+              <strong>
+                {announcement?.car_id.km}
+                km
+              </strong>
             </div>
           </div>
 
@@ -163,7 +201,7 @@ const ShowAnnouncement: React.FC = () => {
             <img src={color} alt="Cor" />
             <div>
               <p>Cor:</p>
-              <strong>Preto</strong>
+              <strong>{announcement?.car_id.color}</strong>
             </div>
           </div>
 
@@ -171,15 +209,7 @@ const ShowAnnouncement: React.FC = () => {
             <img src={gearbox_type} alt="Câmbio" />
             <div>
               <p>Câmbio:</p>
-              <strong>Manual</strong>
-            </div>
-          </div>
-
-          <div>
-            <img src={motor} alt="Motor" />
-            <div>
-              <p>Motor:</p>
-              <strong>1.8</strong>
+              <strong>{announcement?.car_id.gearbox_type}</strong>
             </div>
           </div>
 
@@ -187,7 +217,7 @@ const ShowAnnouncement: React.FC = () => {
             <img src={direction} alt="Direção" />
             <div>
               <p>Direção:</p>
-              <strong>Hidráulica</strong>
+              <strong>{announcement?.car_id.vehicle_item_id.hydraulic_steering?'Hidráulica':'Comum'}</strong>
             </div>
           </div>
 
@@ -195,19 +225,23 @@ const ShowAnnouncement: React.FC = () => {
             <img src={fuel} alt="Combustível" />
             <div>
               <p>Combustível:</p>
-              <strong>Flex</strong>
+              <strong>{announcement?.car_id.fuel}</strong>
             </div>
           </div>
-
-          <div>
-            <img src={door} alt="Portas" />
-            <div>
-              <p>Portas:</p>
-              <strong>4</strong>
-            </div>
-          </div>
+          
         </Info>
       </Content>
+      <Modal
+        hideModal={() => setModalActive(false)}
+        active={modalActive}
+        width='800px'
+        title='Importar Anúncio'
+        contentDisplay='block'
+        fadeInDisplay='block'
+        maxWidth='800px'
+      >
+        <ImportAnnouncement />
+      </Modal>
     </Container>
   );
 };

@@ -21,24 +21,20 @@ import RegisterAdsMsg from '../pages/RegisterAds/RegisterAdsMsg';
 
 const Routes: React.FC = () => (
   <Switch>
-    
-    <Route path="/" exact component={SignIn} />
+
+    <Route path={["/signin","/invite-user","/confirm-user"]} component={SignIn} />
+
     <Route path="/signup" component={SignUp} />
-    <Route path="/adverts" component={ListAnnouncements} isPrivate />
-    <Route path="/advert" component={ShowAnnouncement} isPrivate />
+    <Route path="/" exact component={ListAnnouncements} />
+    <Route path="/advert/:id" component={ShowAnnouncement} />
     <Route path="/import-users" component={ImportUsers} />
-    <Route path="/import-ads" component={ImportAnnouncements} isPrivate />
-    
+
+    <Route path="/import-ads" component={ImportAnnouncements} />
     <Route path="/forgot-password" component={AlterPassword} />
-    <Route path="/reset-password" component={NewPassword} />
-    
-    <Route path="/register-ads-msg" component={RegisterAdsMsg} />
-    <Route path="/register-ads" component={RegisterAds} />
-    <Route path="/register-ads-details" component={RegisterAdsDetails} />
-    <Route path="/register-ads-description" component={RegisterAdsDescription} />
+    <Route path="/reset-password" component={NewPassword} isPrivate />
+    <Route path="/adverts" component={ListAnnouncements} isPrivate />
+    <Route path="/advert-p/:id" component={ShowAnnouncement} isPrivate />
 
-
-    
   </Switch>
 );
 
