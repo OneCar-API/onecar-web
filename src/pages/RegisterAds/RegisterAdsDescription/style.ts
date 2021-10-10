@@ -119,3 +119,12 @@ export const Content = styled.div`
   }
   
 `;
+
+
+export const DropzoneArea = styled.div`
+
+display: flex;
+margin: 10px;
+
+`;
+
