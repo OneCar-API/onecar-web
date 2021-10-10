@@ -35,7 +35,7 @@ const Routes: React.FC = () => (
     <Route path="/register-ads-msg" component={RegisterAdsMsg} isPrivate />
     <Route path="/register-ads" component={RegisterAds} isPrivate />
     <Route path="/register-ads-details" component={RegisterAdsDetails} isPrivate />
-    <Route path="/register-ads-description" component={RegisterAdsDescription} isPrivate />
+    <Route path="/register-ads-description" component={RegisterAdsDescription} />
     <Route path="/ads-management" component={AdsManagement} isPrivate />
   </Switch>
 );

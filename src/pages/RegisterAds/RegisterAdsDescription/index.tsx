@@ -13,7 +13,9 @@ import {
   HeaderContent,
   First,
   Profile,
-  IconVoltar
+  IconVoltar,
+  DropzoneArea
+
 } from './style'
 
 import Input from '../../../components/Input'
@@ -25,6 +27,8 @@ import logoImg from '../../../assets/images/logo.svg';
 import back from '../../../assets/images/seta.svg';
 import getValidationErrors from "../../../utils/getValidationErrors";
 import api from "../../../services/api";
+
+import DropzoneImg from "../../../components/DropzoneImg"
 import { useAuth } from "../../../hooks/auth";
 
 
@@ -40,6 +44,9 @@ interface RegisterAdsStateFormData {
 }
 
 const RegisterAdsDescription: React.FC = () => {
+
+  const [selectedFile, setSelectedFile] = useState<any>();
+  
   const formRef = useRef<FormHandles>(null);
 
   const { state } = useLocation<RegisterAdsStateFormData>()
@@ -142,8 +149,16 @@ const RegisterAdsDescription: React.FC = () => {
           <Input value={priceValue} onChange={(e) => setPriceValue(numberMask(e.target.value))} name="price" placeholder="Preço do veículo" />
 
           <TextArea name="description" title='' placeholder="Descrição..." cols={60} rows={4} />
-
+          
           <h2>Inserir imagens: (Limite de 6 imagens)</h2>
+
+          <DropzoneArea>
+
+          <DropzoneImg onFileUploaded={setSelectedFile} />
+
+          <DropzoneImg onFileUploaded={setSelectedFile} />
+
+          </DropzoneArea>          
 
           <Button type="submit">Finalizar</Button>
         </Form>
