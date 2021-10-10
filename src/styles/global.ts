@@ -2,49 +2,51 @@ import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
 
-  *{
-    margin: 0;
-    padding: 0;
-    outline: 0;
-    box-sizing: border-box;
-  }
-  :root{
-    --background: #ffffff;
-    --blue: #5E9DBC; // cor dos botões
-    --gray: rgba(242, 242, 242, 0.9);
-    --darkGray: #494949;
-    --white: #f9f9f9; // cor do texto dos botões
-    --text-field: #787878; //cor dos título dos campos da tela exibição de 1 anúncio
-    --text-information: #808080; //cor das informações ano/cidade/km da tela exibição de anúncios
-    --text: #383838; // cor padrão dos textos
-  }
+*{
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+}
+:root{
+  --background: #ffffff;
+  --blue: #5E9DBC; // cor dos botões
+  --gray: rgba(242, 242, 242, 0.9);
+  --darkGray: #494949;
+  --white: #f9f9f9; // cor do texto dos botões
+  --text-field: #787878; //cor dos título dos campos da tela exibição de 1 anúncio
+  --text-information: #808080; //cor das informações ano/cidade/km da tela exibição de anúncios
+  --text: #383838; // cor padrão dos textos
+}
 
-  body{
-    background: var(--background);
-    -webkit-font-smoothing: antialiased;
-    color: var(---text);
+body{
+  background: var(--background);
+  -webkit-font-smoothing: antialiased;
+  color: var(---text);
 
-  }
+}
 
-  body, input,textarea{
-    font-family: 'Nunito', sans-serif;
-    font-size: 16px;
-  }
+body, input{
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+}
 
-  button{
-    font-family: 'Nunito', sans-serif;
-  }
+button{
+  font-family: 'Nunito', sans-serif;
+}
 
-  h1,h2,h3,h4,h4,h6,strong{
-    font-weight: 600;
-  }
+}
 
-  button{
-    cursor: pointer;
-  }
+h1,h2,h3,h4,h4,h6,strong{
+  font-weight: 600;
+}
+
+button{
+  cursor: pointer;
+}
 
 
-  @media(max-width: 1980px) {
+@media(max-width: 1980px) {
     html {
       font-size: 81.25%;
     }

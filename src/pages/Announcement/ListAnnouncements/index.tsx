@@ -7,6 +7,7 @@ import { Link, useHistory } from 'react-router-dom';
 import Modal from '../../../components/Modal';
 import Menu from '../../../components/Menu';
 import ImportAnnouncement from '../ImportAnnouncements'
+import Dropdown from '../../../components/Dropdown'
 
 import {
   Container,
@@ -69,12 +70,13 @@ const ListAnnouncements: React.FC = () => {
   const [modalActive, setModalActive] = useState(false)
   const [selected, setSelected] = useState('list')
 
-  const { token, user } = useAuth();
+  const { token, user, signOut } = useAuth();
+
+  const [dropdownActive, setDropdownActive] = useState(false);
 
   const history = useHistory();
 
   useEffect(() => {
-    console.log(token)
     loadCars();
   }, []);
 
@@ -84,8 +86,6 @@ const ListAnnouncements: React.FC = () => {
         Authorization: `Bearer ${token}`,
       },
     });
-
-    console.log(response);
 
     setAnnouncements(response.data);
   }
@@ -115,15 +115,45 @@ const ListAnnouncements: React.FC = () => {
 
           {
             user ?
-              <button type="button" onClick={() => setModalActive(true)}>Anunciar</button>
+              <>
+                <button type="button" onClick={() => history.push('/register-ads')}>Anunciar</button>
+                <Profile onClick={() => setDropdownActive(true)}>
+                  <img src={avatar} alt="User" />
+                </Profile>
+              </>
+
               :
-              <button type="button" onClick={() => history.push('/signin')}>Entrar</button>
+              <>
+                <button type="button" onClick={() => history.push('/signin')}>Entrar</button>
+                <Profile>
+                  <img src={avatar} alt="User" />
+                </Profile>
+              </>
+
           }
-          <Profile>
-            <img src={avatar} alt="User" />
-          </Profile>
+
         </HeaderContent>
       </Header>
+      <Dropdown
+        hideMenu={() => setDropdownActive(false)}
+        active={dropdownActive}
+        width='300px'
+        contentDisplay='block'
+        fadeInDisplay='block'
+        maxWidth='400px'
+      >
+        <ul>
+          <li>
+            <button type='button' onClick={() => history.push('/ads-management')}>Meus Anúncios</button>
+          </li>
+          <hr />
+          <li>
+            <button type='button' onClick={() => signOut()}>Sair</button>
+          </li>
+        </ul>
+
+
+      </Dropdown>
 
       <body>
         <Announcements>

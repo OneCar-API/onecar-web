@@ -19,7 +19,6 @@
     "ecmaFeatures": {
       "jsx": false
     },
-
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
@@ -30,6 +29,8 @@
     "prettier"
   ],
   "rules": {
+    "no-restricted-globals": "off",
+    "babel-plugin-root-import/build": "off",
     "no-restricted-syntax": "off",
     "react/jsx-indent-props": "off",
     "react/jsx-indent": "off",
@@ -53,7 +54,6 @@
       {
         "extensions": [
           ".tsx"
-
         ]
       }
     ],

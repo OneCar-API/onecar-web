@@ -88,6 +88,7 @@ export const Profile = styled.div`
     width: 35px;
     height: 35px;
   }
+  cursor: pointer;
 `;
 
 export const Announcements = styled.div`
@@ -101,7 +102,6 @@ export const Visualization = styled.div`
   svg {
     color: #808080;
     margin-top: 40px;
-    margin-left: 85rem;
 
     & + svg {
       margin-left: 10px;
