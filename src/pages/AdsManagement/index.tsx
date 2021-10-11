@@ -14,50 +14,17 @@ import ImportAnnouncements from "../Announcement/ImportAnnouncements";
 import logoImg from '../../assets/images/logo.svg';
 import avatar from '../../assets/images/botaoUser.svg';
 import viewImg from '../../assets/images/views.svg';
-import likeImg from '../../assets/images/like.png';
+import likeImg from '../../assets/images/like.png'
 import { useAuth } from "../../hooks/auth";
 import api from "../../services/api";
 
-
-// interface IAds {
-//     id: string;
-//     ad_code: number;
-//     title: string;
-//     description: string;
-//     price: string;
-//     views: number;
-//     interests: number;
-//     car_id: {
-//         id: string;
-//         manufacturer: string;
-//         brand: string;
-//         model: string;
-//         year_manufacturer: string;
-//         year_model: string;
-//         fuel: string;
-//         gearbox_type: string;
-//         km: number;
-//         color: number;
-//         vehicle_item_id: {
-//             airbag: boolean;
-//             alarm: boolean;
-//             air_conditioning: boolean;
-//             eletric_lock: boolean;
-//             eletric_window: boolean;
-//             stereo: boolean;
-//             reverse_sensor: boolean;
-//             reverse_camera: boolean;
-//             armoured: boolean;
-//             hydraulic_steering: boolean;
-//         }
-//     };
-// }
 
 
 interface IAds {
     id: string;
     price: string;
     created_at: string;
+    views: string;
     car: {
         id: string;
         manufacturer: string;
@@ -167,15 +134,17 @@ const AdsManagement: React.FC = () => {
 
                             <div className="views">
                                 <img src={viewImg} alt="view" className="icons" />
-                                <p>89 visualizações</p>
+                                <p>
+                                    {`${announcement?.views ? announcement?.views : 0} visualizações`}
+                                </p>
                             </div>
 
-                            <div className="likes">
+                            {/* <div className="likes">
                                 <img src={likeImg} alt="like" className="icons" />
                                 <p>12 curtidas</p>
-                            </div>
+                            </div> */}
 
-                            <p className="date">Publicado em 29 de Setembro</p>
+                            {/* <p className="date">Publicado em 29 de Setembro</p> */}
                         </div>
                     </div>
                 )) : <h3>Você não possui nenhum anúncio...</h3>}
