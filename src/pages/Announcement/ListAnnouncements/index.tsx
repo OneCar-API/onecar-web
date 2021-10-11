@@ -79,7 +79,14 @@ interface IAds {
     gearbox_type: string;
     km: string;
     color: string;
-    carImages: [];
+    carImages: [
+      {
+        id: string,
+        image: string,
+        car_id: string,
+        image_url: string,
+      }
+    ];
   }
 }
 
@@ -205,7 +212,7 @@ const ListAnnouncements: React.FC = () => {
               >
 
                 <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZMlO2PxSWuyDUKRnzbi-qpoBDzdK4MRZ3Kw&usqp=CAU"
+                  src={announcement?.car.carImages[0].image}
                   alt="Carro"
                 />
 
