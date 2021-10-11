@@ -79,7 +79,14 @@ interface IAds {
     gearbox_type: string;
     km: string;
     color: string;
-    carImages: [];
+    carImages: [
+      {
+        id: string,
+        image: string,
+        car_id: string,
+        image_url: string,
+      }
+    ];
   }
   user: {
     name: string;
@@ -178,35 +185,35 @@ const ShowAnnouncement: React.FC = () => {
       <Content>
         <Main>
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZMlO2PxSWuyDUKRnzbi-qpoBDzdK4MRZ3Kw&usqp=CAU"
+            src={announcement?.car.carImages[0].image}
             alt="Carro"
           />
 
           <div>
             <button type="button">
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZMlO2PxSWuyDUKRnzbi-qpoBDzdK4MRZ3Kw&usqp=CAU"
+                src={announcement?.car.carImages[0].image}
                 alt="Carro"
               />
             </button>
 
             <button type="button">
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZMlO2PxSWuyDUKRnzbi-qpoBDzdK4MRZ3Kw&usqp=CAU"
+                src={announcement?.car.carImages[0].image}
                 alt="Carro"
               />
             </button>
 
             <button type="button">
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZMlO2PxSWuyDUKRnzbi-qpoBDzdK4MRZ3Kw&usqp=CAU"
+                src={announcement?.car.carImages[0].image}
                 alt="Carro"
               />
             </button>
 
             <button type="button">
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZMlO2PxSWuyDUKRnzbi-qpoBDzdK4MRZ3Kw&usqp=CAU"
+                src={announcement?.car.carImages[0].image}
                 alt="Carro"
               />
             </button>
