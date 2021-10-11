@@ -104,6 +104,9 @@ export const Menu = styled.div`
 
 
 export const Content = styled.div`
+
+    flex-wrap: wrap;
+    display: flex;
     #content{
         background-color: #E5E5E5;
         margin: 2rem;
@@ -112,6 +115,7 @@ export const Content = styled.div`
         display: flex;
         border-radius: 12px;
         box-shadow: 2.5px 3px 5px 1px #c4c4c4;
+        
     }
     
     h2{

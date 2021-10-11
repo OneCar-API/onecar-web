@@ -36,7 +36,8 @@ interface RegisterAdsDetailsFormData {
 interface RegisterAdsFormData {
   brand: string;
   model: string;
-  year: string;
+  year_manufacture: string;
+  year_model: string;
 }
 
 const RegisterAdsDetails: React.FC = () => {
@@ -60,7 +61,7 @@ const RegisterAdsDetails: React.FC = () => {
           color: Yup.string(),
           km: Yup.string(),
           shift: Yup.string(),
-          direction: Yup.string(),
+          direction: Yup.string().required('Direção obrigatória'),
           fuel: Yup.string(),
         });
         console.log(data);

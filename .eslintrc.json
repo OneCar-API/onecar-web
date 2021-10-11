@@ -30,7 +30,7 @@
   ],
   "rules": {
     "no-restricted-globals": "off",
-    "babel-plugin-root-import/build": "off",
+    "babel-plugin-root-import": "off",
     "no-restricted-syntax": "off",
     "react/jsx-indent-props": "off",
     "react/jsx-indent": "off",

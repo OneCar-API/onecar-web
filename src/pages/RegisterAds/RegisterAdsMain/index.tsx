@@ -28,7 +28,8 @@ import { useAuth } from "../../../hooks/auth";
 interface RegisterAdsFormData {
   brand: string;
   model: string;
-  year: string;
+  year_manufacture: string;
+  year_model: string;
 }
 
 const RegisterAds: React.FC = () => {
@@ -40,7 +41,8 @@ const RegisterAds: React.FC = () => {
 
   const { signOut } = useAuth();
 
-  const [yearValue, setYearValue] = useState<string>();
+  const [yearManufactureValue, setYearManufactureValue] = useState<string>();
+  const [yearModelValue, setYearModelValue] = useState<string>();
 
   const handleSubmit = useCallback(
     async (data: RegisterAdsFormData) => {
@@ -51,8 +53,10 @@ const RegisterAds: React.FC = () => {
             .required('Marca obrigatória'),
           model: Yup.string()
             .required('Modelo obrigatório'),
-          year: Yup.string()
-            .required('Ano obrigatório'),
+          year_manufacture: Yup.string()
+            .required('Ano de Fabricação obrigatório'),
+          year_model: Yup.string()
+            .required('Ano do Modelo obrigatório'),
         });
 
         await schema.validate(data, {
@@ -135,8 +139,13 @@ const RegisterAds: React.FC = () => {
           </div>
 
           <div>
-            <img id="year" src={year} alt="Ano do veículo" />
-            <Input value={yearValue} onChange={(e) => setYearValue(numberMask(e.target.value))} name="year" placeholder="Ano" type='' />
+            <img id="year" src={year} alt="Ano de fabricação" />
+            <Input value={yearManufactureValue} onChange={(e) => setYearManufactureValue(numberMask(e.target.value))} name="year_manufacture" placeholder="Ano de fabricação" type='' />
+          </div>
+
+          <div>
+            <img id="year" src={year} alt="Ano do modelo" />
+            <Input value={yearModelValue} onChange={(e) => setYearModelValue(numberMask(e.target.value))} name="year_model" placeholder="Ano do modelo" type='' />
           </div>
 
           <Button type="submit">Próximo</Button>

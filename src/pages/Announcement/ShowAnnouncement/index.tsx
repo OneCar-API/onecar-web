@@ -29,39 +29,64 @@ import door from '../../../assets/images/door.svg';
 import api from '../../../services/api';
 import { useAuth } from '../../../hooks/auth';
 
+// interface IAds {
+//   id: string;
+//   ad_code: number;
+//   title: string;
+//   description: string;
+//   price: string;
+//   views: number;
+//   interests: number;
+//   car_id: {
+//     id: string;
+//     manufacturer: string;
+//     brand: string;
+//     model: string;
+//     year_manufacturer: string;
+//     year_model: string;
+//     fuel: string;
+//     gearbox_type: string;
+//     km: number;
+//     color: number;
+//     vehicle_item_id: {
+//       airbag: boolean;
+//       alarm: boolean;
+//       air_conditioning: boolean;
+//       eletric_lock: boolean;
+//       eletric_window: boolean;
+//       stereo: boolean;
+//       reverse_sensor: boolean;
+//       reverse_camera: boolean;
+//       armoured: boolean;
+//       hydraulic_steering: boolean;
+//     }
+//   };
+// }
+
 interface IAds {
-  id: string;
-  ad_code: number;
-  title: string;
   description: string;
+  id: string;
   price: string;
-  views: number;
-  interests: number;
-  car_id: {
+  created_at: string;
+  car: {
     id: string;
     manufacturer: string;
     brand: string;
     model: string;
-    year_manufacturer: string;
+    year_manufacture:string;
     year_model: string;
     fuel: string;
     gearbox_type: string;
-    km: number;
-    color: number;
-    vehicle_item_id: {
-      airbag: boolean;
-      alarm: boolean;
-      air_conditioning: boolean;
-      eletric_lock: boolean;
-      eletric_window: boolean;
-      stereo: boolean;
-      reverse_sensor: boolean;
-      reverse_camera: boolean;
-      armoured: boolean;
-      hydraulic_steering: boolean;
-    }
-  };
+    km: string;
+    color: string;
+    carImages: [];
+  }
+  user: {
+    name: string;
+    phone: string;
+  }
 }
+
 
 interface RouterParams {
   id: string
@@ -193,8 +218,7 @@ const ShowAnnouncement: React.FC = () => {
 
         <Info>
           <strong>
-            {announcement?.car_id.brand}
-            {announcement?.car_id.model}
+          {`${announcement?.car.brand} ${announcement?.car.model}`}
           </strong>
           <h1>
             R$
@@ -206,7 +230,7 @@ const ShowAnnouncement: React.FC = () => {
             <img src={calendar} alt="Calendário" />
             <div>
               <p>Ano:</p>
-              <strong>{announcement?.car_id.year_manufacturer}</strong>
+              <strong>{announcement?.car.year_manufacture}</strong>
             </div>
           </div>
 
@@ -215,7 +239,7 @@ const ShowAnnouncement: React.FC = () => {
             <div>
               <p>Quilometragem:</p>
               <strong>
-                {announcement?.car_id.km}
+                {announcement?.car.km}
                 km
               </strong>
             </div>
@@ -225,7 +249,7 @@ const ShowAnnouncement: React.FC = () => {
             <img src={color} alt="Cor" />
             <div>
               <p>Cor:</p>
-              <strong>{announcement?.car_id.color}</strong>
+              <strong>{announcement?.car.color}</strong>
             </div>
           </div>
 
@@ -233,7 +257,7 @@ const ShowAnnouncement: React.FC = () => {
             <img src={gearbox_type} alt="Câmbio" />
             <div>
               <p>Câmbio:</p>
-              <strong>{announcement?.car_id.gearbox_type}</strong>
+              <strong>{announcement?.car.gearbox_type}</strong>
             </div>
           </div>
 
@@ -241,7 +265,7 @@ const ShowAnnouncement: React.FC = () => {
             <img src={direction} alt="Direção" />
             <div>
               <p>Direção:</p>
-              <strong>{announcement?.car_id.vehicle_item_id.hydraulic_steering ? 'Hidráulica' : 'Comum'}</strong>
+              <strong>{announcement ? 'Hidráulica' : 'Comum'}</strong>
             </div>
           </div>
 
@@ -249,7 +273,13 @@ const ShowAnnouncement: React.FC = () => {
             <img src={fuel} alt="Combustível" />
             <div>
               <p>Combustível:</p>
-              <strong>{announcement?.car_id.fuel}</strong>
+              <strong>{announcement?.car.fuel}</strong>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>Contato:</p>
+              <strong>{`${announcement?.user.name} - ${announcement?.user.phone}`}</strong>
             </div>
           </div>
 

@@ -15,9 +15,9 @@ import {
   Profile,
   IconVoltar,
   DropzoneArea
-
 } from './style'
 
+import DropzoneImg from "../../../components/DropzoneImg"
 import Input from '../../../components/Input'
 import Dropdown from '../../../components/Dropdown'
 import Button from '../../../components/Button'
@@ -27,33 +27,42 @@ import logoImg from '../../../assets/images/logo.svg';
 import back from '../../../assets/images/seta.svg';
 import getValidationErrors from "../../../utils/getValidationErrors";
 import api from "../../../services/api";
-
-import DropzoneImg from "../../../components/DropzoneImg"
 import { useAuth } from "../../../hooks/auth";
 
 
 interface RegisterAdsDescriptionFormData {
   title: string;
-  price: string;
+  vehicle_price: string;
   description: string;
 }
 
 interface RegisterAdsStateFormData {
-  firstStep: object;
-  secondStep: object;
+  firstStep: {
+    brand: string;
+    model: string;
+    year_manufacture: string;
+    year_model: string;
+  };
+  secondStep: {
+    color: string;
+    km: string;
+    shift: string;
+    direction: string;
+    fuel: string;
+  };
 }
 
-const RegisterAdsDescription: React.FC = () => {
 
-  const [selectedFile, setSelectedFile] = useState<any>();
-  
+const RegisterAdsDescription: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
   const { state } = useLocation<RegisterAdsStateFormData>()
 
   const history = useHistory();
 
-  const { user, signOut } = useAuth();
+  const { user, signOut, token } = useAuth();
+
+  const [selectedFile, setSelectedFile] = useState<any>();
 
   const [dropdownActive, setDropdownActive] = useState(false);
 
@@ -64,21 +73,32 @@ const RegisterAdsDescription: React.FC = () => {
       try {
         formRef.current?.setErrors({});
         const schema = Yup.object().shape({
-          title: Yup.string(),
-          price: Yup.string().required('Preço obrigatório'),
+          title: Yup.string().required('Título obrigatório'),
+          vehicle_price: Yup.string().required('Preço obrigatório'),
           description: Yup.string(),
         });
-        console.log(state)
-        console.log(data);
-
+        console.log('a')
         await schema.validate(data, {
           abortEarly: false,
         });
 
+        const obj = {
+          vehicle_price: data.vehicle_price,
+          year_manufacture: state.firstStep.year_manufacture,
+          year_model: state.firstStep.year_model,
+          brand: state.firstStep.brand,
+          manufacturer: state.firstStep.brand,
+          model: state.firstStep.model,
+        }
+
+        const response = await api.post('/ads', obj, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
 
-        // await api.post('/ads', );
-
+        console.log(response)
         history.push('/register-ads-msg')
 
       } catch (error) {
@@ -146,20 +166,18 @@ const RegisterAdsDescription: React.FC = () => {
         <Form ref={formRef} onSubmit={handleSubmit}>
           <Input name="title" placeholder="Título do anúncio" />
 
-          <Input value={priceValue} onChange={(e) => setPriceValue(numberMask(e.target.value))} name="price" placeholder="Preço do veículo" />
+          <Input value={priceValue} onChange={(e) => setPriceValue(numberMask(e.target.value))} name="vehicle_price" placeholder="Preço do veículo" />
 
           <TextArea name="description" title='' placeholder="Descrição..." cols={60} rows={4} />
-          
-          <h2>Inserir imagens: (Limite de 6 imagens)</h2>
 
+          <h2>Inserir imagens: (Limite de 6 imagens)</h2>
           <DropzoneArea>
 
-          <DropzoneImg onFileUploaded={setSelectedFile} />
+            <DropzoneImg onFileUploaded={setSelectedFile} />
 
-          <DropzoneImg onFileUploaded={setSelectedFile} />
+            <DropzoneImg onFileUploaded={setSelectedFile} />
 
-          </DropzoneArea>          
-
+          </DropzoneArea>
           <Button type="submit">Finalizar</Button>
         </Form>
       </Content>

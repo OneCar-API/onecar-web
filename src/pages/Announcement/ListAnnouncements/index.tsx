@@ -30,38 +30,57 @@ import direction from '../../../assets/images/direction.svg';
 import api from '../../../services/api';
 import { useAuth } from '../../../hooks/auth';
 
+// interface IAds {
+//   id: string;
+//   ad_code: number;
+//   title: string;
+//   description: string;
+//   price: string;
+//   views: number;
+//   interests: number;
+//   car_id: {
+//     id: string;
+//     manufacturer: string;
+//     brand: string;
+//     model: string;
+//     year_manufacturer: string;
+//     year_model: string;
+//     fuel: string;
+//     gearbox_type: string;
+//     km: number;
+//     color: number;
+//     vehicle_item_id: {
+//       airbag: boolean;
+//       alarm: boolean;
+//       air_conditioning: boolean;
+//       eletric_lock: boolean;
+//       eletric_window: boolean;
+//       stereo: boolean;
+//       reverse_sensor: boolean;
+//       reverse_camera: boolean;
+//       armoured: boolean;
+//       hydraulic_steering: boolean;
+//     }
+//   };
+// }
+
 interface IAds {
   id: string;
-  ad_code: number;
-  title: string;
-  description: string;
-  price: string;
-  views: number;
-  interests: number;
-  car_id: {
+  price: number;
+  created_at: string;
+  car: {
     id: string;
     manufacturer: string;
     brand: string;
     model: string;
-    year_manufacturer: string;
+    year_manufacture:string;
     year_model: string;
     fuel: string;
     gearbox_type: string;
-    km: number;
-    color: number;
-    vehicle_item_id: {
-      airbag: boolean;
-      alarm: boolean;
-      air_conditioning: boolean;
-      eletric_lock: boolean;
-      eletric_window: boolean;
-      stereo: boolean;
-      reverse_sensor: boolean;
-      reverse_camera: boolean;
-      armoured: boolean;
-      hydraulic_steering: boolean;
-    }
-  };
+    km: string;
+    color: string;
+    carImages: [];
+  }
 }
 
 const ListAnnouncements: React.FC = () => {
@@ -87,7 +106,10 @@ const ListAnnouncements: React.FC = () => {
       },
     });
 
-    setAnnouncements(response.data);
+    const ads = response.data.results;
+    console.log(ads)
+    setAnnouncements([...ads]);
+    console.log(announcements)
   }
 
   function viewAnnouncement(id: string) {
@@ -189,12 +211,10 @@ const ListAnnouncements: React.FC = () => {
 
                 <div>
                   <strong>
-                    {announcement.car_id.brand}
-                    {announcement.car_id.model}
+                    {`${announcement.car.brand} ${announcement.car.model}`}
                   </strong>
                   <p>
-                    {announcement.car_id.year_manufacturer}
-                    {announcement.car_id.year_model}
+                    {announcement.car.year_manufacture}
                   </p>
 
                   <h1>
@@ -207,26 +227,26 @@ const ListAnnouncements: React.FC = () => {
                 <div id="info">
                   <div>
                     <p>
-                      {announcement.car_id.km}
+                      {announcement.car.km}
                     </p>
                     <FiHeart size={20} />
                   </div>
 
-                  <div>
+                  {/* <div>
                     <img src={gearbox_type} alt="Câmbio" />
-                    <p>{announcement.car_id.gearbox_type}</p>
-                  </div>
+                    <p>{announcement.car.gearbox_type}</p>
+                  </div> */}
 
-                  <div>
+                  {/* <div>
                     <img src={direction} alt="Direção" />
-                    <p>{announcement?.car_id.vehicle_item_id?.hydraulic_steering ? 'Hidráulica' : 'Comum'}</p>
-                  </div>
+                    <p>{announcement?.car ? 'Hidráulica' : 'Comum'}</p>
+                  </div> */}
 
                   <hr />
-                  <h4>São José dos Campos - SP</h4>
+                  {/* <h4>São José dos Campos - SP</h4> */}
                 </div>
               </Main>
-            ))}
+            )) }
           </Menu>
         </Announcements>
         <Modal

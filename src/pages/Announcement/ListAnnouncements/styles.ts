@@ -205,7 +205,7 @@ export const Main = styled.main<MainProps>`
       }
 
       div {
-        display: ${(props) => props.display === 'flex' ? 'none' : 'flex'};
+        
         align-items: center;
         margin-bottom: 10px;
 
@@ -217,12 +217,14 @@ export const Main = styled.main<MainProps>`
         }
 
         p {
+          display: ${(props) => props.display === 'flex' ? 'none' : 'flex'};
           font-size: 14px;
           color: #808080;
         }
       }
 
       hr {
+        display: ${(props) => props.display === 'flex' ? 'none' : 'flex'};
         color: #c4c4c4;
         margin-bottom: 3px;
       }
