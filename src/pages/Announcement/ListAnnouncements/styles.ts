@@ -88,6 +88,7 @@ export const Profile = styled.div`
     width: 35px;
     height: 35px;
   }
+  cursor: pointer;
 `;
 
 export const Announcements = styled.div`

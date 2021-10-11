@@ -4,8 +4,7 @@ import { FiSearch, FiArrowLeft } from 'react-icons/fi';
 
 import { Link, useHistory, useParams } from 'react-router-dom';
 
-import Modal from '../../../components/Modal';
-import ImportAnnouncement from '../ImportAnnouncements'
+import Dropdown from '../../../components/Dropdown'
 
 import {
   Container,
@@ -49,7 +48,7 @@ interface IAds {
     gearbox_type: string;
     km: number;
     color: number;
-    vehicle_item_id:{
+    vehicle_item_id: {
       airbag: boolean;
       alarm: boolean;
       air_conditioning: boolean;
@@ -73,7 +72,9 @@ const ShowAnnouncement: React.FC = () => {
 
   const [modalActive, setModalActive] = useState(false)
 
-  const { token, user } = useAuth();
+  const [dropdownActive, setDropdownActive] = useState(false);
+
+  const { token, user, signOut } = useAuth();
 
   const history = useHistory();
 
@@ -109,21 +110,46 @@ const ShowAnnouncement: React.FC = () => {
               <FiSearch />
             </button>
           </Form>
-
-
           {
             user ?
-              <button type="button" onClick={() => setModalActive(true)}>Anunciar</button>
+              <>
+                <button type="button" onClick={() => history.push('/register-ads')}>Anunciar</button>
+                <Profile onClick={() => setDropdownActive(true)}>
+                  <img src={avatar} alt="User" />
+                </Profile>
+              </>
               :
-              <button type="button" onClick={() => history.push('/signin')}>Entrar</button>
+              <>
+                <button type="button" onClick={() => history.push('/signin')}>Entrar</button>
+                <Profile>
+                  <img src={avatar} alt="User" />
+                </Profile>
+              </>
           }
 
-          <Profile>
-            <img src={avatar} alt="User" />
-          </Profile>
+
         </HeaderContent>
       </Header>
+      <Dropdown
+        hideMenu={() => setDropdownActive(false)}
+        active={dropdownActive}
+        width='300px'
+        contentDisplay='block'
+        fadeInDisplay='block'
+        maxWidth='400px'
+      >
+        <ul>
+          <li>
+            <button type='button' onClick={() => history.push('/ads-management')}>Meus Anúncios</button>
+          </li>
+          <hr />
+          <li>
+            <button type='button' onClick={() => signOut()}>Sair</button>
+          </li>
+        </ul>
 
+
+      </Dropdown>
       <Content>
         <Main>
           <img
@@ -180,7 +206,7 @@ const ShowAnnouncement: React.FC = () => {
             <img src={calendar} alt="Calendário" />
             <div>
               <p>Ano:</p>
-              <strong>{announcement?.car_id.year_model}</strong>
+              <strong>{announcement?.car_id.year_manufacturer}</strong>
             </div>
           </div>
 
@@ -215,7 +241,7 @@ const ShowAnnouncement: React.FC = () => {
             <img src={direction} alt="Direção" />
             <div>
               <p>Direção:</p>
-              <strong>{announcement?.car_id.vehicle_item_id.hydraulic_steering?'Hidráulica':'Comum'}</strong>
+              <strong>{announcement?.car_id.vehicle_item_id.hydraulic_steering ? 'Hidráulica' : 'Comum'}</strong>
             </div>
           </div>
 
@@ -226,20 +252,9 @@ const ShowAnnouncement: React.FC = () => {
               <strong>{announcement?.car_id.fuel}</strong>
             </div>
           </div>
-          
+
         </Info>
       </Content>
-      <Modal
-        hideModal={() => setModalActive(false)}
-        active={modalActive}
-        width='800px'
-        title='Importar Anúncio'
-        contentDisplay='block'
-        fadeInDisplay='block'
-        maxWidth='800px'
-      >
-        <ImportAnnouncement />
-      </Modal>
     </Container>
   );
 };

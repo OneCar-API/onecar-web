@@ -42,7 +42,7 @@ const SignIn: React.FC = () => {
         confirmUser()
         break;
       default:
-        console.log('a')
+        console.log('usuário não ativado')
     }
   }, [])
 
