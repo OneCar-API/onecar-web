@@ -10,7 +10,7 @@ export const Container = styled.div`
  
 `;
 
-export const IconVoltar =styled.div`
+export const IconVoltar = styled.div`
 position: absolute;
 width: 40px;
 left: 68px;
@@ -122,9 +122,6 @@ export const Content = styled.div`
 
 
 export const DropzoneArea = styled.div`
-
-display: flex;
-margin: 10px;
-
+  display: flex;
+  margin: 10px;
 `;
-

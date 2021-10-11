@@ -29,6 +29,7 @@ const ImportAnnouncements: React.FC = () => {
     try {
       const formData = new FormData();
       formData.append('file-ads', selectedFile);
+      console.log(formData)
       await api.post('/ads/import', formData, {
         headers: {
           'content-type': 'multipart/form-data',
@@ -44,7 +45,7 @@ const ImportAnnouncements: React.FC = () => {
         description: 'Seus anúncios foram importados com sucesso!',
       });
 
-      history.push('/');
+      history.push('/adverts');
     } catch (error) {
       if (error) {
         console.log(error);

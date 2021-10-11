@@ -22,6 +22,7 @@ const ImportUsers: React.FC = () => {
     try {
       const formData = new FormData();
       formData.append('file-users', selectedFile);
+      console.log(formData)
       await api.post('/users/import', formData, {
         headers: { 'content-type': 'multipart/form-data' },
       });

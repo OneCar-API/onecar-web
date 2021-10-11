@@ -19,39 +19,60 @@ import { useAuth } from "../../hooks/auth";
 import api from "../../services/api";
 
 
+// interface IAds {
+//     id: string;
+//     ad_code: number;
+//     title: string;
+//     description: string;
+//     price: string;
+//     views: number;
+//     interests: number;
+//     car_id: {
+//         id: string;
+//         manufacturer: string;
+//         brand: string;
+//         model: string;
+//         year_manufacturer: string;
+//         year_model: string;
+//         fuel: string;
+//         gearbox_type: string;
+//         km: number;
+//         color: number;
+//         vehicle_item_id: {
+//             airbag: boolean;
+//             alarm: boolean;
+//             air_conditioning: boolean;
+//             eletric_lock: boolean;
+//             eletric_window: boolean;
+//             stereo: boolean;
+//             reverse_sensor: boolean;
+//             reverse_camera: boolean;
+//             armoured: boolean;
+//             hydraulic_steering: boolean;
+//         }
+//     };
+// }
+
+
 interface IAds {
     id: string;
-    ad_code: number;
-    title: string;
-    description: string;
     price: string;
-    views: number;
-    interests: number;
-    car_id: {
+    created_at: string;
+    car: {
         id: string;
         manufacturer: string;
         brand: string;
         model: string;
-        year_manufacturer: string;
+        year_manufacture: string;
         year_model: string;
         fuel: string;
         gearbox_type: string;
-        km: number;
-        color: number;
-        vehicle_item_id: {
-            airbag: boolean;
-            alarm: boolean;
-            air_conditioning: boolean;
-            eletric_lock: boolean;
-            eletric_window: boolean;
-            stereo: boolean;
-            reverse_sensor: boolean;
-            reverse_camera: boolean;
-            armoured: boolean;
-            hydraulic_steering: boolean;
-        }
-    };
+        km: string;
+        color: string;
+        carImages: [];
+    }
 }
+
 
 const AdsManagement: React.FC = () => {
 
@@ -70,13 +91,16 @@ const AdsManagement: React.FC = () => {
     }, [])
 
     async function loadCars() {
-        const response = await api.get('/ads', {
+        console.log(token)
+        const response = await api.get('/ads/myAds/show', {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         });
 
-        console.log(response.data);
+        console.log(response);
+
+        setAnnouncements(response.data)
 
     }
 
@@ -135,24 +159,27 @@ const AdsManagement: React.FC = () => {
             </Menu>
 
             <Content>
-                <div id="content">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZMlO2PxSWuyDUKRnzbi-qpoBDzdK4MRZ3Kw&usqp=CAU" alt="carro" />
-                    <div id="description">
-                        <h2>Chevrolet Corsa</h2>
+                {announcements ? announcements.map(announcement => (
+                    <div id="content">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZMlO2PxSWuyDUKRnzbi-qpoBDzdK4MRZ3Kw&usqp=CAU" alt="carro" />
+                        <div id="description">
+                            <h2>{`${announcement.car.brand} ${announcement.car.model}`}</h2>
 
-                        <div className="views">
-                            <img src={viewImg} alt="view" className="icons" />
-                            <p>89 visualizações</p>
+                            <div className="views">
+                                <img src={viewImg} alt="view" className="icons" />
+                                <p>89 visualizações</p>
+                            </div>
+
+                            <div className="likes">
+                                <img src={likeImg} alt="like" className="icons" />
+                                <p>12 curtidas</p>
+                            </div>
+
+                            <p className="date">Publicado em 29 de Setembro</p>
                         </div>
-
-                        <div className="likes">
-                            <img src={likeImg} alt="like" className="icons" />
-                            <p>12 curtidas</p>
-                        </div>
-
-                        <p className="date">Publicado em 29 de Setembro</p>
                     </div>
-                </div>
+                )) : <h3>Você não possui nenhum anúncio...</h3>}
+
             </Content>
             <Modal
                 hideModal={() => setModalActive(false)}

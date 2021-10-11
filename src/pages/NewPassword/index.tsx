@@ -32,7 +32,7 @@ const NewPassword: React.FC = () => {
 
   const location = useLocation();
 
-  const { user, signOut } = useAuth();
+  const { user, token, signOut, allowUser } = useAuth();
 
   let user_id: string;
 
@@ -42,7 +42,7 @@ const NewPassword: React.FC = () => {
       if (value === true && key === 'is_active') {
         history.push('/adverts');
       }
-      if(key === 'id'){
+      if (key === 'id') {
         user_id = value
       }
     }
@@ -61,28 +61,28 @@ const NewPassword: React.FC = () => {
           ),
         });
 
+        const obj = {
+          password: data.password,
+          password_confirmation: data.password_confirmation,
+        }
 
         await schema.validate(data, {
           abortEarly: false,
         });
 
-        const { password, password_confirmation } = data;
-        const token = user_id;
-        console.log(token)
-
         if (!token) {
           throw new Error();
         }
+        else {
+          await api.post(`/password/reset${location.search}`, obj, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          await allowUser({ token: location.search.replace("?token=", '') });
+        }
 
-        // await api.patch('/user/confirm', {
-        //   token
-        // })
 
-        await api.post('/password/reset', {
-          password,
-          password_confirmation,
-          token,
-        });
 
         addToast({
           type: 'success',
