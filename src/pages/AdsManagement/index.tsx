@@ -36,7 +36,14 @@ interface IAds {
         gearbox_type: string;
         km: string;
         color: string;
-        carImages: [];
+        carImages: [
+            {
+              id: string,
+              image: string,
+              car_id: string,
+              image_url: string,
+            }
+        ];
     }
 }
 
@@ -128,7 +135,10 @@ const AdsManagement: React.FC = () => {
             <Content>
                 {announcements ? announcements.map(announcement => (
                     <div id="content">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZMlO2PxSWuyDUKRnzbi-qpoBDzdK4MRZ3Kw&usqp=CAU" alt="carro" />
+                        <img 
+                            src={announcement?.car.carImages[0].image}
+                            alt="Carro"
+                        />
                         <div id="description">
                             <h2>{`${announcement.car.brand} ${announcement.car.model}`}</h2>
 
