@@ -14,6 +14,8 @@ import {
   Info,
 } from './styles';
 
+import Button from '../../../components/Button';
+import logo from '../../../assets/images/logo.svg';
 import avatar from '../../../assets/images/botaoUser.svg';
 import calendar from '../../../assets/images/year.svg';
 import km from '../../../assets/images/km.svg';
@@ -99,39 +101,27 @@ const ShowAnnouncement: React.FC = () => {
 
       <Content>
         <Main>
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZMlO2PxSWuyDUKRnzbi-qpoBDzdK4MRZ3Kw&usqp=CAU"
-            alt="Carro"
-          />
+          <img src={logo} alt="Carro" />
 
-          <div>
-            <button type="button">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZMlO2PxSWuyDUKRnzbi-qpoBDzdK4MRZ3Kw&usqp=CAU"
-                alt="Carro"
-              />
-            </button>
+          <div className="more-images">
+            <div className="images-collection">
+              <div className="image">
+                <img src={logo} alt="Carro" />
+              </div>
+              <div className="image">
+                <img src={logo} alt="Carro" />
+              </div>
+              <div className="image">
+                <img src={logo} alt="Carro" />
+              </div>
+              <div className="image">
+                <img src={logo} alt="Carro" />
+              </div>
+            </div>
 
-            <button type="button">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZMlO2PxSWuyDUKRnzbi-qpoBDzdK4MRZ3Kw&usqp=CAU"
-                alt="Carro"
-              />
-            </button>
-
-            <button type="button">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZMlO2PxSWuyDUKRnzbi-qpoBDzdK4MRZ3Kw&usqp=CAU"
-                alt="Carro"
-              />
-            </button>
-
-            <button type="button">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZMlO2PxSWuyDUKRnzbi-qpoBDzdK4MRZ3Kw&usqp=CAU"
-                alt="Carro"
-              />
-            </button>
+            <div className="upload-image">
+              <Button>Enviar Imagens</Button>
+            </div>
           </div>
 
           <h1>Descrição</h1>

@@ -104,28 +104,31 @@ export const Main = styled.div`
   > img {
     width: 680px;
     height: 410px;
-    border-radius: 12px;
+    border-radius: 1rem;
     box-shadow: 2.5px 3px 5px 1px #c4c4c4;
   }
 
-  div {
+  .more-images {
     display: flex;
-    margin-top: 10px;
+    align-items: flex-start;
+    justify-content: space-between;
 
-    button {
-      border: 0;
-      background: transparent;
-      border-radius: 12px;
+    margin-top: 1rem;
 
-      & + button {
-        margin-left: 10px;
-      }
-
+    .images-collection {
+      display: flex;
       img {
-        width: 95px;
-        height: 95px;
+        width: 5.9rem;
+        height: 5.9rem;
         border-radius: 12px;
         box-shadow: 2.5px 3px 5px 1px #c4c4c4;
+        margin-right: 1.5rem;
+      }
+
+      .image:hover {
+        cursor: pointer;
+        transition: all 0.6s;
+        transform: scale(1.1);
       }
     }
   }

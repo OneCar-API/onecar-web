@@ -17,10 +17,10 @@ const Routes: React.FC = () => (
   <Switch>
     <Route path="/" exact component={SignIn} />
     <Route path="/signup" component={SignUp} />
-    <Route path="/adverts" component={ListAnnouncements} isPrivate />
-    <Route path="/advert" component={ShowAnnouncement} isPrivate />
+    <Route path="/adverts" component={ListAnnouncements} />
+    <Route path="/advert" component={ShowAnnouncement} />
     <Route path="/import-users" component={ImportUsers} />
-    <Route path="/import-ads" component={ImportAnnouncements} isPrivate />
+    <Route path="/import-ads" component={ImportAnnouncements} />
 
     <Route path="/forgot-password" component={AlterPassword} />
     <Route path="/reset-password" component={NewPassword} />
