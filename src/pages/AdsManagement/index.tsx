@@ -4,7 +4,7 @@ import { FiSearch, FiArrowLeft } from 'react-icons/fi';
 
 import { Link, useHistory } from 'react-router-dom';
 
-import { Container, Content, Header, HeaderContent, Form, Profile, Menu } from './style'
+import { Container, Content, Header, HeaderContent, Form, Profile, Menu, DeleteIcon } from './style'
 
 import Button from '../../components/Button'
 import Dropdown from '../../components/Dropdown'
@@ -16,6 +16,7 @@ import avatar from '../../assets/images/botaoUser.svg';
 import viewImg from '../../assets/images/views.svg';
 import likeImg from '../../assets/images/like.png'
 import { useAuth } from "../../hooks/auth";
+import { useToast } from "../../hooks/toast"; 
 import api from "../../services/api";
 
 
@@ -56,6 +57,8 @@ const AdsManagement: React.FC = () => {
 
     const { user, token, signOut } = useAuth();
 
+    const { addToast } = useToast();
+
     const [dropdownActive, setDropdownActive] = useState(false);
 
     const history = useHistory();
@@ -78,10 +81,36 @@ const AdsManagement: React.FC = () => {
 
     }
 
+    const deleteAd = async(id: string) => {
+
+        try{
+            await api.delete(`/ads/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        addToast({
+            type: 'success',
+            title: 'Anúncio deletado!',
+            description: '',
+          });
+          history.push('/adverts')
+        }
+        catch(error){
+            console.log(error)
+            addToast({
+                type: 'error',
+                title: 'Erro ao deletar anúncio',
+                description: 'Ocorreu um erro ao deletar o anúncio, tente novamente.',
+              });
+        }
+        
+
+    }
+
 
     return (
         <Container>
-
             <Header>
                 <HeaderContent>
                     <Link to="/adverts">
@@ -136,12 +165,12 @@ const AdsManagement: React.FC = () => {
                 {announcements ? announcements.map(announcement => (
                     <div id="content">
                         <img 
-                            src={announcement?.car.carImages[0].image}
+                            src={announcement?.car.carImages[0]?.image}
                             alt="Carro"
                         />
                         <div id="description">
                             <h2>{`${announcement.car.brand} ${announcement.car.model}`}</h2>
-
+                            <DeleteIcon onClick={() => deleteAd(announcement.id)} />
                             <div className="views">
                                 <img src={viewImg} alt="view" className="icons" />
                                 <p>

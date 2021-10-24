@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { shade } from 'polished';
+import { FiTrash2 } from 'react-icons/fi'
 
 export const Container = styled.div`
 `;
@@ -160,4 +161,17 @@ export const Content = styled.div`
       }
     }
     
+`;
+
+export const DeleteIcon = styled(FiTrash2)`
+    font-size: 25px;
+    cursor: pointer;
+    color: #808080;
+    border-radius: 5px;
+    padding: 3px;
+
+    &:hover {
+      background: red;
+      color: white;
+    }
 `;
