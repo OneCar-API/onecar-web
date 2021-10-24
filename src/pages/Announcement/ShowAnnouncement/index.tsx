@@ -1,33 +1,20 @@
 import React, { useEffect, useState } from 'react';
 
-import { FiSearch, FiArrowLeft } from 'react-icons/fi';
+import { useParams, Link } from 'react-router-dom';
 
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { Container, Content, Main, Info } from './styles';
 
-import Dropdown from '../../../components/Dropdown'
-
-import {
-  Container,
-  Header,
-  HeaderContent,
-  Form,
-  Profile,
-  Content,
-  Main,
-  Info,
-} from './styles';
-
-import avatar from '../../../assets/images/botaoUser.svg';
 import calendar from '../../../assets/images/year.svg';
 import km from '../../../assets/images/km.svg';
 import color from '../../../assets/images/color.svg';
 import gearbox_type from '../../../assets/images/shift.svg';
-import motor from '../../../assets/images/motor.svg';
 import direction from '../../../assets/images/direction.svg';
 import fuel from '../../../assets/images/fuel.svg';
-import door from '../../../assets/images/door.svg';
 import api from '../../../services/api';
 import { useAuth } from '../../../hooks/auth';
+
+// eslint-disable-next-line import/no-useless-path-segments
+import TopBar from '../../../components/TopBar/';
 
 interface IAds {
   description: string;
@@ -39,7 +26,7 @@ interface IAds {
     manufacturer: string;
     brand: string;
     model: string;
-    year_manufacture:string;
+    year_manufacture: string;
     year_model: string;
     fuel: string;
     gearbox_type: string;
@@ -47,35 +34,26 @@ interface IAds {
     color: string;
     carImages: [
       {
-        id: string,
-        image: string,
-        car_id: string,
-        image_url: string,
-      }
+        id: string;
+        image: string;
+        car_id: string;
+        image_url: string;
+      },
     ];
-  }
+  };
   user: {
     name: string;
     phone: string;
-  }
+  };
 }
 
-
 interface RouterParams {
-  id: string
+  id: string;
 }
 
 const ShowAnnouncement: React.FC = () => {
   const [announcement, setAnnouncement] = useState<IAds>();
-
-  const [modalActive, setModalActive] = useState(false)
-
-  const [dropdownActive, setDropdownActive] = useState(false);
-
-  const { token, user, signOut } = useAuth();
-
-  const history = useHistory();
-
+  const { token } = useAuth();
   const { id } = useParams<RouterParams>();
 
   useEffect(() => {
@@ -89,99 +67,31 @@ const ShowAnnouncement: React.FC = () => {
       },
     });
 
-    console.log(response);
-
     setAnnouncement(response.data);
   }
 
   return (
     <Container>
-      <Header>
-        <HeaderContent>
-          <Link to="/">
-            <FiArrowLeft size={25} />
-          </Link>
-
-          <Form>
-            <input placeholder="Pesquisar" />
-            <button type="submit">
-              <FiSearch />
-            </button>
-          </Form>
-          {
-            user ?
-              <>
-                <button type="button" onClick={() => history.push('/register-ads')}>Anunciar</button>
-                <Profile onClick={() => setDropdownActive(true)}>
-                  <img src={avatar} alt="User" />
-                </Profile>
-              </>
-              :
-              <>
-                <button type="button" onClick={() => history.push('/signin')}>Entrar</button>
-                <Profile>
-                  <img src={avatar} alt="User" />
-                </Profile>
-              </>
-          }
-
-
-        </HeaderContent>
-      </Header>
-      <Dropdown
-        hideMenu={() => setDropdownActive(false)}
-        active={dropdownActive}
-        width='300px'
-        contentDisplay='block'
-        fadeInDisplay='block'
-        maxWidth='400px'
-      >
-        <ul>
-          <li>
-            <button type='button' onClick={() => history.push('/ads-management')}>Meus Anúncios</button>
-          </li>
-          <hr />
-          <li>
-            <button type='button' onClick={() => signOut()}>Sair</button>
-          </li>
-        </ul>
-
-
-      </Dropdown>
+      <TopBar />
       <Content>
         <Main>
-          <img
-            src={announcement?.car.carImages[0].image}
-            alt="Carro"
-          />
+          <img src={announcement?.car.carImages[0].image} alt="Carro" />
 
           <div>
             <button type="button">
-              <img
-                src={announcement?.car.carImages[0].image}
-                alt="Carro"
-              />
+              <img src={announcement?.car.carImages[0].image} alt="Carro" />
             </button>
 
             <button type="button">
-              <img
-                src={announcement?.car.carImages[0].image}
-                alt="Carro"
-              />
+              <img src={announcement?.car.carImages[0].image} alt="Carro" />
             </button>
 
             <button type="button">
-              <img
-                src={announcement?.car.carImages[0].image}
-                alt="Carro"
-              />
+              <img src={announcement?.car.carImages[0].image} alt="Carro" />
             </button>
 
             <button type="button">
-              <img
-                src={announcement?.car.carImages[0].image}
-                alt="Carro"
-              />
+              <img src={announcement?.car.carImages[0].image} alt="Carro" />
             </button>
           </div>
 
@@ -191,7 +101,7 @@ const ShowAnnouncement: React.FC = () => {
 
         <Info>
           <strong>
-          {`${announcement?.car.brand} ${announcement?.car.model}`}
+            {`${announcement?.car.brand} ${announcement?.car.model}`}
           </strong>
           <h1>
             R$
@@ -255,7 +165,6 @@ const ShowAnnouncement: React.FC = () => {
               <strong>{`${announcement?.user.name} - ${announcement?.user.phone}`}</strong>
             </div>
           </div>
-
         </Info>
       </Content>
     </Container>
