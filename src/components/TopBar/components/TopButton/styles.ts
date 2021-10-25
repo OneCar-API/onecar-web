@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { shade } from 'polished';
 
 export const Container = styled.button`
-  margin-left: 90px;
   background: #5e9dbc;
   color: #fff;
   font-size: 16px;

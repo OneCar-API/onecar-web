@@ -5,7 +5,7 @@ import { FiSearch } from 'react-icons/fi';
 import avatar from '../../assets/images/user.svg';
 import logoImg from '../../assets/images/logo.svg';
 import Dropdown from '../Dropdown';
-import TopButton from '../TopButton';
+import TopButton from './components/TopButton';
 
 import { Container, Header, HeaderContent, Form, Profile } from './styles';
 import { useAuth } from '../../hooks/auth';

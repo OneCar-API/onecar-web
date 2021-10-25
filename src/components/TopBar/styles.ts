@@ -34,6 +34,8 @@ export const HeaderContent = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    gap: 1rem;
   }
 `;
 
@@ -75,17 +77,27 @@ export const Form = styled.form`
       margin-top: 5px;
     }
   }
+
+  @media (max-width: 850px) {
+    width: 100%;
+  }
 `;
 
 export const Profile = styled.button`
   appearance: none;
-  background-color: none;
+  background-color: transparent;
 
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   border: none;
+
+  gap: 0.5rem;
+
+  p {
+    color: #5e9dbc;
+  }
 
   img {
     width: 2.5rem;
