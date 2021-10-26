@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import api from '../../../services/api';
 
@@ -8,12 +8,11 @@ import { useToast } from '../../../hooks/toast';
 
 import Button from '../../../components/Button';
 
-import { Container, Content } from './styles';
+import { Content } from './styles';
 import Dropzone from '../../../components/Dropzone';
 import { useAuth } from '../../../hooks/auth';
 
 // import fileAds from '../../../assets/csv/file-ads.csv';
-
 
 type CSVData = string | null;
 
@@ -29,15 +28,13 @@ const ImportAnnouncements: React.FC = () => {
     try {
       const formData = new FormData();
       formData.append('file-ads', selectedFile);
-      console.log(formData)
+      console.log(formData);
       await api.post('/ads/import', formData, {
         headers: {
           'content-type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,
         },
       });
-
-
 
       addToast({
         type: 'success',
@@ -60,13 +57,12 @@ const ImportAnnouncements: React.FC = () => {
     }
   }, [addToast, selectedFile, history, token]);
 
-
   const [fetchedCSVData, setFetchedCSVData] = useState<string>('');
 
   if (!fetchedCSVData) {
-    fetch(`${process.env.PUBLIC_URL}/csv/file-ads.csv`)
-      .then(res => setFetchedCSVData(res.url))
-
+    fetch(`${process.env.PUBLIC_URL}/csv/file-ads.csv`).then(res =>
+      setFetchedCSVData(res.url),
+    );
   }
 
   return (

@@ -50,7 +50,7 @@ const SignUp: React.FC = () => {
         await schema.validate(data, {
           abortEarly: false,
         });
-        console.log(data)
+        console.log(data);
         await api.post('/user', data);
         history.push('/signin');
 
@@ -62,7 +62,7 @@ const SignUp: React.FC = () => {
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErrors(error);
-
+          console.log(error);
           formRef.current?.setErrors(errors);
         }
 
@@ -107,11 +107,11 @@ const SignUp: React.FC = () => {
       <Modal
         hideModal={() => setModalActive(false)}
         active={modalActive}
-        width='800px'
-        title='Importar Usuário'
-        contentDisplay='block'
-        fadeInDisplay='block'
-        maxWidth='800px'
+        width="800px"
+        title="Importar Usuário"
+        contentDisplay="block"
+        fadeInDisplay="block"
+        maxWidth="800px"
       >
         <ImportUsers />
       </Modal>

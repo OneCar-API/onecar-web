@@ -1,68 +1,25 @@
 import React, { useEffect, useState } from 'react';
 
-import { FiSearch, FiHeart } from 'react-icons/fi';
+import { FiHeart } from 'react-icons/fi';
 
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
+import TopBar from '../../../components/TopBar';
 import Modal from '../../../components/Modal';
 import Menu from '../../../components/Menu';
-import ImportAnnouncement from '../ImportAnnouncements'
-import Dropdown from '../../../components/Dropdown'
+import ImportAnnouncement from '../ImportAnnouncements';
 
 import {
   Container,
-  Header,
-  HeaderContent,
-  Form,
-  Profile,
   Announcements,
   Visualization,
   Main,
   GridIcon,
-  ListIcon
+  ListIcon,
 } from './styles';
 
-import logoImg from '../../../assets/images/logo.svg';
-import avatar from '../../../assets/images/botaoUser.svg';
-import gearbox_type from '../../../assets/images/shift.svg';
-import motor from '../../../assets/images/motor.svg';
-import direction from '../../../assets/images/direction.svg';
 import api from '../../../services/api';
 import { useAuth } from '../../../hooks/auth';
-
-// interface IAds {
-//   id: string;
-//   ad_code: number;
-//   title: string;
-//   description: string;
-//   price: string;
-//   views: number;
-//   interests: number;
-//   car_id: {
-//     id: string;
-//     manufacturer: string;
-//     brand: string;
-//     model: string;
-//     year_manufacturer: string;
-//     year_model: string;
-//     fuel: string;
-//     gearbox_type: string;
-//     km: number;
-//     color: number;
-//     vehicle_item_id: {
-//       airbag: boolean;
-//       alarm: boolean;
-//       air_conditioning: boolean;
-//       eletric_lock: boolean;
-//       eletric_window: boolean;
-//       stereo: boolean;
-//       reverse_sensor: boolean;
-//       reverse_camera: boolean;
-//       armoured: boolean;
-//       hydraulic_steering: boolean;
-//     }
-//   };
-// }
 
 interface IAds {
   id: string;
@@ -73,7 +30,7 @@ interface IAds {
     manufacturer: string;
     brand: string;
     model: string;
-    year_manufacture:string;
+    year_manufacture: string;
     year_model: string;
     fuel: string;
     gearbox_type: string;
@@ -81,24 +38,22 @@ interface IAds {
     color: string;
     carImages: [
       {
-        id: string,
-        image: string,
-        car_id: string,
-        image_url: string,
-      }
+        id: string;
+        image: string;
+        car_id: string;
+        image_url: string;
+      },
     ];
-  }
+  };
 }
 
 const ListAnnouncements: React.FC = () => {
   const [announcements, setAnnouncements] = useState<IAds[]>([]);
 
-  const [modalActive, setModalActive] = useState(false)
-  const [selected, setSelected] = useState('list')
+  const [modalActive, setModalActive] = useState(false);
+  const [selected, setSelected] = useState('list');
 
-  const { token, user, signOut } = useAuth();
-
-  const [dropdownActive, setDropdownActive] = useState(false);
+  const { token, user } = useAuth();
 
   const history = useHistory();
 
@@ -114,9 +69,9 @@ const ListAnnouncements: React.FC = () => {
     });
 
     const ads = response.data.results;
-    console.log(ads)
+    console.log(ads);
     setAnnouncements([...ads]);
-    console.log(announcements)
+    console.log(announcements);
   }
 
   function viewAnnouncement(id: string) {
@@ -131,59 +86,7 @@ const ListAnnouncements: React.FC = () => {
 
   return (
     <Container>
-      <Header>
-        <HeaderContent>
-          <img src={logoImg} alt="OneCar" />
-
-          <Form>
-            <input placeholder="Pesquisar" />
-            <button type="submit">
-              <FiSearch />
-            </button>
-          </Form>
-
-          {
-            user ?
-              <>
-                <button type="button" onClick={() => history.push('/register-ads')}>Anunciar</button>
-                <Profile onClick={() => setDropdownActive(true)}>
-                  <img src={avatar} alt="User" />
-                </Profile>
-              </>
-
-              :
-              <>
-                <button type="button" onClick={() => history.push('/signin')}>Entrar</button>
-                <Profile>
-                  <img src={avatar} alt="User" />
-                </Profile>
-              </>
-
-          }
-
-        </HeaderContent>
-      </Header>
-      <Dropdown
-        hideMenu={() => setDropdownActive(false)}
-        active={dropdownActive}
-        width='300px'
-        contentDisplay='block'
-        fadeInDisplay='block'
-        maxWidth='400px'
-      >
-        <ul>
-          <li>
-            <button type='button' onClick={() => history.push('/ads-management')}>Meus Anúncios</button>
-          </li>
-          <hr />
-          <li>
-            <button type='button' onClick={() => signOut()}>Sair</button>
-          </li>
-        </ul>
-
-
-      </Dropdown>
-
+      <TopBar />
       <body>
         <Announcements>
           <Visualization>
@@ -191,16 +94,16 @@ const ListAnnouncements: React.FC = () => {
               selected={selected}
               size={30}
               onClick={() => {
-                setVisualization('flex')
-                setSelected('grid')
+                setVisualization('flex');
+                setSelected('grid');
               }}
             />
             <ListIcon
               selected={selected}
               size={30}
               onClick={() => {
-                setVisualization('block')
-                setSelected('list')
+                setVisualization('block');
+                setSelected('list');
               }}
             />
           </Visualization>
@@ -210,19 +113,13 @@ const ListAnnouncements: React.FC = () => {
                 display={visualization}
                 onClick={() => viewAnnouncement(announcement.id)}
               >
-
-                <img
-                  src={announcement?.car.carImages[0].image}
-                  alt="Carro"
-                />
+                <img src={announcement?.car.carImages[0].image} alt="Carro" />
 
                 <div>
                   <strong>
                     {`${announcement.car.brand} ${announcement.car.model}`}
                   </strong>
-                  <p>
-                    {announcement.car.year_manufacture}
-                  </p>
+                  <p>{announcement.car.year_manufacture}</p>
 
                   <h1>
                     R$
@@ -233,44 +130,29 @@ const ListAnnouncements: React.FC = () => {
 
                 <div id="info">
                   <div>
-                    <p>
-                      {announcement.car.km}
-                    </p>
+                    <p>{announcement.car.km}</p>
                     <FiHeart size={20} />
                   </div>
-
-                  {/* <div>
-                    <img src={gearbox_type} alt="Câmbio" />
-                    <p>{announcement.car.gearbox_type}</p>
-                  </div> */}
-
-                  {/* <div>
-                    <img src={direction} alt="Direção" />
-                    <p>{announcement?.car ? 'Hidráulica' : 'Comum'}</p>
-                  </div> */}
-
                   <hr />
-                  {/* <h4>São José dos Campos - SP</h4> */}
                 </div>
               </Main>
-            )) }
+            ))}
           </Menu>
         </Announcements>
         <Modal
           hideModal={() => setModalActive(false)}
           active={modalActive}
-          width='800px'
-          title='Importar Anúncio'
-          contentDisplay='block'
-          fadeInDisplay='block'
-          maxWidth='800px'
+          width="800px"
+          title="Importar Anúncio"
+          contentDisplay="block"
+          fadeInDisplay="block"
+          maxWidth="800px"
         >
           <ImportAnnouncement />
         </Modal>
       </body>
     </Container>
   );
-  ;
-}
+};
 
 export default ListAnnouncements;

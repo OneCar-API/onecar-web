@@ -1,26 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-import { FiSearch, FiArrowLeft } from 'react-icons/fi';
-
-import { Link, useHistory } from 'react-router-dom';
-
-import {
-  Container,
-  Content,
-  Header,
-  HeaderContent,
-  Form,
-  Profile,
-  Menu,
-} from './style';
+import { Container, Content, Menu } from './style';
 
 import Button from '../../components/Button';
-import Dropdown from '../../components/Dropdown';
 import Modal from '../../components/Modal';
 import ImportAnnouncements from '../Announcement/ImportAnnouncements';
+import TopBar from '../../components/TopBar';
 
-import logoImg from '../../assets/images/logo.svg';
-import avatar from '../../assets/images/botaoUser.svg';
 import viewImg from '../../assets/images/views.svg';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
@@ -57,11 +43,7 @@ const AdsManagement: React.FC = () => {
 
   const [modalActive, setModalActive] = useState(false);
 
-  const { user, token, signOut } = useAuth();
-
-  const [dropdownActive, setDropdownActive] = useState(false);
-
-  const history = useHistory();
+  const { token } = useAuth();
 
   useEffect(() => {
     loadCars();
@@ -82,59 +64,7 @@ const AdsManagement: React.FC = () => {
 
   return (
     <Container>
-      <Header>
-        <HeaderContent>
-          <Link to="/adverts">
-            <FiArrowLeft size={25} />
-          </Link>
-          <img src={logoImg} alt="OneCar" />
-
-          <Form>
-            <input placeholder="Pesquisar" />
-            <button type="submit">
-              <FiSearch />
-            </button>
-          </Form>
-
-          {user ? (
-            <button type="button" onClick={() => history.push('/register-ads')}>
-              Anunciar
-            </button>
-          ) : (
-            <button type="button" onClick={() => history.push('/signin')}>
-              Entrar
-            </button>
-          )}
-          <Profile onClick={() => setDropdownActive(true)}>
-            <img src={avatar} alt="User" />
-          </Profile>
-        </HeaderContent>
-      </Header>
-      <Dropdown
-        hideMenu={() => setDropdownActive(false)}
-        active={dropdownActive}
-        width="300px"
-        contentDisplay="block"
-        fadeInDisplay="block"
-        maxWidth="400px"
-      >
-        <ul>
-          <li>
-            <button
-              type="button"
-              onClick={() => history.push('/ads-management')}
-            >
-              Meus Anúncios
-            </button>
-          </li>
-          <hr />
-          <li>
-            <button type="button" onClick={() => signOut()}>
-              Sair
-            </button>
-          </li>
-        </ul>
-      </Dropdown>
+      <TopBar />
       <Menu>
         <h1>Seus anúncios</h1>
         <Button type="button" onClick={() => setModalActive(true)}>

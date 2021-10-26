@@ -31,29 +31,24 @@ const TopBar: React.FC = () => {
               </button>
             </Form>
           </div>
-
           {user ? (
-            <>
-              <TopButton
-                type="button"
-                onClick={() => history.push('/register-ads')}
-              >
-                Anunciar
-              </TopButton>
-              <Profile onClick={() => setDropdownActive(true)}>
-                <img src={avatar} alt="User" />
-              </Profile>
-            </>
-          ) : (
             <>
               <div className="profile">
                 <TopButton
                   type="button"
-                  onClick={() => history.push('/signin')}
+                  onClick={() => history.push('/register-ads')}
                 >
-                  Entrar
+                  Anunciar
                 </TopButton>
-                <Profile>
+                <Profile onClick={() => setDropdownActive(true)}>
+                  <img src={avatar} alt="User" />
+                </Profile>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="profile">
+                <Profile onClick={() => history.push('/signin')}>
                   <p>Entrar</p>
                   <img src={avatar} alt="User" />
                 </Profile>
