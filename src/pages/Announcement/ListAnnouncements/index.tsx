@@ -71,7 +71,7 @@ const ListAnnouncements: React.FC = () => {
     const ads = response.data.results;
     console.log(ads);
     setAnnouncements([...ads]);
-    console.log(announcements);
+    console.log('announcements', announcements);
   }
 
   function viewAnnouncement(id: string) {
@@ -113,7 +113,7 @@ const ListAnnouncements: React.FC = () => {
                 display={visualization}
                 onClick={() => viewAnnouncement(announcement.id)}
               >
-                <img src={announcement?.car.carImages[0].image} alt="Carro" />
+                <img src={announcement?.car?.carImages[0]?.image} alt="Carro" />
 
                 <div>
                   <strong>
