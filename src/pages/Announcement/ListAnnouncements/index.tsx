@@ -6,8 +6,8 @@ import { Link, useHistory } from 'react-router-dom';
 
 import Modal from '../../../components/Modal';
 import Menu from '../../../components/Menu';
-import ImportAnnouncement from '../ImportAnnouncements'
-import Dropdown from '../../../components/Dropdown'
+import ImportAnnouncement from '../ImportAnnouncements';
+import Dropdown from '../../../components/Dropdown';
 
 import {
   Container,
@@ -19,7 +19,7 @@ import {
   Visualization,
   Main,
   GridIcon,
-  ListIcon
+  ListIcon,
 } from './styles';
 
 import logoImg from '../../../assets/images/logo.svg';
@@ -73,7 +73,7 @@ interface IAds {
     manufacturer: string;
     brand: string;
     model: string;
-    year_manufacture:string;
+    year_manufacture: string;
     year_model: string;
     fuel: string;
     gearbox_type: string;
@@ -81,20 +81,20 @@ interface IAds {
     color: string;
     carImages: [
       {
-        id: string,
-        image: string,
-        car_id: string,
-        image_url: string,
-      }
+        id: string;
+        image: string;
+        car_id: string;
+        image_url: string;
+      },
     ];
-  }
+  };
 }
 
 const ListAnnouncements: React.FC = () => {
   const [announcements, setAnnouncements] = useState<IAds[]>([]);
 
-  const [modalActive, setModalActive] = useState(false)
-  const [selected, setSelected] = useState('list')
+  const [modalActive, setModalActive] = useState(false);
+  const [selected, setSelected] = useState('list');
 
   const { token, user, signOut } = useAuth();
 
@@ -114,9 +114,8 @@ const ListAnnouncements: React.FC = () => {
     });
 
     const ads = response.data.results;
-    console.log(ads)
+    console.log('ads', ads);
     setAnnouncements([...ads]);
-    console.log(announcements)
   }
 
   function viewAnnouncement(id: string) {
@@ -128,6 +127,8 @@ const ListAnnouncements: React.FC = () => {
   }
 
   const [visualization, setVisualization] = useState('block');
+
+  console.log('adverts announcement', announcements);
 
   return (
     <Container>
@@ -142,46 +143,54 @@ const ListAnnouncements: React.FC = () => {
             </button>
           </Form>
 
-          {
-            user ?
-              <>
-                <button type="button" onClick={() => history.push('/register-ads')}>Anunciar</button>
-                <Profile onClick={() => setDropdownActive(true)}>
-                  <img src={avatar} alt="User" />
-                </Profile>
-              </>
-
-              :
-              <>
-                <button type="button" onClick={() => history.push('/signin')}>Entrar</button>
-                <Profile>
-                  <img src={avatar} alt="User" />
-                </Profile>
-              </>
-
-          }
-
+          {user ? (
+            <>
+              <button
+                type="button"
+                onClick={() => history.push('/register-ads')}
+              >
+                Anunciar
+              </button>
+              <Profile onClick={() => setDropdownActive(true)}>
+                <img src={avatar} alt="User" />
+              </Profile>
+            </>
+          ) : (
+            <>
+              <button type="button" onClick={() => history.push('/signin')}>
+                Entrar
+              </button>
+              <Profile>
+                <img src={avatar} alt="User" />
+              </Profile>
+            </>
+          )}
         </HeaderContent>
       </Header>
       <Dropdown
         hideMenu={() => setDropdownActive(false)}
         active={dropdownActive}
-        width='300px'
-        contentDisplay='block'
-        fadeInDisplay='block'
-        maxWidth='400px'
+        width="300px"
+        contentDisplay="block"
+        fadeInDisplay="block"
+        maxWidth="400px"
       >
         <ul>
           <li>
-            <button type='button' onClick={() => history.push('/ads-management')}>Meus Anúncios</button>
+            <button
+              type="button"
+              onClick={() => history.push('/ads-management')}
+            >
+              Meus Anúncios
+            </button>
           </li>
           <hr />
           <li>
-            <button type='button' onClick={() => signOut()}>Sair</button>
+            <button type="button" onClick={() => signOut()}>
+              Sair
+            </button>
           </li>
         </ul>
-
-
       </Dropdown>
 
       <body>
@@ -191,16 +200,16 @@ const ListAnnouncements: React.FC = () => {
               selected={selected}
               size={30}
               onClick={() => {
-                setVisualization('flex')
-                setSelected('grid')
+                setVisualization('flex');
+                setSelected('grid');
               }}
             />
             <ListIcon
               selected={selected}
               size={30}
               onClick={() => {
-                setVisualization('block')
-                setSelected('list')
+                setVisualization('block');
+                setSelected('list');
               }}
             />
           </Visualization>
@@ -210,32 +219,24 @@ const ListAnnouncements: React.FC = () => {
                 display={visualization}
                 onClick={() => viewAnnouncement(announcement.id)}
               >
-
-                <img
-                  src={announcement?.car.carImages[0].image}
-                  alt="Carro"
-                />
+                <img src={announcement?.car.carImages[0]?.image} alt="Carro" />
 
                 <div>
                   <strong>
-                    {`${announcement.car.brand} ${announcement.car.model}`}
+                    {`${announcement?.car?.brand} ${announcement?.car?.model}`}
                   </strong>
-                  <p>
-                    {announcement.car.year_manufacture}
-                  </p>
+                  <p>{announcement?.car?.year_manufacture}</p>
 
                   <h1>
                     R$
-                    {announcement.price}
+                    {announcement?.price}
                     ,00
                   </h1>
                 </div>
 
                 <div id="info">
                   <div>
-                    <p>
-                      {announcement.car.km}
-                    </p>
+                    <p>{announcement?.car?.km}</p>
                     <FiHeart size={20} />
                   </div>
 
@@ -253,24 +254,23 @@ const ListAnnouncements: React.FC = () => {
                   {/* <h4>São José dos Campos - SP</h4> */}
                 </div>
               </Main>
-            )) }
+            ))}
           </Menu>
         </Announcements>
         <Modal
           hideModal={() => setModalActive(false)}
           active={modalActive}
-          width='800px'
-          title='Importar Anúncio'
-          contentDisplay='block'
-          fadeInDisplay='block'
-          maxWidth='800px'
+          width="800px"
+          title="Importar Anúncio"
+          contentDisplay="block"
+          fadeInDisplay="block"
+          maxWidth="800px"
         >
           <ImportAnnouncement />
         </Modal>
       </body>
     </Container>
   );
-  ;
-}
+};
 
 export default ListAnnouncements;

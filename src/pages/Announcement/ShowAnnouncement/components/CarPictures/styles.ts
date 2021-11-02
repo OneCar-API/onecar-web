@@ -1,0 +1,66 @@
+import styled from 'styled-components';
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  padding-left: 2rem;
+  width: 100%;
+
+  > img {
+    width: 100%;
+    border-radius: 1rem;
+    margin-bottom: 32px;
+  }
+
+  .gallery-and-upload {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    width: 100%;
+
+    label {
+      cursor: pointer;
+      background: #5e9dbc;
+      color: #fff;
+      font-size: 1rem;
+      border: 0;
+      border-radius: 25px;
+      transition: background-color 0.2s;
+      width: auto;
+      height: 2.5rem;
+
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      input[type='file'] {
+        appearance: none;
+        display: none;
+      }
+    }
+
+    img {
+      width: 95px;
+      height: 95px;
+      border-radius: 1rem;
+      object-fit: cover;
+    }
+
+    .pictureImg {
+      object-fit: cover;
+    }
+  }
+
+  @media (max-width: 1440px) {
+    padding: 0 2rem 2rem 2rem;
+
+    > img {
+      width: 100%;
+    }
+  }
+`;
