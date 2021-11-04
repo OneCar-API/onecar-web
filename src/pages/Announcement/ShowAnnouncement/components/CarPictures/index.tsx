@@ -21,6 +21,7 @@ interface ICarPictures {
 }
 
 const CarPictures = ({ pictures }: ICarPictures) => {
+  const [mainPicture, setMainPicture] = useState();
   const [announcement, setAnnouncement] = useState(Object);
   const { token } = useAuth();
   const { id } = useParams<RouterParams>();
@@ -70,13 +71,15 @@ const CarPictures = ({ pictures }: ICarPictures) => {
     if (pictureResponse === 200) location.reload();
   }
 
+  useEffect(() => {
+    if (pictures?.length) {
+      setMainPicture(pictures[1]?.image_url);
+    }
+  }, [pictures]);
+
   return (
     <Container>
-      {pictures?.length ? (
-        <img src={pictures[0]?.image_url} alt="" />
-      ) : (
-        <img src={NoImageThumb} alt="" />
-      )}
+      <img src={mainPicture} alt="" />
 
       <div className="gallery-and-upload">
         <label>
@@ -94,14 +97,19 @@ const CarPictures = ({ pictures }: ICarPictures) => {
           />
           Enviar Imagens
         </label>
-
-        {pictures ? (
-          pictures.map((picture: any) => (
-            <img src={picture?.image_url} alt="" />
-          ))
-        ) : (
-          <img src={NoImageThumb} alt="" />
-        )}
+        <div className="pictures">
+          {pictures ? (
+            pictures.map((picture: any) => (
+              <img
+                src={picture?.image_url}
+                alt=""
+                onClick={() => setMainPicture(picture?.image_url)}
+              />
+            ))
+          ) : (
+            <img src={NoImageThumb} alt="" />
+          )}
+        </div>
       </div>
     </Container>
   );

@@ -6,11 +6,12 @@ export const Container = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
 
-  padding-left: 2rem;
   width: 100%;
 
   > img {
     width: 100%;
+    height: 600px;
+    object-fit: cover;
     border-radius: 1rem;
     margin-bottom: 32px;
   }
@@ -49,10 +50,13 @@ export const Container = styled.div`
       height: 95px;
       border-radius: 1rem;
       object-fit: cover;
+      cursor: pointer;
+      margin-left: 2rem;
     }
 
-    .pictureImg {
-      object-fit: cover;
+    img:hover {
+      transition: all 0.3s ease-in-out;
+      transform: scale(1.05);
     }
   }
 
@@ -61,6 +65,7 @@ export const Container = styled.div`
 
     > img {
       width: 100%;
+      height: 100%;
     }
   }
 `;

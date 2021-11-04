@@ -114,7 +114,6 @@ const ListAnnouncements: React.FC = () => {
     });
 
     const ads = response.data.results;
-    console.log('ads', ads);
     setAnnouncements([...ads]);
   }
 
@@ -127,8 +126,6 @@ const ListAnnouncements: React.FC = () => {
   }
 
   const [visualization, setVisualization] = useState('block');
-
-  console.log('adverts announcement', announcements);
 
   return (
     <Container>
@@ -219,7 +216,10 @@ const ListAnnouncements: React.FC = () => {
                 display={visualization}
                 onClick={() => viewAnnouncement(announcement.id)}
               >
-                <img src={announcement?.car.carImages[0]?.image} alt="Carro" />
+                <img
+                  src={announcement?.car?.carImages[0]?.image_url}
+                  alt="Carro"
+                />
 
                 <div>
                   <strong>

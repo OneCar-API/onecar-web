@@ -21,7 +21,7 @@ const TopBar: React.FC = () => {
       <Header>
         <HeaderContent>
           <div className="logo-and-search">
-            <Link to="/">
+            <Link to="/adverts">
               <img src={logoImg} alt="OneCar" />
             </Link>
 

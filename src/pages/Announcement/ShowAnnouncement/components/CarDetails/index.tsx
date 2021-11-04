@@ -36,10 +36,10 @@ const CarDetails = ({
     <Container>
       <div className="title">
         <h1>{brandTitle || 'Nome não atribuido'}</h1>
-        <h1>{model}</h1>
+        <h1>{model || 'Modelo não atribuido'}</h1>
       </div>
       <div className="main-details">
-        <h3>{price || 'R$ (Preço não atribuido)'}</h3>
+        <h3>{`R$ ${price},00` || 'R$ (Preço não atribuido)'}</h3>
         <div>
           <img src={yearIcon} alt="" />
           <p>{year || 'Ano não atribuido'}</p>
