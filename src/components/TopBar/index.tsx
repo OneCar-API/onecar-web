@@ -24,13 +24,6 @@ const TopBar: React.FC = () => {
             <Link to="/adverts">
               <img src={logoImg} alt="OneCar" />
             </Link>
-
-            <Form>
-              <input placeholder="Pesquisar" />
-              <button type="submit">
-                <FiSearch />
-              </button>
-            </Form>
           </div>
           {user ? (
             <>
