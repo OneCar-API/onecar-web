@@ -13,6 +13,7 @@ import ListAnnouncements from '../pages/Announcement/ListAnnouncements';
 import ShowAnnouncement from '../pages/Announcement/ShowAnnouncement';
 import ImportUsers from '../pages/ImportUser';
 import ImportAnnouncements from '../pages/Announcement/ImportAnnouncements';
+import EditAds from '../pages/Announcement/EditAds';
 
 import RegisterAds from '../pages/RegisterAds/RegisterAdsMain';
 import RegisterAdsDetails from '../pages/RegisterAds/RegisterAdsDetails';
@@ -37,6 +38,7 @@ const Routes: React.FC = () => (
     <Route path="/register-ads-details" component={RegisterAdsDetails} isPrivate />
     <Route path="/register-ads-description" component={RegisterAdsDescription} isPrivate />
     <Route path="/ads-management" component={AdsManagement} isPrivate />
+    <Route path="/edit-ads" component={EditAds} />
   </Switch>
 );
 
