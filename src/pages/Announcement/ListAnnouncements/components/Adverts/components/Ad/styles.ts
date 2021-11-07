@@ -6,6 +6,7 @@ export const Container = styled.div`
   box-sizing: border-box;
   border-radius: 1rem;
   margin-right: 2rem;
+  margin-bottom: 2rem;
   padding: 0.5rem;
 
   :hover {

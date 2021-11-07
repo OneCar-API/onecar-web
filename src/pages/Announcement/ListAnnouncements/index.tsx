@@ -13,8 +13,7 @@ import api from '../../../services/api';
 import { useAuth } from '../../../hooks/auth';
 
 const ListAnnouncements: React.FC = () => {
-  const [announcements, setAnnouncements] = useState<any>([]);
-
+  const [ads, setAds] = useState();
   const { token } = useAuth();
 
   useEffect(() => {
@@ -27,18 +26,16 @@ const ListAnnouncements: React.FC = () => {
         Authorization: `Bearer ${token}`,
       },
     });
-
-    const ads = response.data.results;
-    setAnnouncements(ads);
+    setAds(response?.data?.results);
   }
 
   return (
     <Container>
       <TopBar />
       <Content>
-        <Search />
+        <Search setAds={setAds} />
         <WhatWeOffer />
-        <Adverts announcements={announcements} />
+        <Adverts announcements={ads} />
       </Content>
     </Container>
   );

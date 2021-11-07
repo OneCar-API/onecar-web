@@ -24,6 +24,8 @@ export const Container = styled.button`
   text-align: center;
 
   &:hover {
+    transition: all 0.3s;
+    transform: scale(1.03);
     background: ${shade(0.2, '#5E9DBC')};
   }
 `;

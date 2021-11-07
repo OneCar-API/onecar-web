@@ -27,6 +27,12 @@ export const HeaderContent = styled.div`
     justify-content: center;
     align-items: center;
 
+    :hover {
+      transition: all 0.3s;
+      transform: scale(1.03);
+      opacity: 70%;
+    }
+
     img {
       width: 8rem;
     }
