@@ -39,7 +39,12 @@ const CarDetails = ({
         <h1>{model || 'Modelo não atribuido'}</h1>
       </div>
       <div className="main-details">
-        <h3>{`R$ ${price},00` || 'R$ (Preço não atribuido)'}</h3>
+        <h3>
+          {Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          }).format(Number(price))}
+        </h3>
         <div>
           <img src={yearIcon} alt="" />
           <p>{year || 'Ano não atribuido'}</p>

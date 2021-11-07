@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { shade } from 'polished';
 
 export const Container = styled.div`
   display: flex;
@@ -27,12 +28,12 @@ export const Container = styled.div`
       cursor: pointer;
       background: #5e9dbc;
       color: #fff;
-      font-size: 1rem;
+      font-size: 18px;
       border: 0;
       border-radius: 25px;
       transition: background-color 0.2s;
       width: auto;
-      height: 2.5rem;
+      height: 40px;
 
       padding: 1rem;
       display: flex;
@@ -42,6 +43,12 @@ export const Container = styled.div`
       input[type='file'] {
         appearance: none;
         display: none;
+      }
+
+      &:hover {
+        transition: all 0.3s;
+        transform: scale(1.03);
+        background: ${shade(0.2, '#5E9DBC')};
       }
     }
 

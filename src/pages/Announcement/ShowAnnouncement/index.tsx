@@ -31,7 +31,6 @@ const ShowAnnouncement: React.FC = () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log('response', response);
     setAnnouncement(response?.data);
   }
 
