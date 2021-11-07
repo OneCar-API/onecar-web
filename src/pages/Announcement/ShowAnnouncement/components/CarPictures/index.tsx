@@ -73,7 +73,7 @@ const CarPictures = ({ pictures }: ICarPictures) => {
 
   useEffect(() => {
     if (pictures?.length) {
-      setMainPicture(pictures[1]?.image_url);
+      setMainPicture(pictures[1]?.image);
     }
   }, [pictures]);
 
@@ -101,9 +101,9 @@ const CarPictures = ({ pictures }: ICarPictures) => {
           {pictures ? (
             pictures.map((picture: any) => (
               <img
-                src={picture?.image_url}
+                src={picture?.image}
                 alt=""
-                onClick={() => setMainPicture(picture?.image_url)}
+                onClick={() => setMainPicture(picture?.image)}
               />
             ))
           ) : (

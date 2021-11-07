@@ -30,39 +30,6 @@ import direction from '../../../assets/images/direction.svg';
 import api from '../../../services/api';
 import { useAuth } from '../../../hooks/auth';
 
-// interface IAds {
-//   id: string;
-//   ad_code: number;
-//   title: string;
-//   description: string;
-//   price: string;
-//   views: number;
-//   interests: number;
-//   car_id: {
-//     id: string;
-//     manufacturer: string;
-//     brand: string;
-//     model: string;
-//     year_manufacturer: string;
-//     year_model: string;
-//     fuel: string;
-//     gearbox_type: string;
-//     km: number;
-//     color: number;
-//     vehicle_item_id: {
-//       airbag: boolean;
-//       alarm: boolean;
-//       air_conditioning: boolean;
-//       eletric_lock: boolean;
-//       eletric_window: boolean;
-//       stereo: boolean;
-//       reverse_sensor: boolean;
-//       reverse_camera: boolean;
-//       armoured: boolean;
-//       hydraulic_steering: boolean;
-//     }
-//   };
-// }
 
 interface IAds {
   id: string;
@@ -217,7 +184,7 @@ const ListAnnouncements: React.FC = () => {
                 onClick={() => viewAnnouncement(announcement.id)}
               >
                 <img
-                  src={announcement?.car?.carImages[0]?.image_url}
+                  src={announcement?.car?.carImages[0]?.image}
                   alt="Carro"
                 />
 
