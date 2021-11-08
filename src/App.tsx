@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { socket, SocketContext } from './context/socket.js';
 
 import GlobalStyle from './styles/global';
 
@@ -9,13 +10,16 @@ import Routes from './routes';
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <AppProvider>
-        <Routes />
-      </AppProvider>
+    <SocketContext.Provider value={socket}>
+      <Router>
+        <AppProvider>
+          <Routes />
+        </AppProvider>
 
-      <GlobalStyle />
-    </Router>
+        <GlobalStyle />
+      </Router>
+    </SocketContext.Provider>
+
   );
 };
 

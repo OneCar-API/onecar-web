@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi'
+import io from 'socket.io-client';
+import { SocketContext } from '../../context/socket.js'; 
 import Button from '../../components/DefaultButton';
+
 
 
 
@@ -58,11 +61,19 @@ interface PastMsgs {
 
 const Chat: React.FC = () => {
 
+    const socket = useContext(SocketContext); 
+
     const [messages, setMessages] = useState<PastMsgs[]>([])
     const [currentMessage, setCurrentMessage] = useState<string>('');
     const { state } = useLocation<ChatIdentifiers>();
     const history = useHistory()
 
+    useEffect(() => {
+        
+        
+        socket.on('message', setMessages); 
+        // return () => socket.disconnect();
+    })
 
     function closeChat() {
         // disconnect socket
@@ -70,7 +81,7 @@ const Chat: React.FC = () => {
     }
 
     function handleSendMessage(msg: string) {
-        console.log(msg)
+        socket.emit('message', {message: msg, idChatRoom: ''});
     }
 
 
