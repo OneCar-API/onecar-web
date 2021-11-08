@@ -13,7 +13,6 @@ import ListAnnouncements from '../pages/Announcement/ListAnnouncements';
 import ShowAnnouncement from '../pages/Announcement/ShowAnnouncement';
 import ImportUsers from '../pages/ImportUser';
 import ImportAnnouncements from '../pages/Announcement/ImportAnnouncements';
-import EditAds from '../pages/Announcement/EditAds';
 
 import RegisterAds from '../pages/RegisterAds/RegisterAdsMain';
 import RegisterAdsDetails from '../pages/RegisterAds/RegisterAdsDetails';
@@ -25,16 +24,22 @@ const Routes: React.FC = () => (
     <Route
       path={['/signin', '/invite-user', '/confirm-user']}
       component={SignIn}
+      isPrivate
     />
-    <Route path="/signup" component={SignUp} />
-    <Route path="/" exact component={ListAnnouncements} />
-    <Route path="/advert/:id" component={ShowAnnouncement} />
-    <Route path="/import-users" component={ImportUsers} />
-    <Route path="/import-ads" component={ImportAnnouncements} />
-    <Route path="/forgot-password" component={AlterPassword} />
-    <Route path="/reset-password" component={NewPassword} isPrivate />
+
+    <Route path="/" exact component={SignIn} isPrivate />
+    <Route path="/signup" component={SignUp} isPrivate />
     <Route path="/adverts" component={ListAnnouncements} isPrivate />
-    <Route path="/advert-p/:id" component={ShowAnnouncement} isPrivate />
+    <Route path="/import-users" component={ImportUsers} />
+    <Route path="/import-ads" component={ImportAnnouncements} isPrivate />
+
+    <Route path="/forgot-password" component={AlterPassword} isPrivate />
+    <Route path="/reset-password" component={NewPassword} isPrivate />
+
+    <Route path="/" exact component={ListAnnouncements} />
+    <Route path="/advert/:id" component={ShowAnnouncement} isPrivate />
+    <Route path="/forgot-password" component={AlterPassword} isPrivate />
+    <Route path="/reset-password" component={NewPassword} isPrivate />
     <Route path="/register-ads-msg" component={RegisterAdsMsg} isPrivate />
     <Route path="/register-ads" component={RegisterAds} isPrivate />
     <Route
@@ -48,7 +53,6 @@ const Routes: React.FC = () => (
       isPrivate
     />
     <Route path="/ads-management" component={AdsManagement} isPrivate />
-    <Route path="/edit-ads" component={EditAds} />
   </Switch>
 );
 

@@ -14,30 +14,18 @@ const Adverts = ({ announcements }: IAdverts) => {
     <Container>
       <div className="ads">
         {announcements?.length &&
-          announcements.map(
-            (announcement: {
-              id: string;
-              car: {
-                carImages: { image_url: string }[];
-                year_model: string;
-                brand: string;
-                model: string;
-              };
-              created_at: string;
-              price: number;
-            }) => (
-              <Link id="link" to={`/advert-p/${announcement?.id}`}>
-                <Ad
-                  image={announcement?.car?.carImages[0]?.image_url}
-                  year={announcement?.car?.year_model}
-                  brand={announcement?.car?.brand}
-                  model={announcement?.car?.model}
-                  price={announcement?.price}
-                  created_at={announcement?.created_at}
-                />
-              </Link>
-            ),
-          )}
+          announcements.map((announcement: any) => (
+            <Link to={`/advert/${announcement?.id}`}>
+              <Ad
+                image={announcement?.car?.carImages[0]?.image_url}
+                year={announcement?.car?.year_model}
+                brand={announcement?.car?.brand}
+                model={announcement?.car?.model}
+                price={announcement?.price}
+                created_at={announcement?.created_at}
+              />
+            </Link>
+          ))}
       </div>
     </Container>
   );

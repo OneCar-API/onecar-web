@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { HTMLAttributes } from 'react';
 
 import yearIcon from '../../../../../assets/images/year-icon.svg';
@@ -6,6 +7,7 @@ import fuelIcon from '../../../../../assets/images/fuel-icon.svg';
 
 import Button from '../../../../../components/DefaultButton';
 import OwnerDetails from './components/OwnerDetails';
+import { useAuth } from '../../../../../hooks/auth';
 
 import { Container } from './styles';
 
@@ -19,6 +21,7 @@ interface ICarDetails extends HTMLAttributes<HTMLElement> {
   description: string;
   ownerName?: string;
   ownerPhone?: number;
+  setEdit: any;
 }
 
 const CarDetails = ({
@@ -31,7 +34,14 @@ const CarDetails = ({
   description,
   ownerName,
   ownerPhone,
+  setEdit,
 }: ICarDetails) => {
+  const { user } = useAuth();
+
+  function handleEdit(bool: any) {
+    setEdit(bool);
+  }
+
   return (
     <Container>
       <div className="title">
@@ -65,7 +75,12 @@ const CarDetails = ({
             'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}
         </p>
       </div>
-      <Button className="btn">Editar</Button>
+      {user && (
+        <Button className="btn" onClick={() => handleEdit(true)}>
+          Editar
+        </Button>
+      )}
+
       <OwnerDetails ownerName={ownerName} ownerPhone={ownerPhone} />
     </Container>
   );

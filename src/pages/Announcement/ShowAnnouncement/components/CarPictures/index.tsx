@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-shadow */
 /* eslint-disable no-plusplus */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { useAuth } from '../../../../../hooks/auth';
 import api from '../../../../../services/api';
@@ -21,17 +22,19 @@ interface ICarPictures {
 }
 
 const CarPictures = ({ pictures }: ICarPictures) => {
+  const location = useLocation();
+  const idString = location.pathname.slice(8, location.pathname.length);
+
   const [mainPicture, setMainPicture] = useState();
   const [announcement, setAnnouncement] = useState(Object);
   const { token } = useAuth();
-  const { id } = useParams<RouterParams>();
 
   useEffect(() => {
     showAnnouncements();
-  }, [id]);
+  }, [idString]);
 
   async function showAnnouncements() {
-    const response = await api.get(`/ads/${id}`, {
+    const response = await api.get(`/ads/${idString}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -68,7 +71,7 @@ const CarPictures = ({ pictures }: ICarPictures) => {
 
     const pictureResponse = await sendPicturesResquest(formData);
 
-    if (pictureResponse === 200) location.reload();
+    if (pictureResponse === 200) window.location.reload();
   }
 
   useEffect(() => {
@@ -97,6 +100,7 @@ const CarPictures = ({ pictures }: ICarPictures) => {
           />
           Enviar Imagens
         </label>
+
         <div className="pictures">
           {pictures ? (
             pictures.map((picture: any) => (

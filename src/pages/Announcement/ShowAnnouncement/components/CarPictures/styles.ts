@@ -52,13 +52,17 @@ export const Container = styled.div`
       }
     }
 
+    .pictures {
+      display: flex;
+      gap: 1rem;
+    }
+
     img {
       width: 95px;
       height: 95px;
       border-radius: 1rem;
       object-fit: cover;
       cursor: pointer;
-      margin-left: 2rem;
     }
 
     img:hover {

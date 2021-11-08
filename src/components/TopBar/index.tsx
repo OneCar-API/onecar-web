@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import { FiSearch } from 'react-icons/fi';
 
 import avatar from '../../assets/images/user.svg';
 import logoImg from '../../assets/images/logo.svg';
 import Dropdown from '../Dropdown';
 import DefaultButton from '../DefaultButton';
 
-import { Container, Header, HeaderContent, Form, Profile } from './styles';
+import { Container, Header, HeaderContent, Profile } from './styles';
 import { useAuth } from '../../hooks/auth';
-import useIsMobile from '../../hooks/useIsMobile';
 
 const TopBar: React.FC = () => {
   const { user, signOut } = useAuth();

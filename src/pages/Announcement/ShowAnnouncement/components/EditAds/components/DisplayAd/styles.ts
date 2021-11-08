@@ -1,19 +1,51 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 30%;
-  align-items: center;
-
   display: flex;
-  justify-content: center;
+  align-items: center;
+  justify-content: flex-start;
   flex-direction: column;
+
+  padding: 0 4rem;
+
+  .delete {
+    margin-top: 6rem;
+  }
+
+  .delete-ask {
+    margin-top: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+      margin-bottom: 1rem;
+      font-weight: bold;
+      font-size: 16px;
+      display: flex;
+      color: #bc5e5e;
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+
+      #set-delete {
+        border-color: #bc5e5e;
+        color: #bc5e5e;
+      }
+    }
+  }
 
   body {
     background: #ffffff;
   }
 
   h1 {
-    margin-top: 2.5rem;
     font-size: 1.7rem;
     font-style: normal;
     font-weight: 400;
@@ -23,8 +55,9 @@ export const Container = styled.div`
 
   img {
     padding: 0;
-    margin-top: 41px;
-    width: 14rem;
+    margin-top: 4rem;
+    width: 224px;
+    border-radius: 1rem;
   }
 
   #title {
@@ -39,10 +72,6 @@ export const Container = styled.div`
     font-style: normal;
     font-weight: 400;
     text-align: center;
-  }
-
-  button {
-    margin-top: 4rem;
   }
 
   h3 {

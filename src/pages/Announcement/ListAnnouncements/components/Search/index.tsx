@@ -1,6 +1,6 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import Button from '../../../../../components/DefaultButton';
 import searchIcon from '../../../../../assets/images/search.svg';
@@ -18,7 +18,6 @@ const Search = ({ setAds }: ISearch) => {
 
   async function setSearch() {
     const response = await api.get(`/ads?car=${inputCar}`);
-    console.log(response?.data?.results, 'response');
     setAds(response?.data?.results);
   }
 
