@@ -14,7 +14,6 @@ import { useAuth } from '../../../hooks/auth';
 
 // import fileAds from '../../../assets/csv/file-ads.csv';
 
-
 type CSVData = string | null;
 
 const ImportAnnouncements: React.FC = () => {
@@ -29,7 +28,7 @@ const ImportAnnouncements: React.FC = () => {
     try {
       const formData = new FormData();
       formData.append('file-ads', selectedFile);
-      console.log(formData)
+      console.log(formData);
       await api.post('/ads/import', formData, {
         headers: {
           'content-type': 'multipart/form-data',
@@ -37,15 +36,13 @@ const ImportAnnouncements: React.FC = () => {
         },
       });
 
-
-
       addToast({
         type: 'success',
         title: 'Cadastro de anúncios realizado!',
         description: 'Seus anúncios foram importados com sucesso!',
       });
 
-      history.push('/adverts');
+      history.push('/');
     } catch (error) {
       if (error) {
         console.log(error);
@@ -60,13 +57,12 @@ const ImportAnnouncements: React.FC = () => {
     }
   }, [addToast, selectedFile, history, token]);
 
-
   const [fetchedCSVData, setFetchedCSVData] = useState<string>('');
 
   if (!fetchedCSVData) {
-    fetch(`${process.env.PUBLIC_URL}/csv/file-ads.csv`)
-      .then(res => setFetchedCSVData(res.url))
-
+    fetch(`${process.env.PUBLIC_URL}/csv/file-ads.csv`).then(res =>
+      setFetchedCSVData(res.url),
+    );
   }
 
   return (

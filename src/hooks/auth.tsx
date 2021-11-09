@@ -27,15 +27,12 @@ interface AuthContextData {
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
-
-
 const AuthProvider: React.FC = ({ children }) => {
-
   const history = useHistory();
 
   const [data, setData] = useState<AuthState>(() => {
     const token = localStorage.getItem('@OneCar:token');
-    const user = localStorage.getItem('@OneCar:user');;
+    const user = localStorage.getItem('@OneCar:user');
 
     if (token && user) {
       return { token, user: JSON.parse(user) };
@@ -45,23 +42,20 @@ const AuthProvider: React.FC = ({ children }) => {
   });
 
   const signIn = useCallback(async ({ email, password, location }) => {
-    console.log('z')
     const response = await api.post('sessions', {
       email,
       password,
     });
 
-    console.log(response.data)
+    console.log(response.data);
     const { token, user } = response.data;
 
-    console.log(user.is_active)
-    
+    console.log(user.is_active);
 
     localStorage.setItem('@OneCar:token', token);
     localStorage.setItem('@OneCar:user', JSON.stringify(user));
 
     setData({ token, user });
-
 
     if (user.is_active === true) {
       history.push('/adverts');
@@ -79,14 +73,13 @@ const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   const allowUser = useCallback(async ({ token }) => {
-    console.log(token)
+    console.log(token);
     const response = await api.patch('/user/confirm', {
-      token
-    })
-    console.log(response)
+      token,
+    });
+    console.log(response);
     setData({} as AuthState);
   }, []);
-
 
   return (
     <AuthContext.Provider

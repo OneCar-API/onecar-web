@@ -2,7 +2,7 @@ import React, { useRef, useCallback, useEffect } from 'react';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import { useToast } from '../../hooks/toast';
 import getValidationErrors from '../../utils/getValidationErrors';
@@ -10,7 +10,8 @@ import getValidationErrors from '../../utils/getValidationErrors';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Logo from '../../components/Logo';
-import ButtonBack from '../../components/ButtonBack';
+
+import TopBar from '../../components/TopBar';
 
 import { Container, Content, Header } from './style';
 
@@ -21,7 +22,6 @@ interface NewPasswordFormData {
   password: string;
   password_confirmation: string;
 }
-
 
 const NewPassword: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
@@ -37,16 +37,15 @@ const NewPassword: React.FC = () => {
   let user_id: string;
 
   useEffect(() => {
-
     for (const [key, value] of Object.entries(user)) {
       if (value === true && key === 'is_active') {
-        history.push('/adverts');
+        history.push('/');
       }
       if (key === 'id') {
-        user_id = value
+        user_id = value;
       }
     }
-  }, [])
+  }, []);
 
   const handleSubmit = useCallback(
     async (data: NewPasswordFormData) => {
@@ -64,7 +63,7 @@ const NewPassword: React.FC = () => {
         const obj = {
           password: data.password,
           password_confirmation: data.password_confirmation,
-        }
+        };
 
         await schema.validate(data, {
           abortEarly: false,
@@ -72,17 +71,14 @@ const NewPassword: React.FC = () => {
 
         if (!token) {
           throw new Error();
-        }
-        else {
+        } else {
           await api.post(`/password/reset${location.search}`, obj, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           });
-          await allowUser({ token: location.search.replace("?token=", '') });
+          await allowUser({ token: location.search.replace('?token=', '') });
         }
-
-
 
         addToast({
           type: 'success',
@@ -91,7 +87,7 @@ const NewPassword: React.FC = () => {
             'Sua senha foi recuperada, você já pode realizar seu login!',
         });
 
-        signOut
+        signOut;
         history.push('/signin');
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
@@ -110,23 +106,9 @@ const NewPassword: React.FC = () => {
     [addToast, history, location.search],
   );
 
-  console.log(location)
-
   return (
     <Container>
-      <Header>
-
-        <ButtonBack
-          onClick={() => {
-            signOut()
-            history.push('/signin')
-          }}
-          type="submit"
-        >
-          Voltar
-        </ButtonBack>
-
-      </Header>
+      <TopBar />
       <Content>
         <Logo />
 
