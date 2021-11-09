@@ -64,4 +64,14 @@ export const Container = styled.div`
     align-items: left;
     color: #383838;
   }
+
+  .buttons {
+    display: flex;
+
+    height: 2.5rem;
+    width: auto;
+    font-size: 16px;
+    font-weight: 700;
+    gap: 2rem;
+  }
 `;

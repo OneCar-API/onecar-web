@@ -18,7 +18,7 @@ const Adverts = ({ announcements }: IAdverts) => {
             <Link to={`/advert/${announcement?.id}`}>
               <Ad
                 image={announcement?.car?.carImages[0]?.image_url}
-                year={announcement?.car?.year_model}
+                year={announcement?.car?.year_manufacture}
                 brand={announcement?.car?.brand}
                 model={announcement?.car?.model}
                 price={announcement?.price}

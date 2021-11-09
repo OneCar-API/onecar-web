@@ -14,9 +14,6 @@ import NoImageThumb from '../../../../../assets/images/no-image-thumb.png';
 
 import { Container } from './styles';
 
-interface RouterParams {
-  id: string;
-}
 interface ICarPictures {
   pictures: any;
 }

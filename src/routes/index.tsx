@@ -27,7 +27,7 @@ const Routes: React.FC = () => (
       isPrivate
     />
 
-    <Route path="/" exact component={SignIn} isPrivate />
+    <Route path="/" exact component={SignIn} />
     <Route path="/signup" component={SignUp} isPrivate />
     <Route path="/adverts" component={ListAnnouncements} isPrivate />
     <Route path="/import-users" component={ImportUsers} />

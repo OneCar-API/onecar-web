@@ -57,7 +57,7 @@ const ShowAnnouncement: React.FC = () => {
               price={announcement?.price}
               year={announcement?.car?.year_manufacture}
               brand={announcement?.car?.brand}
-              fuel={announcement?.car?.fuel}
+              km={announcement?.car?.km}
               description={announcement?.description}
               ownerName={announcement?.user?.name}
               ownerPhone={announcement?.user?.phone}

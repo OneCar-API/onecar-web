@@ -17,11 +17,4 @@ export const Content = styled.div`
     margin-left: 3.5rem;
     display: flex;
   }
-  .buttons {
-    height: 2.5rem;
-    width: auto;
-    font-size: 16px;
-    font-weight: 700;
-    gap: 2rem;
-  }
 `;

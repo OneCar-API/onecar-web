@@ -3,7 +3,7 @@ import React, { HTMLAttributes } from 'react';
 
 import yearIcon from '../../../../../assets/images/year-icon.svg';
 import brandIcon from '../../../../../assets/images/brand-icon.svg';
-import fuelIcon from '../../../../../assets/images/fuel-icon.svg';
+import kmIcon from '../../../../../assets/images/fuel-icon.svg';
 
 import Button from '../../../../../components/DefaultButton';
 import OwnerDetails from './components/OwnerDetails';
@@ -17,7 +17,7 @@ interface ICarDetails extends HTMLAttributes<HTMLElement> {
   price: string;
   year: string;
   brand: string;
-  fuel: string;
+  km: string;
   description: string;
   ownerName?: string;
   ownerPhone?: number;
@@ -30,7 +30,7 @@ const CarDetails = ({
   price,
   year,
   brand,
-  fuel,
+  km,
   description,
   ownerName,
   ownerPhone,
@@ -64,8 +64,8 @@ const CarDetails = ({
           <p>{brand || 'Modelo não atribuido'}</p>
         </div>
         <div>
-          <img src={fuelIcon} alt="" />
-          <p>{fuel || 'Combustível não atribuido'}</p>
+          <img src={kmIcon} alt="" />
+          <p>{km !== null ? `${km} Km rodados` : 'Km não atribuido'}</p>
         </div>
       </div>
       <div className="description">
