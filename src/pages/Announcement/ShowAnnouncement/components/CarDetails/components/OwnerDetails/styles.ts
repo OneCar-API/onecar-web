@@ -14,6 +14,7 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    gap: 1rem;
 
     width: 100%;
     height: 100%;
