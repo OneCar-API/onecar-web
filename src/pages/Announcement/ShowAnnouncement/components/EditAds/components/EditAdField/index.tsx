@@ -11,7 +11,6 @@ interface iEditAdField {
 const EditAdField = ({ setEdit }: iEditAdField) => {
   return (
     <Container>
-      <h1 id="main-title">Informações básicas</h1>
       <Content>
         <Fields setEdit={setEdit} />
       </Content>

@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
-
-import { Container, Content } from './styles';
+import React, { useState } from 'react';
 
 import DisplayAd from './components/DisplayAd';
-
 import EditAdField from './components/EditAdField';
+
+import { Container, Content } from './styles';
 
 interface iEditAdField {
   picture: string;

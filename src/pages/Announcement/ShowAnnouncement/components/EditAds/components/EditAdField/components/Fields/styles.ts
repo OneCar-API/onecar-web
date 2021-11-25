@@ -4,6 +4,13 @@ export const Container = styled.div`
   display: flex;
   margin-bottom: 2rem;
 
+  #main-title {
+    font-size: 1.7rem;
+    font-style: normal;
+    font-weight: 400;
+    color: #787878;
+  }
+
   .input-box-a,
   .input-box-b {
     border-radius: 25px;
@@ -63,6 +70,23 @@ export const Container = styled.div`
     font-size: 16px;
     align-items: left;
     color: #383838;
+  }
+
+  .additional-info-btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    gap: 2rem;
+    margin-bottom: 4rem;
+
+    h1 {
+      margin: 0;
+      font-size: 1.7rem;
+      font-style: normal;
+      font-weight: 400;
+      color: #787878;
+    }
   }
 
   .buttons {
