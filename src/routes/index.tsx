@@ -19,6 +19,8 @@ import RegisterAdsDetails from '../pages/RegisterAds/RegisterAdsDetails';
 import RegisterAdsDescription from '../pages/RegisterAds/RegisterAdsDescription';
 import RegisterAdsMsg from '../pages/RegisterAds/RegisterAdsMsg';
 
+import User from '../pages/User';
+
 const Routes: React.FC = () => (
   <Switch>
     <Route
@@ -53,6 +55,7 @@ const Routes: React.FC = () => (
       isPrivate
     />
     <Route path="/ads-management" component={AdsManagement} isPrivate />
+    <Route path="/user" component={User} isPrivate />
   </Switch>
 );
 
