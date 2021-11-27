@@ -43,7 +43,8 @@ const AdditionalInfo = ({ setAdditionalInfo }: iAdditionalInfo) => {
         },
       });
 
-      window.location.reload();
+      console.log('response', response);
+
       return response;
     } catch (error: any) {
       return error.response;
@@ -54,7 +55,7 @@ const AdditionalInfo = ({ setAdditionalInfo }: iAdditionalInfo) => {
     <Container>
       <h1>Informações adicionais</h1>
       <div className="add-checks">
-        <form action="">
+        <form action="" method="put">
           <div>
             <input
               type="checkbox"
