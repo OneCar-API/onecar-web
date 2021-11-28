@@ -6,6 +6,7 @@ import brandIcon from '../../../../../assets/images/brand-icon.svg';
 import kmIcon from '../../../../../assets/images/fuel-icon.svg';
 
 import Button from '../../../../../components/DefaultButton';
+import SecondaryButton from '../../../../../components/SecondaryButton';
 import OwnerDetails from './components/OwnerDetails';
 import { useAuth } from '../../../../../hooks/auth';
 
@@ -76,12 +77,12 @@ const CarDetails = ({
         </p>
       </div>
       {user && (
-        <>
+        <div className="buttons">
           <Button className="btn" onClick={() => handleEdit(true)}>
             Editar
           </Button>
-          <Button className="btn">Pausar</Button>
-        </>
+          <SecondaryButton className="btn">Pausar</SecondaryButton>
+        </div>
       )}
 
       <OwnerDetails ownerName={ownerName} ownerPhone={ownerPhone} />

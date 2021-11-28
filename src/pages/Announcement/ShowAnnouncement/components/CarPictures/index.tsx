@@ -77,6 +77,8 @@ const CarPictures = ({ pictures }: ICarPictures) => {
     }
   }, [pictures]);
 
+  console.log('pictures', pictures);
+
   return (
     <Container>
       <img src={mainPicture} alt="" />

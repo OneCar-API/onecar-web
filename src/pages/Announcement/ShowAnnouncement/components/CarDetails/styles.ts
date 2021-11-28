@@ -70,6 +70,13 @@ export const Container = styled.div`
     margin-bottom: 2rem;
   }
 
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+
   @media (max-width: 840px) {
     width: 100%;
   }

@@ -8,7 +8,7 @@ import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import AlterPassword from '../pages/AlterPassword';
 import NewPassword from '../pages/NewPassword';
-import AdsManagement from '../pages/AdsManagement';
+import AdsManagement from '../pages/AdsManagement/index';
 
 import ListAnnouncements from '../pages/Announcement/ListAnnouncements';
 import ShowAnnouncement from '../pages/Announcement/ShowAnnouncement';
