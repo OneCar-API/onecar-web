@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { Container, Content } from './styles';
 
 import TopBar from '../../../components/TopBar';
-import CarPictures from './components/CarPictures';
+import CarPictures from './components/CarPictures/index';
 import CarDetails from './components/CarDetails';
 import EditAds from './components/EditAds';
 

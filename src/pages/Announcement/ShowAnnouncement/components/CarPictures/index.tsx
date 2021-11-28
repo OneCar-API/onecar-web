@@ -24,7 +24,7 @@ const CarPictures = ({ pictures }: ICarPictures) => {
 
   const [mainPicture, setMainPicture] = useState();
   const [announcement, setAnnouncement] = useState(Object);
-  const { token } = useAuth();
+  const { token, user } = useAuth();
 
   useEffect(() => {
     showAnnouncements();
@@ -77,28 +77,28 @@ const CarPictures = ({ pictures }: ICarPictures) => {
     }
   }, [pictures]);
 
-  console.log('pictures', pictures);
-
   return (
     <Container>
       <img src={mainPicture} alt="" />
 
       <div className="gallery-and-upload">
-        <label>
-          <input
-            id="upload"
-            placeholder="Enviar Imagens"
-            type="file"
-            name="image"
-            accept="image/*"
-            multiple
-            onChange={e => {
-              const pictureFiles = e.target.files;
-              handleSendPictures(pictureFiles);
-            }}
-          />
-          Enviar Imagens
-        </label>
+        {user && (
+          <label>
+            <input
+              id="upload"
+              placeholder="Enviar Imagens"
+              type="file"
+              name="image"
+              accept="image/*"
+              multiple
+              onChange={e => {
+                const pictureFiles = e.target.files;
+                handleSendPictures(pictureFiles);
+              }}
+            />
+            Enviar Imagens
+          </label>
+        )}
 
         <div className="pictures">
           {pictures ? (
