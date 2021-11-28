@@ -76,9 +76,12 @@ const CarDetails = ({
         </p>
       </div>
       {user && (
-        <Button className="btn" onClick={() => handleEdit(true)}>
-          Editar
-        </Button>
+        <>
+          <Button className="btn" onClick={() => handleEdit(true)}>
+            Editar
+          </Button>
+          <Button className="btn">Pausar</Button>
+        </>
       )}
 
       <OwnerDetails ownerName={ownerName} ownerPhone={ownerPhone} />

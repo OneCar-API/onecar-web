@@ -17,7 +17,6 @@ import Logo from '../../components/Logo';
 
 import { Container, Content, Background } from './styles';
 
-
 interface SignInFormData {
   email: string;
   password: string;
@@ -26,7 +25,7 @@ interface SignInFormData {
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const { allowUser, signIn, user } = useAuth();
+  const { allowUser, signIn } = useAuth();
 
   const { addToast } = useToast();
 
@@ -35,20 +34,19 @@ const SignIn: React.FC = () => {
   const location = useLocation();
 
   useEffect(() => {
-    console.log(location)
+    console.log(location);
     switch (location.pathname) {
       case '/confirm-user':
-       
-        confirmUser()
+        confirmUser();
         break;
       default:
-        console.log('usuário não ativado')
+        console.log('usuário não ativado');
     }
-  }, [])
+  }, []);
 
   const confirmUser = async () => {
-    await allowUser({ token: location.search.replace("?token=",'') });
-  }
+    await allowUser({ token: location.search.replace('?token=', '') });
+  };
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
@@ -70,8 +68,6 @@ const SignIn: React.FC = () => {
           password: data.password,
           location: location.pathname.replace('/invite-user/', '?token='),
         });
-
-
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErrors(error);

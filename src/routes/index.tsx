@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 import React from 'react';
 import { Switch } from 'react-router-dom';
 
@@ -19,27 +20,25 @@ import RegisterAdsDetails from '../pages/RegisterAds/RegisterAdsDetails';
 import RegisterAdsDescription from '../pages/RegisterAds/RegisterAdsDescription';
 import RegisterAdsMsg from '../pages/RegisterAds/RegisterAdsMsg';
 
-import User from '../pages/User';
+import User from '../pages/UserProfile/index';
 
 const Routes: React.FC = () => (
   <Switch>
     <Route
       path={['/signin', '/invite-user', '/confirm-user']}
       component={SignIn}
-      isPrivate
     />
 
-    <Route path="/" exact component={SignIn} />
-    <Route path="/signup" component={SignUp} isPrivate />
-    <Route path="/adverts" component={ListAnnouncements} isPrivate />
-    <Route path="/import-users" component={ImportUsers} />
+    <Route path="/signup" component={SignUp} />
+    <Route path="/adverts" component={ListAnnouncements} />
+    <Route path="/import-users" component={ImportUsers} isPrivate />
     <Route path="/import-ads" component={ImportAnnouncements} isPrivate />
 
     <Route path="/forgot-password" component={AlterPassword} isPrivate />
     <Route path="/reset-password" component={NewPassword} isPrivate />
 
-    <Route path="/" exact component={ListAnnouncements} />
-    <Route path="/advert/:id" component={ShowAnnouncement} isPrivate />
+    <Route path="/" exact component={ListAnnouncements} isPrivate />
+    <Route path="/advert/:id" component={ShowAnnouncement} />
     <Route path="/forgot-password" component={AlterPassword} isPrivate />
     <Route path="/reset-password" component={NewPassword} isPrivate />
     <Route path="/register-ads-msg" component={RegisterAdsMsg} isPrivate />

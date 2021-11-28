@@ -13,16 +13,17 @@ import { useHistory } from 'react-router-dom';
 import { Container } from './styles';
 
 const User = () => {
-  const { token } = useAuth();
+  const { token, user, signOut } = useAuth();
   const [deleteUser, setDeleteUser] = useState(true);
   const history = useHistory();
 
   async function deletingUser() {
-    await api.delete(`/user/`, {
+    await api.delete(`/user/${user?.id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
+    signOut()
     history.push('/adverts');
   }
 
@@ -32,8 +33,8 @@ const User = () => {
       <Container>
         <div className="user-profile">
           <img src={userIcon} alt="" />
-          <h1>Henrique Sousa</h1>
-          <p>@dehenriquesousa</p>
+          <h1>{user?.name}</h1>
+          <p>{user?.email}</p>
 
           {deleteUser ? (
             <SecondaryButton onClick={() => setDeleteUser(false)}>
