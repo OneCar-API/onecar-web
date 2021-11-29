@@ -16,15 +16,16 @@ import { Container } from './styles';
 
 interface ICarPictures {
   pictures: any;
+  user: any;
 }
 
-const CarPictures = ({ pictures }: ICarPictures) => {
+const CarPictures = ({ pictures, user }: ICarPictures) => {
   const location = useLocation();
   const idString = location.pathname.slice(8, location.pathname.length);
 
   const [mainPicture, setMainPicture] = useState();
   const [announcement, setAnnouncement] = useState(Object);
-  const { token, user } = useAuth();
+  const { token } = useAuth();
 
   useEffect(() => {
     showAnnouncements();
@@ -82,7 +83,7 @@ const CarPictures = ({ pictures }: ICarPictures) => {
       <img src={mainPicture} alt="" />
 
       <div className="gallery-and-upload">
-        {user && (
+        {user?.id === announcement?.user?.id && (
           <label>
             <input
               id="upload"

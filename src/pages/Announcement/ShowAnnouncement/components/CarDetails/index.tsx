@@ -8,7 +8,6 @@ import kmIcon from '../../../../../assets/images/fuel-icon.svg';
 import Button from '../../../../../components/DefaultButton';
 import SecondaryButton from '../../../../../components/SecondaryButton';
 import OwnerDetails from './components/OwnerDetails';
-import { useAuth } from '../../../../../hooks/auth';
 
 import { Container } from './styles';
 
@@ -23,6 +22,8 @@ interface ICarDetails extends HTMLAttributes<HTMLElement> {
   ownerName?: string;
   ownerPhone?: number;
   setEdit: any;
+  user: any;
+  announcementUser: any;
 }
 
 const CarDetails = ({
@@ -36,9 +37,9 @@ const CarDetails = ({
   ownerName,
   ownerPhone,
   setEdit,
+  user,
+  announcementUser,
 }: ICarDetails) => {
-  const { user } = useAuth();
-
   function handleEdit(bool: any) {
     setEdit(bool);
   }
@@ -76,7 +77,7 @@ const CarDetails = ({
             'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}
         </p>
       </div>
-      {user && (
+      {user?.id === announcementUser?.id && (
         <div className="buttons">
           <Button className="btn" onClick={() => handleEdit(true)}>
             Editar
@@ -85,7 +86,14 @@ const CarDetails = ({
         </div>
       )}
 
-      <OwnerDetails ownerName={ownerName} ownerPhone={ownerPhone} />
+      {user?.id !== announcementUser?.id && (
+        <OwnerDetails
+          user={user}
+          announcementUser={announcementUser}
+          ownerName={ownerName}
+          ownerPhone={ownerPhone}
+        />
+      )}
     </Container>
   );
 };
