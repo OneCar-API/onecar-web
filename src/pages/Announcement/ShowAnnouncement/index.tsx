@@ -20,11 +20,11 @@ const ShowAnnouncement: React.FC = () => {
   const [announcement, setAnnouncement] = useState<any>();
   const [edit, setEdit] = useState(bool);
 
-  const { token } = useAuth();
+  const { token, user } = useAuth();
 
   useEffect(() => {
     showAnnouncements();
-  }, [idString]);
+  }, []);
 
   async function showAnnouncements() {
     const response = await api.get(`/ads/${idString}`, {
@@ -50,8 +50,10 @@ const ShowAnnouncement: React.FC = () => {
           />
         ) : (
           <>
-            <CarPictures pictures={announcement?.car?.carImages} />
+            <CarPictures user={user} pictures={announcement?.car?.carImages} />
             <CarDetails
+              user={user}
+              announcementUser={announcement?.user}
               brandTitle={announcement?.car?.brand}
               model={announcement?.car?.model}
               price={announcement?.price}

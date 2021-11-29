@@ -13,7 +13,7 @@ interface RouteProps extends ReactDOMRouteProps {
 }
 
 const Route: React.FC<RouteProps> = ({
-  isPrivate = false,
+  isPrivate,
   component: Component,
   ...rest
 }) => {
@@ -23,11 +23,7 @@ const Route: React.FC<RouteProps> = ({
     <ReactDOMRoute
       {...rest}
       render={() => {
-        return isPrivate === !!user ? (
-          <Component />
-        ) : (
-          <Redirect to={{ pathname: isPrivate ? '/' : '/adverts' }} />
-        );
+        return isPrivate && !user ? <Redirect to="/adverts" /> : <Component />;
       }}
     />
   );

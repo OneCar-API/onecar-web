@@ -1,10 +1,11 @@
+/* eslint-disable import/no-useless-path-segments */
 import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 
 import avatar from '../../assets/images/user.svg';
 import logoImg from '../../assets/images/logo.svg';
 import Dropdown from '../Dropdown';
-import DefaultButton from '../DefaultButton';
+import DefaultButton from '../../components/DefaultButton';
 
 import { Container, Header, HeaderContent, Profile } from './styles';
 import { useAuth } from '../../hooks/auth';
@@ -66,7 +67,11 @@ const TopBar: React.FC = () => {
               Meus Anúncios
             </DefaultButton>
           </li>
-          <hr />
+          <li>
+            <DefaultButton type="button" onClick={() => history.push('/user')}>
+              Perfil
+            </DefaultButton>
+          </li>
           <li>
             <DefaultButton type="button" onClick={() => signOut()}>
               Sair

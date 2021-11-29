@@ -16,9 +16,10 @@ import { Container } from './styles';
 
 interface ICarPictures {
   pictures: any;
+  user: any;
 }
 
-const CarPictures = ({ pictures }: ICarPictures) => {
+const CarPictures = ({ pictures, user }: ICarPictures) => {
   const location = useLocation();
   const idString = location.pathname.slice(8, location.pathname.length);
 
@@ -82,21 +83,23 @@ const CarPictures = ({ pictures }: ICarPictures) => {
       <img src={mainPicture} alt="" />
 
       <div className="gallery-and-upload">
-        <label>
-          <input
-            id="upload"
-            placeholder="Enviar Imagens"
-            type="file"
-            name="image"
-            accept="image/*"
-            multiple
-            onChange={e => {
-              const pictureFiles = e.target.files;
-              handleSendPictures(pictureFiles);
-            }}
-          />
-          Enviar Imagens
-        </label>
+        {user?.id === announcement?.user?.id && (
+          <label>
+            <input
+              id="upload"
+              placeholder="Enviar Imagens"
+              type="file"
+              name="image"
+              accept="image/*"
+              multiple
+              onChange={e => {
+                const pictureFiles = e.target.files;
+                handleSendPictures(pictureFiles);
+              }}
+            />
+            Enviar Imagens
+          </label>
+        )}
 
         <div className="pictures">
           {pictures ? (
