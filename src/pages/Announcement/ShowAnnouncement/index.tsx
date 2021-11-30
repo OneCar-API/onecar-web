@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-boolean-value */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
@@ -35,6 +36,8 @@ const ShowAnnouncement: React.FC = () => {
     setAnnouncement(response?.data);
   }
 
+  console.log(announcement);
+
   return (
     <Container>
       <TopBar />
@@ -52,6 +55,7 @@ const ShowAnnouncement: React.FC = () => {
           <>
             <CarPictures user={user} pictures={announcement?.car?.carImages} />
             <CarDetails
+              isPausedAd={announcement?.paused}
               user={user}
               announcementUser={announcement?.user}
               brandTitle={announcement?.car?.brand}

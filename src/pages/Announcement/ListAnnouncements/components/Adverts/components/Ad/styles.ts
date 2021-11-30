@@ -29,28 +29,48 @@ export const Container = styled.div`
     color: #383838;
   }
 
-  .year {
+  .tags {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 49px;
-    height: 20px;
-    border: 1px solid #787878;
-    box-sizing: border-box;
-    border-radius: 8px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0.5rem;
+
+    .isPausedAd,
+    .year {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 20px;
+      box-sizing: border-box;
+      border-radius: 8px;
+    }
 
     p {
       margin: 0;
       width: 22px;
       height: 10px;
-      font-family: Nunito;
       font-size: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
+    }
 
-      color: #787878;
+    .isPausedAd {
+      border: 1px solid #bc5e5e;
+
+      p {
+        color: #bc5e5e;
+      }
+    }
+
+    .year {
+      border: 1px solid #787878;
+
+      p {
+        color: #787878;
+      }
     }
   }
 

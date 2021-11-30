@@ -17,6 +17,7 @@ const Adverts = ({ announcements }: IAdverts) => {
           announcements.map((announcement: any) => (
             <Link to={`/advert/${announcement?.id}`}>
               <Ad
+                isPausedAd={announcement?.paused}
                 image={announcement?.car?.carImages[0]?.image_url}
                 year={announcement?.car?.year_manufacture}
                 brand={announcement?.car?.brand}

@@ -1,5 +1,8 @@
+/* eslint-disable no-shadow */
+/* eslint-disable object-shorthand */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { HTMLAttributes } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import yearIcon from '../../../../../assets/images/year-icon.svg';
 import brandIcon from '../../../../../assets/images/brand-icon.svg';
@@ -9,6 +12,9 @@ import Button from '../../../../../components/DefaultButton';
 import SecondaryButton from '../../../../../components/SecondaryButton';
 import OwnerDetails from './components/OwnerDetails';
 
+import api from '../../../../../services/api';
+
+import { useAuth } from '../../../../../hooks/auth';
 import { Container } from './styles';
 
 interface ICarDetails extends HTMLAttributes<HTMLElement> {
@@ -24,6 +30,7 @@ interface ICarDetails extends HTMLAttributes<HTMLElement> {
   setEdit: any;
   user: any;
   announcementUser: any;
+  isPausedAd: boolean;
 }
 
 const CarDetails = ({
@@ -39,9 +46,50 @@ const CarDetails = ({
   setEdit,
   user,
   announcementUser,
+  isPausedAd,
 }: ICarDetails) => {
   function handleEdit(bool: any) {
     setEdit(bool);
+  }
+
+  const location = useLocation();
+  const idString = location.pathname.slice(8, location.pathname.length);
+  const { token } = useAuth();
+
+  const obj = {
+    description: description,
+    brand: brand,
+    model: model,
+    year_manufacture: year,
+    km: km,
+    vehicle_price: price,
+    paused: true,
+  };
+
+  async function setPauseAd(object: any) {
+    try {
+      const response = await api.post(`/ads/${idString}`, object, {
+        headers: {
+          'content-type': 'application/json',
+          authorization: `Bearer ${token}`,
+        },
+      });
+
+      window.location.reload();
+      return response.status;
+    } catch (error: any) {
+      return error.response;
+    }
+  }
+
+  function handleResumeAd() {
+    obj.paused = false;
+    setPauseAd(obj);
+  }
+
+  function handleSetPauseAd() {
+    obj.paused = true;
+    setPauseAd(obj);
   }
 
   return (
@@ -69,6 +117,11 @@ const CarDetails = ({
           <img src={kmIcon} alt="" />
           <p>{km !== null ? `${km} Km rodados` : 'Km não atribuido'}</p>
         </div>
+        <div>
+          <p className="isPausedAd">
+            {isPausedAd ? '⚠️ Anúncio pausado ' : ''}
+          </p>
+        </div>
       </div>
       <div className="description">
         <h3>Descrição</h3>
@@ -82,7 +135,16 @@ const CarDetails = ({
           <Button className="btn" onClick={() => handleEdit(true)}>
             Editar
           </Button>
-          <SecondaryButton className="btn">Pausar</SecondaryButton>
+
+          {isPausedAd ? (
+            <SecondaryButton className="btn" onClick={() => handleResumeAd()}>
+              Retomar
+            </SecondaryButton>
+          ) : (
+            <SecondaryButton className="btn" onClick={() => handleSetPauseAd()}>
+              Pausar
+            </SecondaryButton>
+          )}
         </div>
       )}
 
