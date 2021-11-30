@@ -68,7 +68,7 @@ const CarDetails = ({
 
   async function setPauseAd(object: any) {
     try {
-      const response = await api.post(`/ads/${idString}`, object, {
+      const response = await api.put(`/ads/${idString}`, object, {
         headers: {
           'content-type': 'application/json',
           authorization: `Bearer ${token}`,

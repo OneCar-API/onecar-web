@@ -36,8 +36,6 @@ const ShowAnnouncement: React.FC = () => {
     setAnnouncement(response?.data);
   }
 
-  console.log(announcement);
-
   return (
     <Container>
       <TopBar />
@@ -60,7 +58,7 @@ const ShowAnnouncement: React.FC = () => {
               announcementUser={announcement?.user}
               brandTitle={announcement?.car?.brand}
               model={announcement?.car?.model}
-              price={announcement?.price}
+              price={String(announcement?.price)}
               year={announcement?.car?.year_manufacture}
               brand={announcement?.car?.brand}
               km={announcement?.car?.km}
