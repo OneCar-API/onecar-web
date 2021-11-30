@@ -23,7 +23,7 @@ interface ICarDetails extends HTMLAttributes<HTMLElement> {
   price: string;
   year: string;
   brand: string;
-  km: string;
+  km: number;
   description: string;
   ownerName?: string;
   ownerPhone?: number;
