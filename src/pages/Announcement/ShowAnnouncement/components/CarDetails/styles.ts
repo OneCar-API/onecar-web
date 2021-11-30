@@ -45,6 +45,10 @@ export const Container = styled.div`
         margin-right: 1rem;
       }
     }
+
+    .isPausedAd {
+      color: #bc5e5e;
+    }
   }
 
   .description {

@@ -7,12 +7,20 @@ import Button from '../../../../components/DefaultButton';
 
 import { Container } from './styles';
 
-const Ad = ({ image, year, brand, model, price, created_at }) => {
+const Ad = ({ image, year, brand, model, price, created_at, isPausedAd }) => {
   return (
     <Container>
       <img src={image} alt="" />
-      <div className="year">
-        <p>{year}</p>
+      <div className="tags">
+        <div className="year">
+          <p>{year}</p>
+        </div>
+
+        {isPausedAd && (
+          <div className="isPausedAd">
+            <p> Pausado </p>
+          </div>
+        )}
       </div>
       <div className="car-and-price">
         <h1>{brand}</h1>

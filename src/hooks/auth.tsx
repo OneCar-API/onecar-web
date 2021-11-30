@@ -47,7 +47,6 @@ const AuthProvider: React.FC = ({ children }) => {
       password,
     });
 
-    console.log('aqui', response.data);
     const { token, user } = response.data;
 
     console.log(user.is_active);

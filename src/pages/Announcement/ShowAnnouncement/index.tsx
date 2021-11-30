@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-boolean-value */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
@@ -52,11 +53,12 @@ const ShowAnnouncement: React.FC = () => {
           <>
             <CarPictures user={user} pictures={announcement?.car?.carImages} />
             <CarDetails
+              isPausedAd={announcement?.paused}
               user={user}
               announcementUser={announcement?.user}
               brandTitle={announcement?.car?.brand}
               model={announcement?.car?.model}
-              price={announcement?.price}
+              price={String(announcement?.price)}
               year={announcement?.car?.year_manufacture}
               brand={announcement?.car?.brand}
               km={announcement?.car?.km}

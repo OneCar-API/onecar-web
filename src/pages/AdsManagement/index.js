@@ -31,7 +31,6 @@ const AdsManagement = () => {
       },
     });
     setAnnouncements(response?.data?.results);
-    console.log(announcements, 'announcements');
   }
 
   return (
@@ -63,6 +62,7 @@ const AdsManagement = () => {
                       model={announcement?.car?.model}
                       price={announcement?.price}
                       created_at={announcement?.created_at}
+                      isPausedAd={announcement?.paused}
                     />
                   </Link>
                 )}

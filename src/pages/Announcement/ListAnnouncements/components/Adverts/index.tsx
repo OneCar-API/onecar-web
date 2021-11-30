@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import Ad from './components/Ad';
@@ -14,18 +15,22 @@ const Adverts = ({ announcements }: IAdverts) => {
     <Container>
       <div className="ads">
         {announcements?.length &&
-          announcements.map((announcement: any) => (
-            <Link to={`/advert/${announcement?.id}`}>
-              <Ad
-                image={announcement?.car?.carImages[0]?.image_url}
-                year={announcement?.car?.year_manufacture}
-                brand={announcement?.car?.brand}
-                model={announcement?.car?.model}
-                price={announcement?.price}
-                created_at={announcement?.created_at}
-              />
-            </Link>
-          ))}
+          announcements.map(
+            (announcement: any) =>
+              !announcement?.paused && (
+                <Link to={`/advert/${announcement?.id}`}>
+                  <Ad
+                    isPausedAd={announcement?.paused}
+                    image={announcement?.car?.carImages[0]?.image_url}
+                    year={announcement?.car?.year_manufacture}
+                    brand={announcement?.car?.brand}
+                    model={announcement?.car?.model}
+                    price={announcement?.price}
+                    created_at={announcement?.created_at}
+                  />
+                </Link>
+              ),
+          )}
       </div>
     </Container>
   );
